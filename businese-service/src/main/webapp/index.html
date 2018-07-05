@@ -478,7 +478,7 @@
 			var nowtime = date2str(new Date(),"yyyyMMdd");
 			$.ajax({
 				type: "POST",
-				url: 'appSysUser/registerSysUser.do',
+				url: 'sysUser/registerSysUser',
 		    	data: {USERNAME:$("#USERNAME").val(),PASSWORD:$("#PASSWORD").val(),NAME:$("#name").val(),EMAIL:$("#EMAIL").val(),rcode:$("#rcode").val(),FKEY:$.md5('USERNAME'+nowtime+',fh,'),tm:new Date().getTime()},
 				dataType:'json',
 				cache: false,

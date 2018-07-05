@@ -3,11 +3,11 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
-    <!--<context-param>
+    <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:/applicationContext.xml
-            &lt;!&ndash;,classpath:/applicationContext-auth.xml,classpath:/applicationContext-shiro.xml&ndash;&gt;
+            <!--,classpath:/applicationContext-auth.xml,classpath:/applicationContext-shiro.xml-->
         </param-value>
     </context-param>
     <display-name>Archetype Created Web Application</display-name>
@@ -28,5 +28,5 @@
     <servlet-mapping>
         <servlet-name>springServlet</servlet-name>
         <url-pattern>/</url-pattern>
-    </servlet-mapping>-->
+    </servlet-mapping>
 </web-app>
