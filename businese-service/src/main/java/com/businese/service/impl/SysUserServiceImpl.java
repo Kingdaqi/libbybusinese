@@ -1,6 +1,9 @@
 package com.businese.service.impl;
 
+import com.businese.dao.SysUserMapper;
+import com.businese.model.SysUser;
 import com.businese.service.SysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,7 +12,10 @@ import org.springframework.stereotype.Service;
 @Service("sysUserService")
 public class SysUserServiceImpl implements SysUserService {
 
-    public int addSysUser() {
-        return 0;
+    @Autowired
+    private SysUserMapper sysUserMapper;
+
+    public int addSysUser(SysUser sysUser) {
+        return sysUserMapper.insert(sysUser);
     }
 }

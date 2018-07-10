@@ -1,5 +1,6 @@
 package com.businese.controller;
 
+import com.businese.model.SysUser;
 import com.businese.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,17 +19,24 @@ public class SysUserController {
     private SysUserService sysUserService;
 
     @RequestMapping("/registerSysUser")
-    public String registerSysUser(@RequestParam() String username,
-                                  @RequestParam() String password,
-                                  @RequestParam() String name,
-                                  @RequestParam() String email,
-                                  @RequestParam() String rcode,
-                                  @RequestParam() String FKEY){
+    public void registerSysUser(@RequestParam() String username,@RequestParam() String password,
+                                  @RequestParam() String name,@RequestParam() String email,
+                                  @RequestParam() String rcode,@RequestParam() String FKEY){
 
         String result = "00";
-        int i = sysUserService.addSysUser();
 
-        return result;
+        SysUser sysUser = new SysUser();
+        sysUser.setUsername(username);
+        sysUser.setPassword(password);
+        sysUser.setName(name);
+        sysUser.setEmail(email);
+
+        int row = sysUserService.addSysUser(sysUser);
+
+        if (row==1)
+            result ="01";
+
+//        return result;
     }
 
 }
