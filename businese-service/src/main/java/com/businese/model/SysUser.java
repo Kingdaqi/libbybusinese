@@ -1,18 +1,23 @@
 package com.businese.model;
 
+import java.util.Date;
+
 public class SysUser {
-    //用户id
     private Integer id;
-    //用户名
+
     private String username;
-    //密码
+
     private String password;
-    //姓名
+
     private String name;
-    //邮箱地址
+
     private String email;
-    //是否有效    0：失效  ，1：有效
+
     private Integer status;
+
+    private Date createtime;
+
+    private Date lastmodifylogintime;
 
     public Integer getId() {
         return id;
@@ -60,5 +65,33 @@ public class SysUser {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Date getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
+
+    public Date getLastmodifylogintime() {
+        return lastmodifylogintime;
+    }
+
+    public void setLastmodifylogintime(Date lastmodifylogintime) {
+        this.lastmodifylogintime = lastmodifylogintime;
+    }
+
+    public SysUser() {
+    }
+
+    public SysUser(String username, String password, String name, String email, Integer status, Date createtime) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.status = status;
+        this.createtime = createtime;
     }
 }

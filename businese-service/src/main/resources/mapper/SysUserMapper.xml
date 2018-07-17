@@ -8,6 +8,8 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastModifyLoginTime" property="lastmodifylogintime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, password, name, email, status
+    id, username, password, name, email, status, createTime, lastModifyLoginTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.businese.model.SysUserExample" >
     select
@@ -102,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.businese.model.SysUser" >
     insert into sys_user (id, username, password, 
-      name, email, status
-      )
+      name, email, status, 
+      createTime, lastModifyLoginTime)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
-      )
+      #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{lastmodifylogintime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.businese.model.SysUser" >
     insert into sys_user
@@ -129,6 +131,12 @@
       <if test="status != null" >
         status,
       </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="lastmodifylogintime != null" >
+        lastModifyLoginTime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -148,6 +156,12 @@
       </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifylogintime != null" >
+        #{lastmodifylogintime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -178,6 +192,12 @@
       <if test="record.status != null" >
         status = #{record.status,jdbcType=INTEGER},
       </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastmodifylogintime != null" >
+        lastModifyLoginTime = #{record.lastmodifylogintime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +210,9 @@
       password = #{record.password,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER}
+      status = #{record.status,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      lastModifyLoginTime = #{record.lastmodifylogintime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +235,12 @@
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifylogintime != null" >
+        lastModifyLoginTime = #{lastmodifylogintime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -222,7 +250,9 @@
       password = #{password,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastModifyLoginTime = #{lastmodifylogintime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

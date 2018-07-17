@@ -14,7 +14,7 @@
         </param-value>
     </context-param>
 
-    <!--<listener>
+    <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <servlet>
@@ -29,7 +29,12 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.html</url-pattern>
+        <url-pattern>/static/*"</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <url-pattern>/</url-pattern>
-    </servlet-mapping>-->
+    </servlet-mapping>
 </web-app>

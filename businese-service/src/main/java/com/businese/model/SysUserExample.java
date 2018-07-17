@@ -1,8 +1,11 @@
 package com.businese.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+@Component("sysUserExample")
 public class SysUserExample {
     protected String orderByClause;
 
@@ -501,6 +504,126 @@ public class SysUserExample {
 
         public Criteria andStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIsNull() {
+            addCriterion("createTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIsNotNull() {
+            addCriterion("createTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeEqualTo(Date value) {
+            addCriterion("createTime =", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotEqualTo(Date value) {
+            addCriterion("createTime <>", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeGreaterThan(Date value) {
+            addCriterion("createTime >", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("createTime >=", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLessThan(Date value) {
+            addCriterion("createTime <", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLessThanOrEqualTo(Date value) {
+            addCriterion("createTime <=", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIn(List<Date> values) {
+            addCriterion("createTime in", values, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotIn(List<Date> values) {
+            addCriterion("createTime not in", values, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeBetween(Date value1, Date value2) {
+            addCriterion("createTime between", value1, value2, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotBetween(Date value1, Date value2) {
+            addCriterion("createTime not between", value1, value2, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastmodifylogintimeIsNull() {
+            addCriterion("lastModifyLoginTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastmodifylogintimeIsNotNull() {
+            addCriterion("lastModifyLoginTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastmodifylogintimeEqualTo(Date value) {
+            addCriterion("lastModifyLoginTime =", value, "lastmodifylogintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastmodifylogintimeNotEqualTo(Date value) {
+            addCriterion("lastModifyLoginTime <>", value, "lastmodifylogintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastmodifylogintimeGreaterThan(Date value) {
+            addCriterion("lastModifyLoginTime >", value, "lastmodifylogintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastmodifylogintimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("lastModifyLoginTime >=", value, "lastmodifylogintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastmodifylogintimeLessThan(Date value) {
+            addCriterion("lastModifyLoginTime <", value, "lastmodifylogintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastmodifylogintimeLessThanOrEqualTo(Date value) {
+            addCriterion("lastModifyLoginTime <=", value, "lastmodifylogintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastmodifylogintimeIn(List<Date> values) {
+            addCriterion("lastModifyLoginTime in", values, "lastmodifylogintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastmodifylogintimeNotIn(List<Date> values) {
+            addCriterion("lastModifyLoginTime not in", values, "lastmodifylogintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastmodifylogintimeBetween(Date value1, Date value2) {
+            addCriterion("lastModifyLoginTime between", value1, value2, "lastmodifylogintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastmodifylogintimeNotBetween(Date value1, Date value2) {
+            addCriterion("lastModifyLoginTime not between", value1, value2, "lastmodifylogintime");
             return (Criteria) this;
         }
     }
