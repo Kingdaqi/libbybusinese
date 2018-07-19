@@ -58,4 +58,7 @@
 		</property>  
     </bean>
 
+	<mvc:resources location="/WEB-INF/erp/" mapping="/erp/**"/>
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+
 </beans>

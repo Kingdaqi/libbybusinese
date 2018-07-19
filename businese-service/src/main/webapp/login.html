@@ -361,10 +361,10 @@
 		}
 
 		function saveCookie() {
+            $.cookie('loginname', $("#loginname").val(), {
+                expires : 7
+            });
 			if ($("#saveid").attr("checked")) {
-				$.cookie('loginname', $("#loginname").val(), {
-					expires : 7
-				});
 				$.cookie('password', $("#password").val(), {
 					expires : 7
 				});

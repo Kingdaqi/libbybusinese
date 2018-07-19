@@ -10,13 +10,30 @@
 <script  src="js/jquery.min.js"></script>
 <!-- 动态菜单JS -->
 <script type="text/javascript"  src="js/menu.js"></script>
+<script>
+    function goToErpIndex() {
+        window.location.href = "erpIndex";
+    }
+
+    window.onload=function(){
+        $("#khgl").attr("style","display:block;");
+
+        var oCookie = document.cookie.split('; ');
+        for (var i = 0; i < oCookie.length; i++) {
+            var temp = oCookie[i].split('=');
+            if (temp[0] == "loginname") {
+                $("#loginname").html(temp[1]);
+            }
+        }
+    }
+</script>
 </head>
 
 <body>
 
 <div class="container">
  <div class="cont-top">
-  <div class="companyname">首耀照明</div>
+  <div class="companyname">libbybusinese</div>
   <div class="cont-top-middle">
    <ul>
     <li>
@@ -29,42 +46,6 @@
     </li>
     
     <li>
-     <a href="#">
-      <div class="top-middle">
-       <img src="img/icon1.png">
-      </div>
-      <div class="top-txt">收款单</div>
-     </a>
-    </li>
-    
-     <li>
-     <a href="#">
-      <div class="top-middle">
-       <img src="img/icon1.png">
-      </div>
-      <div class="top-txt">收款单</div>
-     </a>
-    </li>
-    
-     <li>
-     <a href="#">
-      <div class="top-middle">
-       <img src="img/icon1.png">
-      </div>
-      <div class="top-txt">收款单</div>
-     </a>
-    </li>
-    
-     <li>
-     <a href="#">
-      <div class="top-middle">
-       <img src="img/icon1.png">
-      </div>
-      <div class="top-txt">收款单</div>
-     </a>
-    </li>
-    
-     <li>
      <a href="#">
       <div class="top-middle">
        <img src="img/icon1.png">
@@ -93,14 +74,14 @@
     </li>
     <li class="default" style="position:relative;">
      <span class="user"><img src="img/user.png"></span>
-     <a  href="#" class="special">小丫头</a>
+     <a  href="#" class="special" id="loginname">小丫头</a>
      <span class="triangle-bottom" style="margin:6px 0 0 10px;"></span>
      <div class="drop-down-wrap" style="width:180px;left:15px;display: none;">
       <div class="drop-down">
        <span class="triangle-border"></span>
        <span class="triangle-bg"></span>
        <ul class="del-ul">
-        <li><a href="#" class="hot">首耀照明</a></li>
+        <li><a href="#" class="hot">libbybusinese</a></li>
         <li><a href="#">小丫头</a></li>
         <li><a href="#">操作日志</a></li>       
        </ul>
@@ -131,7 +112,7 @@
   <div class="menu-list">
    <ul>
     <li class="menu-list-01" >
-     <a href="ck-kffp.html">
+     <a href="ck-kffp">
      <p class="fumenu">库房管理</p>
      <img class="xiala" src="img/xiala.png" />
      </a>
@@ -143,7 +124,7 @@
     </li>
     
     <li class="menu-list-02">
-     <a  href="ckgl.html">
+     <a  href="cpgl">
      <p class="fumenu">产品管理</p>
      <img class="xiala" src="img/xiala.png" />
      </a>
@@ -155,7 +136,7 @@
     </li>
     
     <li class="menu-list-01" >
-    <a href="dd-ddgl.html">
+    <a href="dd-ddgl">
      <p class="fumenu">订单管理</p>
      <img class="xiala" src="img/xiala.png" />
      </a>
@@ -171,7 +152,7 @@
     </li>
     
     <li class="menu-list-02">
-     <a href="cj-ckd.html">
+     <a href="cj-ckd">
      <p class="fumenu">财务管理</p>
      <img class="xiala" src="img/xiala.png" />
      </a>
@@ -182,11 +163,11 @@
     </li>
     
     <li class="menu-list-01" >
-    <a href="kh-khgl.html">
+    <a href="#">
      <p class="fumenu">客户管理</p>
      <img class="xiala" src="img/xiala.png" />
      </a>
-     <div class="list-p">
+     <div class="list-p" id="khgl">
       <p class="zcd" id="zcd17">客户基本信息</p>
       <p class="zcd" id="zcd18">客户VIP登记管理</p>
       <p class="zcd" id="zcd19">客户信息管理</p>
@@ -196,7 +177,7 @@
     </li>
     
     <li class="menu-list-02">
-    <a href="yg-jbxx.html">
+    <a href="yg-jbxx">
      <p class="fumenu">员工管理</p>
      <img class="xiala" src="img/xiala.png" />
      </a>
@@ -221,6 +202,7 @@
       </li>
        <li class="l-select">
        <a href="#">客户管理</a>
+       <span class="close" onclick="goToErpIndex()"></span>
       </li>
      </ul>
     </div>
