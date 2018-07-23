@@ -19,7 +19,7 @@ public class ErpManagerController {
     public String erpIndex(){ return "index"; }
 
     /**
-     * 库存管理
+     * 库房管理-库房分配
      * @return
      */
     @RequestMapping("/ck-kffp")
@@ -28,12 +28,57 @@ public class ErpManagerController {
     }
 
     /**
-     * 产品管理
+     * 库房管理-入库单
      * @return
      */
-    @RequestMapping("/cpgl")
-    public String cpgl(){
-        return "cpgl";
+    @RequestMapping("/ck-rkd")
+    public String ckrkd(){
+        return "ck-rkd";
+    }
+
+    /**
+     * 库房管理-出库单
+     * @return
+     */
+    @RequestMapping("/ck-ckd")
+    public String ckckd(){
+        return "ck-ckd";
+    }
+
+    /**
+     * 库房管理-仓库管理
+     * @return
+     */
+    @RequestMapping("/ck-ckgl")
+    public String ckckgl(){
+        return "ck-ckgl";
+    }
+
+    /**
+     * 产品库存
+     * @return
+     */
+    @RequestMapping("/cp-cpkc")
+    public String cpcpkc(){
+        return "cp-cpkc";
+    }
+
+    /**
+     * 产品成本
+     * @return
+     */
+    @RequestMapping("/cp-cpcb")
+    public String cpcpcb(){
+        return "cp-cpcb";
+    }
+
+    /**
+     * 产品属性管理
+     * @return
+     */
+    @RequestMapping("/cp-cpsxgl")
+    public String cpcpsxgl(){
+        return "cp-cpsxgl";
     }
 
     /**
@@ -41,33 +86,69 @@ public class ErpManagerController {
      * @return
      */
     @RequestMapping("/dd-ddgl")
-    public String ddgl(){ return "dd-ddgl"; }
+    public String ddddgl(){ return "dd-ddgl"; }
 
     /**
      * 财务管理
      * @return
      */
-    @RequestMapping("/cj-ckd")
-    public String cwgl(){ return "cj-ckd"; }
+    @RequestMapping("/cw-cwgl")
+    public String cwcwgl(){ return "cj-ckd"; }
 
     /**
-     * 客户管理
+     * 客户基本信息
      * @return
      */
-    @RequestMapping("/kh-khgl")
-    public String kugl(){ return "kh-khgl"; }
+    @RequestMapping("/kh-jbxx")
+    public String khjbxx(){ return "kh-jbxx"; }
 
     /**
-     * 员工管理
+     * 客户信息管理
+     * @return
+     */
+    @RequestMapping("/kh-xxgl")
+    public String khxxgl(){ return "kh-xxgl"; }
+
+    /**
+     * 客户订单管理
+     * @return
+     */
+    @RequestMapping("/kh-ddgl")
+    public String khddgl(){ return "kh-ddgl"; }
+
+    /**
+     * 员工基本信息
      * @return
      */
     @RequestMapping("/yg-jbxx")
-    public String yggl(){ return "yg-jbxx"; }
+    public String ygjbxx(){ return "yg-jbxx"; }
 
     /**
-     * 首页
+     * 员工权限
      * @return
      */
-    @RequestMapping("/erpIndexJsp")
-    public String erpIndexJsp(){ return "erpIndex"; }
+    @RequestMapping("/yg-ygqx")
+    public String ygygqx(){ return "yg-jsgl"; }
+
+    /**
+     * 员工开通新客户
+     * @return
+     */
+    @RequestMapping("/yg-ktxkh")
+    public String ygktxkh(){ return "yg-ktxkh"; }
+
+    /**
+     * 销售额管理
+     * @return
+     */
+    @RequestMapping("/yg-xsegl")
+    public String ygxsegl(){ return "yg-xsegl"; }
+
+    /**
+     * 员工操作日志
+     * @return
+     */
+    @RequestMapping("/yg-czrz")
+    public String ygczrz(){ return "yg-czrz"; }
+
 }
