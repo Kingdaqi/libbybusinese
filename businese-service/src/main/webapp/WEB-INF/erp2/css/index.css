@@ -2,7 +2,7 @@
 /* CSS Document */
 
 /*index-right*/
-.right-menu{position:absolute;top:0px;bottom:0;left:0px;right:0;z-index:1;}
+.right-menu{position:absolute;top:80px;bottom:0;left:150px;right:0;z-index:1;}
 .l-tab-links{height:36px;background:#e2e2e2;}
 .l-tab-links ul{height:36px;overflow:hidden;position:absolute;top:0;zoom:1;}
 .l-select{background:#4dc2e6;}
