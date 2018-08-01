@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
 <head>
-<title>登陆</title>
+<title>系统登录</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -241,7 +241,7 @@
 						if("success" == data.result){
 							saveCookie();
 							// window.location.href="<%=basePath%>main/index";
-							window.location.href="erp/erpIndex";
+							window.location.href="erp/fmain";
 						}else if("usererror" == data.result){
 							$("#loginname").tips({
 								side : 1,

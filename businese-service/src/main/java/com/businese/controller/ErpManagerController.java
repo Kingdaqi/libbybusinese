@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/erp")
 public class ErpManagerController {
 
-//    /**
-//     * 首页
-//     * @return
-//     */
-//    @RequestMapping("/erpIndex")
-//    public String erpIndex(){ return "index"; }
+    /**
+     * 后台页面框架
+     * @return
+     */
+    @RequestMapping("/fmain")
+    public String fmain(){ return "fmain"; }
 
     /**
      * 首页
      * @return
      */
     @RequestMapping("/erpIndex")
-    public String erpIndex(){ return "fmain"; }
+    public String erpIndex(){ return "index"; }
 
     /**
      * 库房管理-库房分配
@@ -157,5 +157,6 @@ public class ErpManagerController {
      */
     @RequestMapping("/yg-czrz")
     public String ygczrz(){ return "yg-czrz"; }
+
 
 }

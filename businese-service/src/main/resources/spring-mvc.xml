@@ -32,7 +32,7 @@
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="0" />
 		<property name="prefix" value="/WEB-INF/erp/"/>
-		<property name="suffix" value=".html" />
+		<property name="suffix" value=".htm" />
 	</bean>
 	<!-- 定义JSP文件的位置 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -20,7 +20,7 @@ i,s{text-decoration:none;font-style:normal;}
 
 /*index*/
 .container{margin:0 auto;position:absolute;top:0;bottom:0;width:100%;min-width:1200;min-height:730px;background:#2d373c;}
-.cont-top{position:absolute;top:0;bottom:0;left:0;right:0;height:80px;padding:0 20px;z-index:2;background:#fff;overflow:hidden;}
+.cont-top{position:absolute;top:0;bottom:0;left:0;right:0;height:80px;padding:0 10px;z-index:2;background:#fff;overflow:hidden;}
 .companyname{font-size:18px;line-height:80px;float:left;width:220px;}
 .cont-top-middle{float:left;width:522px;position:absolutel;}
 .cont-top-middle li{float:left;width:80px;height:80px;background:#fff;text-align:center; }
@@ -30,7 +30,7 @@ i,s{text-decoration:none;font-style:normal;}
 
 .top-txt{text-align:center;line-height:22px;}
 .cont-top-rg{float:right;width:700px;overflow:hidden;text-align:right}
-.advanced-menu{font-size:13px;line-height:30px;padding:21px 0;color:#d4d4d4;float:left;}
+.advanced-menu{font-size:13px;line-height:30px;padding:21px 0;color:#d4d4d4;float:right;}
 .advanced-menu li{float:left;padding:0 10px;cursor:pointer;}
 .top-search{color:#888;}
 .t-s-l{position:relative;float:left;}
