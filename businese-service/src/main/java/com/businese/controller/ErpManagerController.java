@@ -30,9 +30,7 @@ public class ErpManagerController {
      * @return
      */
     @RequestMapping("/ck-kffp")
-    public String ckkffp(){
-        return "ck-kffp";
-    }
+    public String ckkffp(){ return "ck-kffp"; }
 
     /**
      * 库房管理-入库单
@@ -62,30 +60,30 @@ public class ErpManagerController {
     }
 
     /**
-     * 产品库存
+     * 商品库存
      * @return
      */
-    @RequestMapping("/cp-cpkc")
-    public String cpcpkc(){
-        return "cp-cpkc";
+    @RequestMapping("/sp-spkc")
+    public String spspkc(){
+        return "sp-spkc";
     }
 
     /**
-     * 产品成本
+     * 商品成本
      * @return
      */
-    @RequestMapping("/cp-cpcb")
-    public String cpcpcb(){
-        return "cp-cpcb";
+    @RequestMapping("/sp-spcb")
+    public String spspcb(){
+        return "sp-spcb";
     }
 
     /**
-     * 产品属性管理
+     * 商品属性管理
      * @return
      */
-    @RequestMapping("/cp-cpsxgl")
-    public String cpcpsxgl(){
-        return "cp-cpsxgl";
+    @RequestMapping("/sp-spsxgl")
+    public String spspsxgl(){
+        return "sp-spsxgl";
     }
 
     /**
