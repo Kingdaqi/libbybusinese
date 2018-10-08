@@ -1,14 +1,13 @@
-package com.businese.controller;
+package com.businese.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.businese.model.SysUser;
-import com.businese.service.SysUserService;
+import com.businese.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.businese.model.SysUser;
 import java.util.Date;
 import java.util.List;
 
@@ -24,10 +23,9 @@ public class SysUserController {
     private SysUserService sysUserService;
 
     @ResponseBody
-    @RequestMapping("/registerSysUser")
-    public String registerSysUser(@RequestParam(value = "USERNAME") String username,@RequestParam(value = "PASSWORD") String password,
-                                  @RequestParam(value = "NAME") String name,@RequestParam(value = "EMAIL") String email,
-                                  @RequestParam String rcode,@RequestParam String FKEY){
+    @RequestMapping("/addSysUser")
+    public String addSysUser(@RequestParam(value = "USERNAME") String username,@RequestParam(value = "PASSWORD") String password,
+                                  @RequestParam(value = "NAME") String name){
 
         JSONObject json = new JSONObject();
         String result = "01";
@@ -38,15 +36,9 @@ public class SysUserController {
             json.put("result", result);
             return json.toString();
         }
-        sysUsers = sysUserService.findUserByEmail(email);
-        if (sysUsers!=null && sysUsers.size()>0){
-            result = "05";
-            json.put("result", result);
-            return json.toString();
-        }
 
         //至此，用户名和邮箱地址都可以注册，无重复
-        SysUser sysUser = new SysUser(username,password,name,email,1,new Date());
+        SysUser sysUser = new SysUser();
         int row = sysUserService.addSysUser(sysUser);
 
         if (row==1) {

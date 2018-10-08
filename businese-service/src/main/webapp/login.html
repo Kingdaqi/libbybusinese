@@ -106,7 +106,7 @@
 				</div>
 				<div class="form-actions">
 					<div style="width:86%;padding-left:8%;">
-
+						<!--
 						<div style="float: left;padding-top:2px;">
 							<i><img src="static/login/yan.png" /></i>
 						</div>
@@ -117,7 +117,7 @@
 						<div style="float: left;">
 							<i><img style="height:22px;" id="codeImg" alt="点击更换" title="点击更换" src="" /></i>
 						</div>
-						<!--<c:if test="${pd.isZhuce == 'yes' }">
+						<c:if test="${pd.isZhuce == 'yes' }">
 						<span class="pull-right" style="padding-right:3%;"><a href="javascript:changepage(1);" class="btn btn-success">注册</a></span>
 						</c:if>-->
 						<span class="pull-right"><a onclick="severCheck();" class="flip-link btn btn-info" id="to-recover">登录</a></span>
@@ -251,15 +251,6 @@
 							});
 							showfh();
 							$("#loginname").focus();
-						}else if("codeerror" == data.result){
-							$("#code").tips({
-								side : 1,
-								msg : "验证码输入有误",
-								bg : '#FF5080',
-								time : 5
-							});
-							showfh();
-							$("#code").focus();
 						}else{
 							$("#loginname").tips({
 								side : 1,
@@ -324,17 +315,6 @@
 				});
 				showfh();
 				$("#password").focus();
-				return false;
-			}
-			if ($("#code").val() == "") {
-				$("#code").tips({
-					side : 1,
-					msg : '验证码不得为空',
-					bg : '#AE81FF',
-					time : 3
-				});
-				showfh();
-				$("#code").focus();
 				return false;
 			}
 			$("#loginbox").tips({

@@ -1,9 +1,9 @@
-package com.businese.service.impl;
+package com.businese.system.service.impl;
 
 import com.businese.dao.SysUserMapper;
 import com.businese.model.SysUser;
 import com.businese.model.SysUserExample;
-import com.businese.service.SysUserService;
+import com.businese.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,24 +27,17 @@ public class SysUserServiceImpl implements SysUserService {
     public List<SysUser> findUserByUserName(String username) {
         sysUserExample.clear();
         SysUserExample.Criteria criteria = sysUserExample.createCriteria();
-        criteria.andUsernameEqualTo(username);
+        criteria.andUserNameEqualTo(username);
         List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
         return sysUsers;
     }
 
-    public List<SysUser> findUserByEmail(String email) {
-        sysUserExample.clear();
-        SysUserExample.Criteria criteria = sysUserExample.createCriteria();
-        criteria.andEmailEqualTo(email);
-        List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
-        return sysUsers;
-    }
 
     public String login(String username, String password) {
         String result = "success";
         sysUserExample.clear();
         SysUserExample.Criteria criteria = sysUserExample.createCriteria();
-        criteria.andUsernameEqualTo(username);
+        criteria.andUserNameEqualTo(username);
         criteria.andPasswordEqualTo(password);
         List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
 

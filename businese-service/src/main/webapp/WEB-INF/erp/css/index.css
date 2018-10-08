@@ -202,8 +202,8 @@
 .yg-gl{display: block;width:100%;overflow:hidden;}
 .yg-add{float:left;height:38px;line-height:38px;margin:0 auto;overflow: hidden;margin-bottom:18px;}
 .ui-xz,.ui-xz1,.ui-xz2{border:1px solid #ddd;border-radius:5px;padding:5px 15px;font-size:16px;}
-.ui-xz{background:#ff0303;color:#fff}
-.ui-xz1,.ui-xz2{background:#fff;color:#333;}
+.ui-xz{background:#ff0303;color:#fff;cursor:pointer;}
+.ui-xz1,.ui-xz2{background:#fff;color:#333;cursor:pointer;}
 .yg-tab{width:100%;display:block;clear:both;}
 .gridbar{border:1px solid #ddd;width:100%;clear:both;}
 .gridbar input{padding:1px 3px 1px 3px; margin:0px; border:none;width:80%;}

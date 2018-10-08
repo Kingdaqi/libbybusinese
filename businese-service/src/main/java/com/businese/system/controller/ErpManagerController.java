@@ -1,4 +1,4 @@
-package com.businese.controller;
+package com.businese.system.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,39 +25,7 @@ public class ErpManagerController {
     @RequestMapping("/erpIndex")
     public String erpIndex(){ return "index"; }
 
-    /**
-     * 库房管理-库房分配
-     * @return
-     */
-    @RequestMapping("/ck-kffp")
-    public String ckkffp(){ return "ck-kffp"; }
 
-    /**
-     * 库房管理-入库单
-     * @return
-     */
-    @RequestMapping("/ck-rkd")
-    public String ckrkd(){
-        return "ck-rkd";
-    }
-
-    /**
-     * 库房管理-出库单
-     * @return
-     */
-    @RequestMapping("/ck-ckd")
-    public String ckckd(){
-        return "ck-ckd";
-    }
-
-    /**
-     * 库房管理-仓库管理
-     * @return
-     */
-    @RequestMapping("/ck-ckgl")
-    public String ckckgl(){
-        return "ck-ckgl";
-    }
 
     /**
      * 商品库存

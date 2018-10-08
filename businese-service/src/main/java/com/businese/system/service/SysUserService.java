@@ -1,4 +1,4 @@
-package com.businese.service;
+package com.businese.system.service;
 
 import com.businese.model.SysUser;
 
@@ -23,12 +23,6 @@ public interface SysUserService {
      */
     List<SysUser> findUserByUserName(String username);
 
-    /**
-     * 根据email查询用户
-     * @param email
-     * @return
-     */
-    List<SysUser> findUserByEmail(String email);
 
     /**
      * 用户登录

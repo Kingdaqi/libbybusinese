@@ -7,6 +7,15 @@
     <link rel="stylesheet" type="text/css" href="../js/demo/demo.css">
     <script  src="../js/jquery.min.js"></script>
     <script src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var contentIdstr='${contentIdstr}';
+            if(contentIdstr==''){
+                $('#idTr').hide();
+
+            }
+        });
+    </script>
 </head>
 
 
