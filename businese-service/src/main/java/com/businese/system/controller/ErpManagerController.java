@@ -16,7 +16,7 @@ public class ErpManagerController {
      * @return
      */
     @RequestMapping("/fmain")
-    public String fmain(){ return "fmain"; }
+    public String fmain(){ return "index"; }
 
     /**
      * 首页
@@ -24,6 +24,13 @@ public class ErpManagerController {
      */
     @RequestMapping("/erpIndex")
     public String erpIndex(){ return "index"; }
+
+    /**
+     * 首页
+     * @return
+     */
+    @RequestMapping("/home")
+    public String home(){ return "home"; }
 
 
 

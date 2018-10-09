@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * create by Administrator on 2018/10/8
  */
 @Controller
-@RequestMapping("/staff")
+@RequestMapping("erp/staff")
 public class StaffController {
 }
