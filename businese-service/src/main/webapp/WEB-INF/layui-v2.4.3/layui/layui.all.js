@@ -4087,7 +4087,7 @@ layui.define("jquery", function (t) {
         var e = ".layui-tab-title", l = a(".layui-tab[lay-filter=" + t + "]"), n = l.children(e),
             s = n.children(".layui-tab-bar"), o = l.children(".layui-tab-content"),
             r = '<li lay-id="' + (i.id || "") + '"' + (i.attr ? ' lay-attr="' + i.attr + '"' : "") + ">" + (i.title || "unnaming") + "</li>";
-        return s[0] ? s.before(r) : n.append(r), o.append('<div class="layui-tab-item layui-show">' + (i.content || "") + "</div>"), f.hideTabMore(!0), f.tabAuto(), this
+        return s[0] ? s.before(r) : n.append(r), o.append('<div class="layui-tab-item">' + (i.content || "") + "</div>"), f.hideTabMore(!0), f.tabAuto(), this
     }, s.prototype.tabDelete = function (t, i) {
         var e = ".layui-tab-title", l = a(".layui-tab[lay-filter=" + t + "]"), n = l.children(e),
             s = n.find('>li[lay-id="' + i + '"]');

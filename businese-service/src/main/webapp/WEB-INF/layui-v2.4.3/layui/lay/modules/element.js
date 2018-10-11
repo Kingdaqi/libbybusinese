@@ -60,7 +60,7 @@
                     if (n === window && 8 != i.ie && f.hideTabMore(!0), s.attr("lay-allowClose") && o.find("li").each(function () {
                         var t = a(this);
                         if (!t.find("." + l)[0]) {
-                            var i = a('<i class="layui-icon layui-unselect ' + l + '">&#x1006;</i>');
+                            var i = a('<i onclick="closeTabla()" class="layui-icon layui-unselect ' + l + '">&#x1006;</i>');
                             i.on("click", f.tabDelete), t.append(i)
                         }
                     }), "string" != typeof s.attr("lay-unauto")) if (o.prop("scrollWidth") > o.outerWidth() + 1) {
