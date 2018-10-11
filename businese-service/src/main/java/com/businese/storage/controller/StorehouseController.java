@@ -17,7 +17,7 @@ public class StorehouseController {
      */
     @RequestMapping("/purchaseOrder")
     public String purchaseOrder(){
-        return "purchaseOrder";
+        return "storehouse/purchaseOrder";
     }
 
     /**
@@ -26,7 +26,7 @@ public class StorehouseController {
      */
     @RequestMapping("/warehouseReceipt")
     public String warehouseReceipt(){
-        return "warehouseReceipt";
+        return "storehouse/warehouseReceipt";
     }
 
     /**
@@ -35,7 +35,7 @@ public class StorehouseController {
      */
     @RequestMapping("/outboundReceipt")
     public String outboundReceipt(){
-        return "outboundReceipt";
+        return "storehouse/outboundReceipt";
     }
 
     /**
@@ -44,7 +44,7 @@ public class StorehouseController {
      */
     @RequestMapping("/distribution")
     public String distribution(){
-        return "manager";
+        return "storehouse/distribution";
     }
 
     /**
@@ -53,7 +53,7 @@ public class StorehouseController {
      */
     @RequestMapping("/manager")
     public String manager(){
-        return "manager";
+        return "storehouse/manager";
     }
 
 }

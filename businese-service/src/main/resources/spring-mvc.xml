@@ -57,7 +57,8 @@
     </bean>
 
 	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
-	<!--<mvc:resources location="/WEB-INF/erp/" mapping="/erp/**"/>-->
+	<mvc:resources location="/static/" mapping="/static/**"/>
+	<mvc:resources location="/WEB-INF/erp/" mapping="/erp/**"/>
 	<mvc:resources location="/WEB-INF/layui-v2.4.3/" mapping="/layui-v2.4.3/**"/>
 
 </beans>

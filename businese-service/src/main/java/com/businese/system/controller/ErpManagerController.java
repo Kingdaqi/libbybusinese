@@ -32,6 +32,13 @@ public class ErpManagerController {
     @RequestMapping("/home")
     public String home(){ return "home"; }
 
+    /**
+     * 首页
+     * @return
+     */
+    @RequestMapping("/ceshiTab")
+    public String ceshiTab(){ return "ceshiTab"; }
+
 
 
     /**
