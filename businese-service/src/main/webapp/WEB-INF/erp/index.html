@@ -113,18 +113,6 @@
         <div class="layadmin-pagetabs" id="LAY_app_tabs">
             <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
             <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
-            <!--<div class="layui-icon layadmin-tabs-control layui-icon-down">
-                <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
-                    <li class="layui-nav-item" lay-unselect>
-                        <a href="javascript:;"></a>
-                        &lt;!&ndash;<dl class="layui-nav-child layui-anim-fadein">
-                            <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
-                            <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
-                            <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
-                        </dl>&ndash;&gt;
-                    </li>
-                </ul>
-            </div>-->
             <div class="layui-tab" lay-allowClose="true" lay-filter="layadmin-layout-tabs">
                 <ul class="layui-tab-title" id="LAY_app_tabsheader">
                     <li lay-id="home" lay-attr="home" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
@@ -224,9 +212,24 @@
         }
 
     });
-    function closeTabla() {
-        var id = $(this).parent.attr("lay-id");
-        alert(id);
+
+    function closeTabla(id) {
+        var tabs = $(".layui-tab-title li[lay-id]");
+        var layId = id;
+        var lastTab = tabs.eq(tabs.length-1);
+        if(layId == lastTab.attr("lay-id")){
+            bodyChange(tabs.eq(tabs.length-2).attr("lay-id"));
+            // alert("111--"+tabs.eq(tabs.length-2).attr("lay-id"))
+        }else{
+            bodyChange(lastTab.attr("lay-id"));
+            // alert("222--"+lastTab.attr("lay-id"));
+        }
+    }
+    function bodyChange(id) {
+        var body = $('.layui-body');
+        body.children().attr('class','layadmin-tabsbody-item');
+        //alert(id);
+        $('#'+id+'').attr('class','layadmin-tabsbody-item layui-show');
     }
 </script>
 </body>

@@ -14,7 +14,7 @@
         var e = ".layui-tab-title", l = a(".layui-tab[lay-filter=" + t + "]"), n = l.children(e),
             s = n.children(".layui-tab-bar"), o = l.children(".layui-tab-content"),
             r = '<li lay-id="' + (i.id || "") + '"' + (i.attr ? ' lay-attr="' + i.attr + '"' : "") + ">" + (i.title || "unnaming") + "</li>";
-        return s[0] ? s.before(r) : n.append(r), o.append('<div class="layui-tab-item">' + (i.content || "") + "</div>"), f.hideTabMore(!0), f.tabAuto(), this
+        return s[0] ? s.before(r) : n.append(r), o.append('<div class="layui-tab-item">' + (i.content || "") + "</div>"), f.hideTabMore(!0), f.tabAuto2(i.id), this
     }, s.prototype.tabDelete = function (t, i) {
         var e = ".layui-tab-title", l = a(".layui-tab[lay-filter=" + t + "]"), n = l.children(e),
             s = n.find('>li[lay-id="' + i + '"]');
@@ -61,6 +61,25 @@
                         var t = a(this);
                         if (!t.find("." + l)[0]) {
                             var i = a('<i onclick="closeTabla()" class="layui-icon layui-unselect ' + l + '">&#x1006;</i>');
+                            i.on("click", f.tabDelete), t.append(i)
+                        }
+                    }), "string" != typeof s.attr("lay-unauto")) if (o.prop("scrollWidth") > o.outerWidth() + 1) {
+                        if (o.find("." + e)[0]) return;
+                        o.append(c), s.attr("overflow", ""), c.on("click", function (a) {
+                            o[this.title ? "removeClass" : "addClass"](t), this.title = this.title ? "" : "收缩"
+                        })
+                    } else o.find("." + e).remove(), s.removeAttr("overflow")
+                })
+            },tabAuto2: function (id) {
+                var t = "layui-tab-more", e = "layui-tab-bar", l = "layui-tab-close", n = this;
+                a(".layui-tab").each(function () {
+                    var s = a(this), o = s.children(".layui-tab-title"),
+                        r = (s.children(".layui-tab-content").children(".layui-tab-item"), 'lay-stope="tabmore"'),
+                        c = a('<span class="layui-unselect layui-tab-bar" ' + r + "><i " + r + ' class="layui-icon">&#xe61a;</i></span>');
+                    if (n === window && 8 != i.ie && f.hideTabMore(!0), s.attr("lay-allowClose") && o.find("li").each(function () {
+                        var t = a(this);
+                        if (!t.find("." + l)[0]) {
+                            var i = a('<i onclick="closeTabla('+'\''+id+'\''+')" class="layui-icon layui-unselect ' + l + '">&#x1006;</i>');
                             i.on("click", f.tabDelete), t.append(i)
                         }
                     }), "string" != typeof s.attr("lay-unauto")) if (o.prop("scrollWidth") > o.outerWidth() + 1) {
