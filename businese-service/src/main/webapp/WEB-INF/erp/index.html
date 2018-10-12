@@ -71,7 +71,7 @@
                 <ul class="layui-nav layui-nav-tree"  lay-shrink="all" id="LAY-system-side-menu" lay-filter="demo1">
 
                     <li class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="首页">
+                        <a data-url="home" data-id="home" data-title="" href="#" class="site-demo-active" data-type="tabAdd">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>首页</cite>
                         </a>
@@ -177,7 +177,7 @@
             var dataid = $(this);
 
             //这时会判断右侧.layui-tab-title属性下的有lay-id属性的li的数目，即已经打开的tab项数目
-            if ($(".layui-tab-title li[lay-id]").length <= 1) {
+            if ($(".layui-tab-title li[lay-id]").length < 1) {
                 //如果比零小，则直接打开新的tab项
                 active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"),dataid.attr("data-title"));
             } else {
@@ -217,12 +217,28 @@
         var tabs = $(".layui-tab-title li[lay-id]");
         var layId = id;
         var lastTab = tabs.eq(tabs.length-1);
-        if(layId == lastTab.attr("lay-id")){
-            bodyChange(tabs.eq(tabs.length-2).attr("lay-id"));
-            // alert("111--"+tabs.eq(tabs.length-2).attr("lay-id"))
+        if(layId == lastTab.attr("lay-id")){//要关闭的是最后一个
+            if (lastTab.attr("class")=="layui-this"){
+                bodyChange(tabs.eq(tabs.length-2).attr("lay-id"));
+                // alert("111--"+tabs.eq(tabs.length-2).attr("lay-id"))
+            }else{
+                $.each($(tabs), function () {
+                    if ($(this).attr("class") == "layui-this") {
+                        bodyChange($(this).attr("lay-id"));
+                    }
+                })
+            }
         }else{
-            bodyChange(lastTab.attr("lay-id"));
-            // alert("222--"+lastTab.attr("lay-id"));
+            if (lastTab.attr("class")=="layui-this"){
+                bodyChange(lastTab.attr("lay-id"));
+                // alert("222--"+lastTab.attr("lay-id"));
+            }else{
+                $.each($(tabs), function () {
+                    if ($(this).attr("class") == "layui-this") {
+                        bodyChange($(this).attr("lay-id"));
+                    }
+                })
+            }
         }
     }
     function bodyChange(id) {
