@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,7 +20,7 @@ import java.util.List;
  * 后台管理系统--用户登录注册controller
  */
 @Controller
-@RequestMapping("/sysUser")
+@RequestMapping("erp/sysUser")
 public class SysUserController {
 
     @Autowired
@@ -30,8 +34,8 @@ public class SysUserController {
         JSONObject json = new JSONObject();
         String result = "01";
 
-        List<SysUser> sysUsers = sysUserService.findUserByUserName(username);
-        if (sysUsers!=null && sysUsers.size()>0){
+        SysUser user = sysUserService.findUserByUserName(username);
+        if (user!=null){
             result = "04";
             json.put("result", result);
             return json.toString();
@@ -51,19 +55,36 @@ public class SysUserController {
 
     @ResponseBody
     @RequestMapping("/login")
-    public String login(@RequestParam(value = "KEYDATA") String keyData, @RequestParam(value = "tm") String loginDate){
+    public String login(HttpServletRequest request, @RequestParam(value = "KEYDATA") String keyData, @RequestParam(value = "tm") String loginDate){
         JSONObject json = new JSONObject();
 
         String result = "success";
         String[] split = keyData.split(",");
         String username = split[0];
         String password = split[1];
-        String code = split[2];
 
-        result = sysUserService.login(username,password);
+        SysUser sysUser = sysUserService.login(username, password);
+
+        if (sysUser!=null){
+            //登录成功
+            request.getSession().setAttribute("userId",sysUser.getUserid());
+        }else{
+            //登录失败
+            result = "usererror";
+        }
 
         json.put("result", result);
         return json.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping("/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //清空session
+        HttpSession session = request.getSession();
+        session.invalidate();//销毁session
+
+        response.sendRedirect(request.getContextPath()+"/index.jsp");
     }
 
 }

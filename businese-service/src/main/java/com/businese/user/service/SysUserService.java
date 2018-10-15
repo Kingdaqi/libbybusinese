@@ -21,7 +21,7 @@ public interface SysUserService {
      * @param username
      * @return
      */
-    List<SysUser> findUserByUserName(String username);
+    SysUser findUserByUserName(String username);
 
 
     /**
@@ -30,5 +30,12 @@ public interface SysUserService {
      * @param password
      * @return
      */
-    String login(String username, String password);
+    SysUser login(String username, String password);
+
+    /**
+     * 根据id获取用户
+     * @param userId
+     * @return
+     */
+    SysUser findUserByUserId(Integer userId);
 }

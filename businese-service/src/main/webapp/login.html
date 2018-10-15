@@ -95,7 +95,7 @@
 						</div>
 					</div>
 				</div>
-				<div style="float:right;padding-right:10%;">
+				<!--<div style="float:right;padding-right:10%;">
 					<div style="float: left;margin-top:3px;margin-right:2px;">
 						<font color="white">记住密码</font>
 					</div>
@@ -103,7 +103,7 @@
 						<input name="form-field-checkbox" id="saveid" type="checkbox"
 							onclick="savePaw();" style="padding-top:0px;" />
 					</div>
-				</div>
+				</div>-->
 				<div class="form-actions">
 					<div style="width:86%;padding-left:8%;">
 						<!--
@@ -132,7 +132,7 @@
 		</div>
 		</div>
 		<!-- 注册 -->
-		<div id="windows2" style="display: none;">
+		<!--<div id="windows2" style="display: none;">
 		<div id="loginbox">
 			<form action="" method="post" name="loginForm" id="loginForm">
 				<div class="control-group normal_text">
@@ -209,7 +209,7 @@
 				</div>
 			</div>
 		</div>
-		</div>
+		</div>-->
 		
 	</div>
 	<div id="templatemo_banner_slide" class="container_wapper">
@@ -233,14 +233,13 @@
 				var code = loginname+","+password+","+$("#code").val();
 				$.ajax({
 					type: "POST",
-					url: 'sysUser/login',
+					url: 'erp/sysUser/login',
 			    	data: {KEYDATA:code,tm:new Date().getTime()},
 					dataType:'json',
 					cache: false,
 					success: function(data){
 						if("success" == data.result){
 							saveCookie();
-							// window.location.href="<%=basePath%>main/index";
 							window.location.href="erp/fmain";
 						}else if("usererror" == data.result){
 							$("#loginname").tips({
@@ -344,11 +343,11 @@
             $.cookie('loginname', $("#loginname").val(), {
                 expires : 7
             });
-			if ($("#saveid").attr("checked")) {
-				$.cookie('password', $("#password").val(), {
-					expires : 7
-				});
-			}
+			// if ($("#saveid").attr("checked")) {
+			// 	$.cookie('password', $("#password").val(), {
+			// 		expires : 7
+			// 	});
+			// }
 		}
 		
 		jQuery(function() {

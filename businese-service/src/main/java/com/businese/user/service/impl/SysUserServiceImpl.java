@@ -24,16 +24,19 @@ public class SysUserServiceImpl implements SysUserService {
         return sysUserMapper.insert(sysUser);
     }
 
-    public List<SysUser> findUserByUserName(String username) {
+    public SysUser findUserByUserName(String username) {
         sysUserExample.clear();
         SysUserExample.Criteria criteria = sysUserExample.createCriteria();
         criteria.andUsernameEqualTo(username);
         List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
-        return sysUsers;
+        if(sysUsers!=null && sysUsers.size()>0){
+            return sysUsers.get(0);
+        }
+        return null;
     }
 
 
-    public String login(String username, String password) {
+    public SysUser login(String username, String password) {
         String result = "success";
         sysUserExample.clear();
         SysUserExample.Criteria criteria = sysUserExample.createCriteria();
@@ -41,10 +44,13 @@ public class SysUserServiceImpl implements SysUserService {
         criteria.andPasswordEqualTo(password);
         List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
 
-        if (sysUsers==null || sysUsers.size()==0){
-            result = "usererror";
+        if(sysUsers!=null && sysUsers.size()>0){
+            return sysUsers.get(0);
         }
+        return null;
+    }
 
-        return result;
+    public SysUser findUserByUserId(Integer userId) {
+        return sysUserMapper.selectByPrimaryKey(userId);
     }
 }
