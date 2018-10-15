@@ -1,14 +1,14 @@
-package com.businese.system.controller;
+package com.businese.user.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.businese.system.service.SysUserService;
+import com.businese.model.SysUser;
+import com.businese.user.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.businese.model.SysUser;
-import java.util.Date;
+
 import java.util.List;
 
 /**

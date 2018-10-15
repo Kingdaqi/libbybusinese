@@ -1,4 +1,4 @@
-package com.businese.system.service;
+package com.businese.user.service;
 
 import com.businese.model.SysUser;
 

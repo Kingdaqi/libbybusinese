@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.businese.dao.SysMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.businese.model.SysMenu" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="COMPONENT" property="component" jdbcType="VARCHAR" />
+    <result column="ICO" property="ico" jdbcType="VARCHAR" />
+    <result column="CURL" property="curl" jdbcType="VARCHAR" />
+    <result column="ORDERNO" property="orderno" jdbcType="INTEGER" />
+    <result column="PARENTID" property="parentid" jdbcType="INTEGER" />
+    <result column="PARENTNAME" property="parentname" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="INTEGER" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, COMPONENT, ICO, CURL, ORDERNO, PARENTID, PARENTNAME, STATE, REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.businese.model.SysMenuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_menu
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_menu
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.businese.model.SysMenuExample" >
+    delete from sys_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.businese.model.SysMenu" >
+    insert into sys_menu (ID, NAME, COMPONENT, 
+      ICO, CURL, ORDERNO, 
+      PARENTID, PARENTNAME, STATE, 
+      REMARK)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{component,jdbcType=VARCHAR}, 
+      #{ico,jdbcType=VARCHAR}, #{curl,jdbcType=VARCHAR}, #{orderno,jdbcType=INTEGER}, 
+      #{parentid,jdbcType=INTEGER}, #{parentname,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.businese.model.SysMenu" >
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="component != null" >
+        COMPONENT,
+      </if>
+      <if test="ico != null" >
+        ICO,
+      </if>
+      <if test="curl != null" >
+        CURL,
+      </if>
+      <if test="orderno != null" >
+        ORDERNO,
+      </if>
+      <if test="parentid != null" >
+        PARENTID,
+      </if>
+      <if test="parentname != null" >
+        PARENTNAME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null" >
+        #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="ico != null" >
+        #{ico,jdbcType=VARCHAR},
+      </if>
+      <if test="curl != null" >
+        #{curl,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="parentname != null" >
+        #{parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.businese.model.SysMenuExample" resultType="java.lang.Integer" >
+    select count(*) from sys_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_menu
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.component != null" >
+        COMPONENT = #{record.component,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ico != null" >
+        ICO = #{record.ico,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curl != null" >
+        CURL = #{record.curl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderno != null" >
+        ORDERNO = #{record.orderno,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null" >
+        PARENTID = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentname != null" >
+        PARENTNAME = #{record.parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_menu
+    set ID = #{record.id,jdbcType=INTEGER},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      COMPONENT = #{record.component,jdbcType=VARCHAR},
+      ICO = #{record.ico,jdbcType=VARCHAR},
+      CURL = #{record.curl,jdbcType=VARCHAR},
+      ORDERNO = #{record.orderno,jdbcType=INTEGER},
+      PARENTID = #{record.parentid,jdbcType=INTEGER},
+      PARENTNAME = #{record.parentname,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=INTEGER},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.businese.model.SysMenu" >
+    update sys_menu
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null" >
+        COMPONENT = #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="ico != null" >
+        ICO = #{ico,jdbcType=VARCHAR},
+      </if>
+      <if test="curl != null" >
+        CURL = #{curl,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null" >
+        ORDERNO = #{orderno,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        PARENTID = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="parentname != null" >
+        PARENTNAME = #{parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.businese.model.SysMenu" >
+    update sys_menu
+    set NAME = #{name,jdbcType=VARCHAR},
+      COMPONENT = #{component,jdbcType=VARCHAR},
+      ICO = #{ico,jdbcType=VARCHAR},
+      CURL = #{curl,jdbcType=VARCHAR},
+      ORDERNO = #{orderno,jdbcType=INTEGER},
+      PARENTID = #{parentid,jdbcType=INTEGER},
+      PARENTNAME = #{parentname,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--======================================================================================================-->
+  <select id="getMainMenusByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from sys_menu m
+    where m.id IN (
+      SELECT
+        r_m.MENUID
+      FROM
+        sys_role_user u_r,
+        sys_role_menu r_m
+      WHERE
+        u_r.ROLEID = r_m.ROLEID
+        AND u_r.USERID = #{userId}
+    )
+          AND m.PARENTID=-1 order by ORDERNO;
+  </select>
+  <select id="getChildMenusByParentIdAndUserId" parameterType="map" resultMap="BaseResultMap">
+    select * from sys_menu m
+    where m.id IN (
+      SELECT
+        r_m.MENUID
+      FROM
+        sys_role_user u_r,
+        sys_role_menu r_m
+      WHERE
+        u_r.ROLEID = r_m.ROLEID
+        AND u_r.USERID = #{userId}
+    )
+          AND m.PARENTID=#{parentId} order by ORDERNO;
+  </select>
+
+</mapper>

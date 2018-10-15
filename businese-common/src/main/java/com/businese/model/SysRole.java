@@ -4,18 +4,14 @@ import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
-public class SysUser {
-    private Integer userid;
-
-    private String deptid;
-
-    private String username;
-
-    private String password;
+public class SysRole {
+    private Integer id;
 
     private String name;
 
-    private Integer state;
+    private String remark;
+
+    private Integer orderno;
 
     private String createby;
 
@@ -28,36 +24,12 @@ public class SysUser {
     private Date updatetime;
 
     @Id
-    public Integer getUserid() {
-        return userid;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
-
-    public String getDeptid() {
-        return deptid;
-    }
-
-    public void setDeptid(String deptid) {
-        this.deptid = deptid == null ? null : deptid.trim();
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -68,12 +40,20 @@ public class SysUser {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getState() {
-        return state;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
+
+    public Integer getOrderno() {
+        return orderno;
+    }
+
+    public void setOrderno(Integer orderno) {
+        this.orderno = orderno;
     }
 
     public String getCreateby() {

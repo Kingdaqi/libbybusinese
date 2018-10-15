@@ -55,6 +55,10 @@
         <!-- 指定数据库表 -->
 
         <table schema="businese" tableName="sys_user"></table>
+        <table schema="businese" tableName="sys_menu"></table>
+        <table schema="businese" tableName="sys_role"></table>
+        <table schema="businese" tableName="sys_role_user"></table>
+        <table schema="businese" tableName="sys_role_menu"></table>
 
     </context>
 </generatorConfiguration>

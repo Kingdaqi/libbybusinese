@@ -1,20 +1,28 @@
-package com.businese.system.controller;
+package com.businese.user.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.businese.model.SysMenu;
+import com.businese.user.service.MenuService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 菜单管理
  */
 @Controller
-@RequestMapping("erp/module")
-public class ModuleController {
+@RequestMapping("erp/menu")
+public class MenuController {
+
+    @Autowired
+    private MenuService menuService;
 
     /**
      * 新增菜单
@@ -95,15 +103,14 @@ public class ModuleController {
      */
     @RequestMapping(value = "/sysMenu",method = RequestMethod.GET)
     public ResponseEntity sysMenu(HttpServletRequest request) throws Exception{
-        //UserModel user = this.getUser();
-        //Integer userId = user.getId();
+        //Object loginname = request.getSession().getAttribute("loginname");
         //根据当前登录用户id，查出该用户可操作的系统菜单集合
-//        List<MenuModel> list = menuService.getMenusByUserId(1);
-//        JSONObject result = new JSONObject();
-//        result.accumulate("data",list);
-//        if(list!=null)
-//            return new ResponseEntity(result, HttpStatus.OK);
-//        else
+        List<SysMenu> list = menuService.getMenusByUserId(1);
+        JSONObject result = new JSONObject();
+        result.put("data",list);
+        if(list!=null)
+            return new ResponseEntity(result, HttpStatus.OK);
+        else
             return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 

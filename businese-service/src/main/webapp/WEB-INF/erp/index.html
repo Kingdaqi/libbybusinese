@@ -6,6 +6,47 @@
     <title>libbybusinese</title>
     <link rel="stylesheet" href="../layui-v2.4.3/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="../layui-v2.4.3/style/admin.css" media="all">
+    <script src="../js/jquery.min.js"></script>
+    <script defer="false">
+        //登录成功后,但要在页面加载前加载左侧菜单栏
+        $(document).ready(function() {
+            $.ajax({
+                type: "GET",
+                url: 'menu/sysMenu',
+                dataType:'json',
+                cache: false,
+                async:false,
+                success: function(data){
+                    if(data.data!=null){
+                        handleMenu(data.data);
+                    }
+                }
+            });
+        });
+        //拼接左侧菜单栏代码
+        function handleMenu(data){
+            var lis = "";
+            $.each(data,function (index,item) {
+                lis += "<li data-name=\""+item.curl+"\" class=\"layui-nav-item\">\n" +
+                    "            <a href=\"javascript:;\">\n" +
+                    "                <i class=\"layui-icon "+item.ico+"\"></i>\n" +
+                    "            <cite>"+item.name+"</cite>\n" +
+                    "            </a>\n" +
+                    "            <dl class=\"layui-nav-child\">\n";
+
+                $.each(item.children,function(index2,itemChild){
+                    lis += "                <dd>\n" +
+                        "                    <a data-url=\""+itemChild.curl+"\" data-id=\""+itemChild.component+"\" data-title=\""+itemChild.name+"\" href=\"#\" class=\"site-demo-active\" data-type=\"tabAdd\">"+itemChild.name+"</a>\n" +
+                        "                </dd>\n";
+                })
+
+                lis += "            </dl>\n" +
+                    "        </li>";
+            })
+            $('ul#LAY-system-side-menu').append(lis);
+
+        }
+    </script>
 </head>
 <body class="layui-layout-body">
 <div id="LAY_app">
@@ -77,7 +118,7 @@
                         </a>
                     </li>
 
-                    <li data-name="storehouse" class="layui-nav-item">
+                    <!--<li data-name="storehouse" class="layui-nav-item">
                         <a href="javascript:;">
                             <i class="layui-icon layui-icon-component"></i>
                             <cite>库房管理</cite>
@@ -104,7 +145,7 @@
                         </dl>
                     </li>
                     <li class="layui-nav-item"><a href="">云市场</a></li>
-                    <li class="layui-nav-item"><a href="">发布商品</a></li>
+                    <li class="layui-nav-item"><a href="">发布商品</a></li>-->
                 </ul>
             </div>
         </div>
@@ -137,9 +178,8 @@
 
     </div>
 </div>
-<script src="../layui-v2.4.3/layui/layui.js"></script>
-<script src="../js/jquery.min.js"></script>
 
+<script src="../layui-v2.4.3/layui/layui.js"></script>
 <script>
     //JavaScript代码区域
     layui.use('element', function() {

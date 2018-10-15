@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.businese.dao.SysUserMapper" >
-  <resultMap id="BaseResultMap" type="com.businese.model.SysUser" >
-    <id column="USERID" property="userid" jdbcType="INTEGER" />
-    <result column="DEPTID" property="deptid" jdbcType="VARCHAR" />
-    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
-    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+<mapper namespace="com.businese.dao.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.businese.model.SysRole" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
     <result column="NAME" property="name" jdbcType="VARCHAR" />
-    <result column="STATE" property="state" jdbcType="INTEGER" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ORDERNO" property="orderno" jdbcType="INTEGER" />
     <result column="CREATEBY" property="createby" jdbcType="VARCHAR" />
     <result column="CREATEDEPT" property="createdept" jdbcType="VARCHAR" />
     <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
@@ -73,16 +71,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    USERID, DEPTID, USERNAME, PASSWORD, NAME, STATE, CREATEBY, CREATEDEPT, CREATETIME, 
-    UPDATEBY, UPDATETIME
+    ID, NAME, REMARK, ORDERNO, CREATEBY, CREATEDEPT, CREATETIME, UPDATEBY, UPDATETIME
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.businese.model.SysUserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.businese.model.SysRoleExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from sys_user
+    from sys_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,49 +90,43 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from sys_user
-    where USERID = #{userid,jdbcType=INTEGER}
+    from sys_role
+    where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from sys_user
-    where USERID = #{userid,jdbcType=INTEGER}
+    delete from sys_role
+    where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.businese.model.SysUserExample" >
-    delete from sys_user
+  <delete id="deleteByExample" parameterType="com.businese.model.SysRoleExample" >
+    delete from sys_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.businese.model.SysUser" >
-    insert into sys_user (USERID, DEPTID, USERNAME, 
-      PASSWORD, NAME, STATE, 
-      CREATEBY, CREATEDEPT, CREATETIME, 
-      UPDATEBY, UPDATETIME)
-    values (#{userid,jdbcType=INTEGER}, #{deptid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
-      #{createby,jdbcType=VARCHAR}, #{createdept,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{updateby,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.businese.model.SysRole" >
+    insert into sys_role (ID, NAME, REMARK, 
+      ORDERNO, CREATEBY, CREATEDEPT, 
+      CREATETIME, UPDATEBY, UPDATETIME
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{orderno,jdbcType=INTEGER}, #{createby,jdbcType=VARCHAR}, #{createdept,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updateby,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.businese.model.SysUser" >
-    insert into sys_user
+  <insert id="insertSelective" parameterType="com.businese.model.SysRole" >
+    insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userid != null" >
-        USERID,
-      </if>
-      <if test="deptid != null" >
-        DEPTID,
-      </if>
-      <if test="username != null" >
-        USERNAME,
-      </if>
-      <if test="password != null" >
-        PASSWORD,
+      <if test="id != null" >
+        ID,
       </if>
       <if test="name != null" >
         NAME,
       </if>
-      <if test="state != null" >
-        STATE,
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="orderno != null" >
+        ORDERNO,
       </if>
       <if test="createby != null" >
         CREATEBY,
@@ -154,23 +145,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="deptid != null" >
-        #{deptid,jdbcType=VARCHAR},
-      </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="state != null" >
-        #{state,jdbcType=INTEGER},
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=INTEGER},
       </if>
       <if test="createby != null" >
         #{createby,jdbcType=VARCHAR},
@@ -189,32 +174,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.businese.model.SysUserExample" resultType="java.lang.Integer" >
-    select count(*) from sys_user
+  <select id="countByExample" parameterType="com.businese.model.SysRoleExample" resultType="java.lang.Integer" >
+    select count(*) from sys_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update sys_user
+    update sys_role
     <set >
-      <if test="record.userid != null" >
-        USERID = #{record.userid,jdbcType=INTEGER},
-      </if>
-      <if test="record.deptid != null" >
-        DEPTID = #{record.deptid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.username != null" >
-        USERNAME = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null" >
-        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.name != null" >
         NAME = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.state != null" >
-        STATE = #{record.state,jdbcType=INTEGER},
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderno != null" >
+        ORDERNO = #{record.orderno,jdbcType=INTEGER},
       </if>
       <if test="record.createby != null" >
         CREATEBY = #{record.createby,jdbcType=VARCHAR},
@@ -237,13 +216,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update sys_user
-    set USERID = #{record.userid,jdbcType=INTEGER},
-      DEPTID = #{record.deptid,jdbcType=VARCHAR},
-      USERNAME = #{record.username,jdbcType=VARCHAR},
-      PASSWORD = #{record.password,jdbcType=VARCHAR},
+    update sys_role
+    set ID = #{record.id,jdbcType=INTEGER},
       NAME = #{record.name,jdbcType=VARCHAR},
-      STATE = #{record.state,jdbcType=INTEGER},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      ORDERNO = #{record.orderno,jdbcType=INTEGER},
       CREATEBY = #{record.createby,jdbcType=VARCHAR},
       CREATEDEPT = #{record.createdept,jdbcType=VARCHAR},
       CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
@@ -253,23 +230,17 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.businese.model.SysUser" >
-    update sys_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.businese.model.SysRole" >
+    update sys_role
     <set >
-      <if test="deptid != null" >
-        DEPTID = #{deptid,jdbcType=VARCHAR},
-      </if>
-      <if test="username != null" >
-        USERNAME = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        PASSWORD = #{password,jdbcType=VARCHAR},
-      </if>
       <if test="name != null" >
         NAME = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="state != null" >
-        STATE = #{state,jdbcType=INTEGER},
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null" >
+        ORDERNO = #{orderno,jdbcType=INTEGER},
       </if>
       <if test="createby != null" >
         CREATEBY = #{createby,jdbcType=VARCHAR},
@@ -287,20 +258,18 @@
         UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where USERID = #{userid,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.businese.model.SysUser" >
-    update sys_user
-    set DEPTID = #{deptid,jdbcType=VARCHAR},
-      USERNAME = #{username,jdbcType=VARCHAR},
-      PASSWORD = #{password,jdbcType=VARCHAR},
-      NAME = #{name,jdbcType=VARCHAR},
-      STATE = #{state,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.businese.model.SysRole" >
+    update sys_role
+    set NAME = #{name,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ORDERNO = #{orderno,jdbcType=INTEGER},
       CREATEBY = #{createby,jdbcType=VARCHAR},
       CREATEDEPT = #{createdept,jdbcType=VARCHAR},
       CREATETIME = #{createtime,jdbcType=TIMESTAMP},
       UPDATEBY = #{updateby,jdbcType=VARCHAR},
       UPDATETIME = #{updatetime,jdbcType=TIMESTAMP}
-    where USERID = #{userid,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
