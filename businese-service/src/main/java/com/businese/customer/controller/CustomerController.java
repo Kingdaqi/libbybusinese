@@ -10,4 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("erp/customer")
 public class CustomerController {
+
+    /**
+     * 客户基本信息
+     * @return
+     */
+    @RequestMapping("/baseInfo")
+    public String baseInfo(){
+        return "customer/baseInfo";
+    }
+
+    /**
+     * 客户订单管理
+     * @return
+     */
+    @RequestMapping("/orderRel")
+    public String orderRel(){
+        return "customer/orderRel";
+    }
 }

@@ -10,4 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("erp/product")
 public class ProductController {
+
+    /**
+     * 商品列表
+     * @return
+     */
+    @RequestMapping("/productList")
+    public String productList(){
+        return "product/productList";
+    }
 }

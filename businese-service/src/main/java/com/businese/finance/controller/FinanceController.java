@@ -10,4 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("erp/finance")
 public class FinanceController {
+
+    /**
+     * 入款记录
+     * @return
+     */
+    @RequestMapping("/income")
+    public String income(){
+        return "finance/income";
+    }
+
+    /**
+     * 出款记录
+     * @return
+     */
+    @RequestMapping("/out")
+    public String out(){
+        return "finance/out";
+    }
 }

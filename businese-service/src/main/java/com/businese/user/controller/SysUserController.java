@@ -54,7 +54,7 @@ public class SysUserController {
     }
 
     @ResponseBody
-    @RequestMapping("/login")
+    @RequestMapping(value="/login",produces = "application/json;charset=utf-8")
     public String login(HttpServletRequest request, @RequestParam(value = "KEYDATA") String keyData, @RequestParam(value = "tm") String loginDate){
         JSONObject json = new JSONObject();
 
@@ -68,6 +68,7 @@ public class SysUserController {
         if (sysUser!=null){
             //登录成功
             request.getSession().setAttribute("userId",sysUser.getUserid());
+            json.put("name", sysUser.getName());
         }else{
             //登录失败
             result = "usererror";

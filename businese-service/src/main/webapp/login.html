@@ -239,7 +239,7 @@
 					cache: false,
 					success: function(data){
 						if("success" == data.result){
-							saveCookie();
+							saveCookie(data.name);
 							window.location.href="erp/fmain";
 						}else if("usererror" == data.result){
 							$("#loginname").tips({
@@ -339,10 +339,11 @@
 			}
 		}
 
-		function saveCookie() {
-            $.cookie('loginname', $("#loginname").val(), {
-                expires : 7
-            });
+		function saveCookie(name) {
+            // $.cookie('loginname', $("#loginname").val(), {
+            //     expires : 7
+            // });
+            $.cookie('name', name);
 			// if ($("#saveid").attr("checked")) {
 			// 	$.cookie('password', $("#password").val(), {
 			// 		expires : 7

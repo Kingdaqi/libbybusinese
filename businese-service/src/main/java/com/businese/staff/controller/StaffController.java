@@ -10,4 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("erp/staff")
 public class StaffController {
+
+    /**
+     * 员工基本信息
+     * @return
+     */
+    @RequestMapping("/baseInfo")
+    public String baseInfo(){
+        return "staff/baseInfo";
+    }
+
+    /**
+     * 销售额管理
+     * @return
+     */
+    @RequestMapping("/sales")
+    public String sales(){
+        return "staff/sales";
+    }
 }

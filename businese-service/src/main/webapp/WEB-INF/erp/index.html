@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
 <html>
 <head>
     <meta charset="utf-8">
@@ -6,7 +7,8 @@
     <title>libbybusinese</title>
     <link rel="stylesheet" href="../layui-v2.4.3/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="../layui-v2.4.3/style/admin.css" media="all">
-    <script src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script defer="false">
         //登录成功后,但要在页面加载前加载左侧菜单栏
         $(document).ready(function() {
@@ -46,6 +48,13 @@
             $('ul#LAY-system-side-menu').append(lis);
 
         }
+    </script>
+    <script>
+        $(function () {
+            var name = $.cookie("name");
+            // alert(name);
+            $('#name').text(name);
+        });
     </script>
 </head>
 <body class="layui-layout-body">
@@ -88,9 +97,9 @@
             </ul>
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">
-                        <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                        admin
+                    <a id="personalInfo" href="javascript:;">
+                        <img src="img/profilePhoto.jpg" class="layui-nav-img">
+                        <font id="name">someone</font>
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a href="">基本资料</a></dd>
