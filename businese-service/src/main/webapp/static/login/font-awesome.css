@@ -139,6 +139,9 @@ ul.icons li [class*=" icon-"] {
   float: right;
   margin-right: 3px;
 }
+.pull-center {
+  float: initial;
+}
 .pull-left {
   float: left;
   margin-left: 6px;

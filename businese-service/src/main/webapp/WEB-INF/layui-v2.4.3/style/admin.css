@@ -21,6 +21,9 @@ html {
 [lay-href], [lay-tips], [layadmin-event] {
     cursor: pointer
 }
+[layadmin-event-search] {
+    cursor: text
+}
 
 .layui-layout-admin .layui-header {
     position: fixed;

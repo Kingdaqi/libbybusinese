@@ -1883,6 +1883,14 @@ a cite {
     font-size: 12px
 }
 
+.layui-btn-sm1 {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 20px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
 .layui-btn-sm i {
     font-size: 16px !important
 }
@@ -1961,7 +1969,7 @@ a cite {
 
 .layui-input, .layui-textarea {
     display: block;
-    width: 100%;
+    width: 15%;
     padding-left: 10px
 }
 
@@ -5015,4 +5023,17 @@ body .layui-util-face .layui-layer-content {
 .layui-anim-fadeout {
     -webkit-animation-name: layui-fadeout;
     animation-name: layui-fadeout
+}
+
+.layui-input-search {
+    padding-left: 10px;
+    margin-left: 50px;
+    height: 30px;
+    line-height: 1.3;
+    border-width: 1px;
+    border-style: hidden;
+    border-radius: 2px;
+    vertical-align:middle;
+    cursor: text;
+
 }
