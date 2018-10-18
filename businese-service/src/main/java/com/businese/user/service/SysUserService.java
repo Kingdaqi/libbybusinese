@@ -38,4 +38,13 @@ public interface SysUserService {
      * @return
      */
     SysUser findUserByUserId(Integer userId);
+
+    /**
+     * 查询员工列表
+     * @param userName
+     * @param page
+     * @param rows
+     * @return
+     */
+    List<SysUser> getUsers(String userName, Integer page, Integer rows);
 }

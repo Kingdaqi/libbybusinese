@@ -2893,7 +2893,7 @@ a cite {
 
 .layui-table-view .layui-table {
     position: relative;
-    width: auto;
+    width: 98%;
     margin: 0
 }
 
@@ -5035,5 +5035,8 @@ body .layui-util-face .layui-layer-content {
     border-radius: 2px;
     vertical-align:middle;
     cursor: text;
-
 }
+
+.laytable-cell-1-0-0{ width: 48px; }.laytable-cell-1-0-1{ width: 80px; }.laytable-cell-1-0-2{ width: 120px; }.laytable-cell-1-0-3{ width: 150px; }.laytable-cell-1-0-4{ width: 80px; }.laytable-cell-1-0-5{ width: 100px; }.laytable-cell-1-0-6{  }.laytable-cell-1-0-7{ width: 80px; }.laytable-cell-1-0-8{ width: 120px; }.laytable-cell-1-0-9{ width: 100px; }.laytable-cell-1-0-10{ width: 120px; }.laytable-cell-1-0-11{ width: 150px; }
+
+.layui-laypage-btn:hover {background:#ff0303;color:#fff;}

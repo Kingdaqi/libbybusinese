@@ -14,6 +14,26 @@ public class SysUserExample {
 
     protected List<Criteria> oredCriteria;
 
+    protected int start;
+
+    protected int limit;
+
+    public int getStart() {
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
     public SysUserExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
@@ -178,62 +198,62 @@ public class SysUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeptidEqualTo(String value) {
+        public Criteria andDeptidEqualTo(Integer value) {
             addCriterion("DEPTID =", value, "deptid");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidNotEqualTo(String value) {
+        public Criteria andDeptidNotEqualTo(Integer value) {
             addCriterion("DEPTID <>", value, "deptid");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidGreaterThan(String value) {
+        public Criteria andDeptidGreaterThan(Integer value) {
             addCriterion("DEPTID >", value, "deptid");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidGreaterThanOrEqualTo(String value) {
+        public Criteria andDeptidGreaterThanOrEqualTo(Integer value) {
             addCriterion("DEPTID >=", value, "deptid");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidLessThan(String value) {
+        public Criteria andDeptidLessThan(Integer value) {
             addCriterion("DEPTID <", value, "deptid");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidLessThanOrEqualTo(String value) {
+        public Criteria andDeptidLessThanOrEqualTo(Integer value) {
             addCriterion("DEPTID <=", value, "deptid");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidLike(String value) {
+        public Criteria andDeptidLike(Integer value) {
             addCriterion("DEPTID like", value, "deptid");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidNotLike(String value) {
+        public Criteria andDeptidNotLike(Integer value) {
             addCriterion("DEPTID not like", value, "deptid");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidIn(List<String> values) {
+        public Criteria andDeptidIn(List<Integer> values) {
             addCriterion("DEPTID in", values, "deptid");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidNotIn(List<String> values) {
+        public Criteria andDeptidNotIn(List<Integer> values) {
             addCriterion("DEPTID not in", values, "deptid");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidBetween(String value1, String value2) {
+        public Criteria andDeptidBetween(Integer value1, Integer value2) {
             addCriterion("DEPTID between", value1, value2, "deptid");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidNotBetween(String value1, String value2) {
+        public Criteria andDeptidNotBetween(Integer value1, Integer value2) {
             addCriterion("DEPTID not between", value1, value2, "deptid");
             return (Criteria) this;
         }

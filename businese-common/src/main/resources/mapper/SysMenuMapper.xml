@@ -84,6 +84,7 @@
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
+    limit ${start},${limit}
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
@@ -301,7 +302,7 @@
         u_r.ROLEID = r_m.ROLEID
         AND u_r.USERID = #{userId}
     )
-          AND m.PARENTID=-1 order by ORDERNO;
+    AND m.PARENTID=-1 AND m.STATE=1 order by ORDERNO;
   </select>
   <select id="getChildMenusByParentIdAndUserId" parameterType="map" resultMap="BaseResultMap">
     select * from sys_menu m
@@ -315,7 +316,7 @@
         u_r.ROLEID = r_m.ROLEID
         AND u_r.USERID = #{userId}
     )
-          AND m.PARENTID=#{parentId} order by ORDERNO;
+    AND m.PARENTID=#{parentId} AND m.STATE=1 order by ORDERNO;
   </select>
 
 </mapper>

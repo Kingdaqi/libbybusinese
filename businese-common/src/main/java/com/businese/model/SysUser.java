@@ -3,11 +3,12 @@ package com.businese.model;
 import org.springframework.data.annotation.Id;
 
 import java.util.Date;
+import java.util.List;
 
 public class SysUser {
     private Integer userid;
 
-    private String deptid;
+    private Integer deptid;
 
     private String username;
 
@@ -27,6 +28,26 @@ public class SysUser {
 
     private Date updatetime;
 
+    private List<SysRole> roles;
+
+    private String deptName;
+
+    public List<SysRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<SysRole> roles) {
+        this.roles = roles;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
     @Id
     public Integer getUserid() {
         return userid;
@@ -36,12 +57,12 @@ public class SysUser {
         this.userid = userid;
     }
 
-    public String getDeptid() {
+    public Integer getDeptid() {
         return deptid;
     }
 
-    public void setDeptid(String deptid) {
-        this.deptid = deptid == null ? null : deptid.trim();
+    public void setDeptid(Integer deptid) {
+        this.deptid = deptid;
     }
 
     public String getUsername() {

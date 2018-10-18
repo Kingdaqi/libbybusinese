@@ -7,6 +7,7 @@ import com.businese.user.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,5 +53,24 @@ public class SysUserServiceImpl implements SysUserService {
 
     public SysUser findUserByUserId(Integer userId) {
         return sysUserMapper.selectByPrimaryKey(userId);
+    }
+
+    public List<SysUser> getUsers(String userName, Integer page, Integer rows) {
+        sysUserExample.clear();
+        SysUserExample.Criteria criteria = sysUserExample.createCriteria();
+        if (userName!=null && !"".equals(userName)){
+            criteria.andUsernameEqualTo(userName);
+        }
+
+        sysUserExample.setStart((page-1)*rows);
+        sysUserExample.setLimit(rows);
+        List<SysUser> sysUsers= sysUserMapper.selectByExample(sysUserExample);
+//        List<SysUser> sysUsers = new ArrayList<SysUser>();
+//        for (SysUser user:users) {
+//            Integer deptid = user.getDeptid();
+//
+//        }
+
+        return sysUsers;
     }
 }
