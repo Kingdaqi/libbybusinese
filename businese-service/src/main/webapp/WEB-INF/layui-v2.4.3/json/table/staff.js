@@ -1,0 +1,55 @@
+{
+    "code": 0
+    ,"msg": ""
+    ,"count": 30
+    ,"data": [{
+    "id": "10001"
+    ,"username": "dufu"
+    ,"name": "杜甫"
+    ,"deptName": "销售部"
+    ,"roleName": "销售经理"
+}, {
+    "id": "10002"
+    ,"username": "libai"
+    ,"name": "李白"
+    ,"deptName": "人事部"
+    ,"roleName": "人事经理"
+    ,"LAY_CHECKED": true
+}, {
+    "id": "10003"
+    ,"username": "wangbo"
+    ,"name": "王勃"
+    ,"deptName": "技术部"
+    ,"roleName": "技术经理"
+}, {
+    "id": "10004"
+    ,"username": "wangbo"
+    ,"name": "王勃"
+    ,"deptName": "技术部"
+    ,"roleName": "技术经理"
+}, {
+    "id": "10005"
+    ,"username": "wangbo"
+    ,"name": "王勃"
+    ,"deptName": "技术部"
+    ,"roleName": "技术经理"
+}, {
+    "id": "10006"
+    ,"username": "wangbo"
+    ,"name": "王勃"
+    ,"deptName": "技术部"
+    ,"roleName": "技术经理"
+}, {
+    "id": "10007"
+    ,"username": "wangbo"
+    ,"name": "王勃"
+    ,"deptName": "技术部"
+    ,"roleName": "技术经理"
+}, {
+    "id": "10008"
+    ,"username": "wangbo"
+    ,"name": "王勃"
+    ,"deptName": "技术部"
+    ,"roleName": "技术经理"
+}]
+}  

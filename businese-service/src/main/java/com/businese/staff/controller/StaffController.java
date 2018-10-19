@@ -2,6 +2,7 @@ package com.businese.staff.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.businese.model.SysUser;
+import com.businese.staff.service.StaffService;
 import com.businese.user.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ import java.util.List;
 public class StaffController {
 
     @Autowired
-    private SysUserService sysUserService;
+    private StaffService staffService;
 
     /**
      * 员工基本信息
@@ -51,15 +52,20 @@ public class StaffController {
      * @throws Exception
      */
     @RequestMapping(value = "/getStaffs",method = RequestMethod.POST)
-    public ResponseEntity getStaffs(@RequestParam(value = "username") String userName,
+    public ResponseEntity getStaffs(@RequestParam(value = "userName") String userName,
                                    @RequestParam(value = "page") Integer page,
-                                   @RequestParam(value = "rows") Integer rows) throws Exception{
+                                   @RequestParam(value = "limit") Integer rows) throws Exception{
 
-        List<SysUser> list = sysUserService.getUsers(userName,page,rows);
+        List<SysUser> list = staffService.getStaffs(userName,page,rows);
+        Integer count = staffService.getStaffsCount(userName);
 
         JSONObject result = new JSONObject();
         result.put("data",list);
+        result.put("count",count);
+        result.put("code",0);
+        result.put("msg","");
 
         return new ResponseEntity(result, HttpStatus.OK);
     }
+
 }

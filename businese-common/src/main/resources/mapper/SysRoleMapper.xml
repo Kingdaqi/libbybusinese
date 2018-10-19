@@ -272,4 +272,8 @@
       UPDATETIME = #{updatetime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getRolesByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT r.* FROM sys_role r,sys_role_user r_u where r_u.USERID=#{userId} and r_u.ROLEID=r.ID
+  </select>
 </mapper>

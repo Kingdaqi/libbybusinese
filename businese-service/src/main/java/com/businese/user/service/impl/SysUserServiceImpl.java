@@ -1,6 +1,9 @@
 package com.businese.user.service.impl;
 
+import com.businese.dao.SysDeptMapper;
 import com.businese.dao.SysUserMapper;
+import com.businese.model.SysDept;
+import com.businese.model.SysDeptExample;
 import com.businese.model.SysUser;
 import com.businese.model.SysUserExample;
 import com.businese.user.service.SysUserService;
@@ -55,22 +58,4 @@ public class SysUserServiceImpl implements SysUserService {
         return sysUserMapper.selectByPrimaryKey(userId);
     }
 
-    public List<SysUser> getUsers(String userName, Integer page, Integer rows) {
-        sysUserExample.clear();
-        SysUserExample.Criteria criteria = sysUserExample.createCriteria();
-        if (userName!=null && !"".equals(userName)){
-            criteria.andUsernameEqualTo(userName);
-        }
-
-        sysUserExample.setStart((page-1)*rows);
-        sysUserExample.setLimit(rows);
-        List<SysUser> sysUsers= sysUserMapper.selectByExample(sysUserExample);
-//        List<SysUser> sysUsers = new ArrayList<SysUser>();
-//        for (SysUser user:users) {
-//            Integer deptid = user.getDeptid();
-//
-//        }
-
-        return sysUsers;
-    }
 }

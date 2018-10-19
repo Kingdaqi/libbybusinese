@@ -1888,7 +1888,8 @@ a cite {
     line-height: 30px;
     padding: 0 20px;
     font-size: 14px;
-    vertical-align: middle;
+    vertical-align: text-top;
+    margin-left: 20px;
 }
 
 .layui-btn-sm i {
@@ -2893,7 +2894,7 @@ a cite {
 
 .layui-table-view .layui-table {
     position: relative;
-    width: 98%;
+    width: 100%;
     margin: 0
 }
 
@@ -3175,7 +3176,7 @@ a cite {
     width: 100%;
     min-height: 50px;
     line-height: 30px;
-    padding: 10px 15px;
+    /*padding: 10px 15px;*/
     border-width: 0 0 1px
 }
 
@@ -5033,7 +5034,7 @@ body .layui-util-face .layui-layer-content {
     border-width: 1px;
     border-style: hidden;
     border-radius: 2px;
-    vertical-align:middle;
+    vertical-align:text-top;
     cursor: text;
 }
 
