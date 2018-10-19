@@ -46,8 +46,8 @@ public class StaffController {
     /**
      * 查询员工列表
      * @param userName  为""或NULL时查询所有
-     * @param page  第几页 默认0
-     * @param rows  一页几行 默认5
+     * @param page  第几页 默认1
+     * @param rows  一页几行 默认10
      * @return
      * @throws Exception
      */
