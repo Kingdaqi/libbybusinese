@@ -23,4 +23,10 @@ public interface StaffService {
      * @return
      */
     Integer getStaffsCount(String userName);
+
+    /**
+     *
+     * @param userId
+     */
+    void delete(Integer userId);
 }

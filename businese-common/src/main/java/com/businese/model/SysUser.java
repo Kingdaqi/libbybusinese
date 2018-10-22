@@ -32,6 +32,16 @@ public class SysUser {
 
     private String deptName;
 
+    private String roleName;
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
     public List<SysRole> getRoles() {
         return roles;
     }

@@ -46,16 +46,43 @@
                     </script>
 
                     <script type="text/html" id="add-bar">
-                        <div id="baseInfo" style="height: 90%">
-                            <label id="username">用户名</label>
-                            <input type="text"/>
-                            <label id="name">姓名</label>
-                            <input type="text"/>
-                            <label id="name">性别</label>
-                            <input type="text"/>
-                            <label id="name">生日</label>
-                            <input type="date"/>
+                        <div id="userInfo" style="height: 90%">
+                            <form id="userInfoForm" style="width: 100%;height: 100%;">
 
+                                <div class="layui-col-md6">
+                                    <label for="username" class="layui-label">用户名</label>
+                                    <input type="text" id="username" placeholder="请输入用户名" class="layui-input">
+                                </div>
+
+                                <div class="layui-col-md6">
+                                    <label for="name" class="layui-label">姓名</label>
+                                    <input type="text" id="name" placeholder="请输入姓名" class="layui-input">
+                                </div>
+
+                                <div class="layui-col-md6">
+                                    <label for="password" class="layui-label">密码</label>
+                                    <input type="password" id="password" placeholder="请输入密码" class="layui-input">
+                                </div>
+
+                                <div class="layui-col-md6">
+                                    <label for="confirm" class="layui-label">确认密码</label>
+                                    <input type="password" id="confirm" placeholder="请确认密码" class="layui-input">
+                                </div>
+
+                                <!--<div class="layui-unselect layui-form-select">
+                                    <label for="roles" class="layui-label">角色</label>
+                                    <div class="layui-select-title">
+                                        <input type="text" id="roles" placeholder="请选择一个城市" value="" class="layui-input layui-unselect">
+                                        <i class="layui-edge"></i>
+                                    </div>
+                                    <dl class="layui-anim layui-anim-upbit" style="">
+                                        <dd lay-value="" class="layui-select-tips layui-this">请选择一个城市</dd>
+                                        <dd lay-value="010" class="">北京</dd>
+                                        <dd lay-value="021" class="">上海</dd>
+                                        <dd lay-value="0571" class="">杭州</dd>
+                                    </dl>
+                                </div>-->
+                            </form>
                         </div>
                         <div align="right" style="height: 10%">
                             <button class="layui-btn layui-btn-normal layui-btn-radius" >保存</button>
@@ -83,7 +110,7 @@
 
         table.render({
             elem: '#test-table-toolbar'
-            , url: 'getStaffs'
+            , url: 'getUsers'
             , method:'POST'
             , userName:""
             , toolbar: '#test-table-toolbar-toolbarDemo'
@@ -93,7 +120,7 @@
                 , {field: 'username', title: '用户名', width: 210}
                 , {field: 'name', title: '姓名', width: 210}
                 , {field: 'deptName', title: '所属部门', width: 210}
-                , {field: 'roleName', title: '职位', width: 240}
+                , {field: 'roleName', title: '角色', width: 240}
                 , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 240}
             ]]
             , page: true
@@ -129,7 +156,7 @@
             var data = obj.data;
             //alert(data);
             if (obj.event === 'del') {
-                layer.confirm('确认删除该员工信息吗？', function (index) {
+                layer.confirm('确认删除该用户信息吗？', function (index) {
                     $.ajax({
                         type: "POST",
                         url: 'delete',
@@ -165,7 +192,7 @@
 
             table.render({
                 elem: '#test-table-toolbar'
-                , url: 'getStaffs'
+                , url: 'getUsers'
                 , method:'POST'
                 , userName:username
                 , toolbar: '#test-table-toolbar-toolbarDemo'
@@ -187,6 +214,7 @@
             layer.open({
                 type: 1,
                 title: '新增',
+                resize:1,
                 skin: 'layui-layer-rim',
                 area: ['800px', '600px'],
                 content: addBar

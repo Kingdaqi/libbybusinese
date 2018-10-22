@@ -1201,7 +1201,8 @@ a cite {
     }
 
     .layui-col-md6 {
-        width: 50%
+        width: 100%;
+        margin: 20px 10px 10px;
     }
 
     .layui-col-md7 {
@@ -1969,9 +1970,10 @@ a cite {
 }
 
 .layui-input, .layui-textarea {
-    display: block;
-    width: 15%;
-    padding-left: 10px
+    /*display: block;*/
+    width: 50%;
+    padding-left: 10px;
+    margin-left: 30px;
 }
 
 .layui-input:hover, .layui-textarea:hover {
@@ -5041,3 +5043,12 @@ body .layui-util-face .layui-layer-content {
 .laytable-cell-1-0-0{ width: 48px; }.laytable-cell-1-0-1{ width: 80px; }.laytable-cell-1-0-2{ width: 120px; }.laytable-cell-1-0-3{ width: 150px; }.laytable-cell-1-0-4{ width: 80px; }.laytable-cell-1-0-5{ width: 100px; }.laytable-cell-1-0-6{  }.laytable-cell-1-0-7{ width: 80px; }.laytable-cell-1-0-8{ width: 120px; }.laytable-cell-1-0-9{ width: 100px; }.laytable-cell-1-0-10{ width: 120px; }.laytable-cell-1-0-11{ width: 150px; }
 
 .layui-laypage-btn:hover {background:#ff0303;color:#fff;}
+
+.layui-label{
+    margin-left: 50px;
+}
+
+label{
+    display: inline-block;
+    min-width: 100px;/*或者 width: 100px;*/
+}

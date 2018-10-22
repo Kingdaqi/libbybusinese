@@ -39,4 +39,25 @@ public interface SysUserService {
      */
     SysUser findUserByUserId(Integer userId);
 
+    /**
+     * 根据id删除用户
+     * @param userId
+     */
+    void delete(Integer userId);
+
+    /**
+     * 分页查询用户
+     * @param userName 用户名
+     * @param page
+     * @param rows
+     * @return
+     */
+    List<SysUser> getUsers(String userName, Integer page, Integer rows);
+
+    /**
+     * 根据用户名查询数量
+     * @param userName
+     * @return
+     */
+    Integer getUsersCount(String userName);
 }
