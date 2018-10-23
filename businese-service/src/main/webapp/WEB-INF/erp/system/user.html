@@ -11,6 +11,22 @@
     <link rel="stylesheet" href="../../layui-v2.4.3/style/admin.css" media="all">
     <script src="../../js/jquery-1.7.2.js"></script>
     <script src="../../js/jquery.tips.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                type: "GET",
+                url: 'getRoles',
+                dataType:'json',
+                cache: false,
+                async:false,
+                success: function(data){
+                    if(data.data!=null){
+                        handleRoleBox(data.data);
+                    }
+                }
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -46,7 +62,7 @@
                     </script>
 
                     <script type="text/html" id="add-bar">
-                        <div id="userInfo" style="height: 90%">
+                        <div id="userInfo" style="height: 90%;">
                             <form id="userInfoForm" style="width: 100%;height: 100%;">
 
                                 <div class="layui-col-md6">
@@ -78,15 +94,8 @@
                                     <input type="text" id="roles" placeholder="请选择角色" readonly="readonly" class="layui-input">
                                     <font id="rolestip" style="color: red;margin-left: 10px;display: none">*角色不能为空</font>
                                     <br />
-                                    <div style="margin-left: 185px;margin-top: 5px;width: 50%">
-                                        <input type="checkbox" name="lang" value="01"><span style="margin-right: 10px">天天挖坑</span>
-                                        <input type="checkbox" name="lang" value="02"><span style="margin-right: 10px">爱游戏</span>
-                                        <input type="checkbox" name="lang" value="03"><span style="margin-right: 10px">沃商店</span>
-                                        <input type="checkbox" name="lang" value="04"><span style="margin-right: 10px">咪咕</span>
-                                        <input type="checkbox" name="lang" value="05"><span style="margin-right: 10px">天天挖坑</span>
-                                        <input type="checkbox" name="lang" value="06"><span style="margin-right: 10px">爱游戏</span>
-                                        <input type="checkbox" name="lang" value="07"><span style="margin-right: 10px">沃商店</span>
-                                        <input type="checkbox" name="lang" value="08"><span style="margin-right: 10px">咪咕</span>
+                                    <div id="roleBox" style="margin-left: 185px;margin-top: 5px;width: 50%">
+                                        <!--<input type="checkbox" name="lang" value="01"><span style="margin-right: 10px">系统管理员</span>-->
                                     </div>
                                 </div>
 
@@ -98,7 +107,6 @@
                             <button class="layui-btn layui-btn-primary layui-btn-radius" style="margin-right: 20px;">取消</button>
                         </div>
                     </script>
-
                 </div>
             </div>
         </div>
@@ -220,6 +228,7 @@
         
         function add() {
             var addBar = getAddBar();
+            addBar.
             layer.open({
                 type: 1,
                 title: '新增',
@@ -249,21 +258,48 @@
         if ($('#username').val()==''){
             $('#usernametip').css("display",'inline');
             return false;
-        }else if($('#name').val()==''){
+        }else{
+            $('#usernametip').css("display",'none');
+        }
+
+        if($('#name').val()==''){
             $('#nametip').css("display",'inline');
             return false;;
-        }else if($('#password').val()==''){
+        }else{
+            $('#nametip').css("display",'none');
+        }
+
+        if($('#password').val()==''){
             $('#passwordtip').css("display",'inline');
             return false;;
-        }else if($('#confirm').val()!=$('#password').val()){
+        }else{
+            $('#passwordtip').css("display",'none');
+        }
+
+        if($('#confirm').val()!=$('#password').val()){
             $('#confirmtip').css("display",'inline');
             return false;;
-        }else if($('#roles').val()==''){
+        }else{
+            $('#confirmtip').css("display",'none');
+        }
+
+        if($('#roles').val()==''){
             $('#rolestip').css("display",'inline');
             return false;;
+        }else{
+            $('#rolestip').css("display",'none');
         }
 
         return true;
+    }
+
+    //拼接左侧菜单栏代码
+    function handleRoleBox(data){
+        var inputs = "";
+        $.each(data,function (index,item) {
+            inputs += "<input type=\"checkbox\" name=\"lang\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
+        })
+        $('#roleBox').append(inputs);
     }
 
 </script>

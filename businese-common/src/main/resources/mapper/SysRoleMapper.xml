@@ -276,4 +276,8 @@
   <select id="getRolesByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT r.* FROM sys_role r,sys_role_user r_u where r_u.USERID=#{userId} and r_u.ROLEID=r.ID
   </select>
+
+  <select id="getRoles" resultMap="BaseResultMap">
+    SELECT r.* FROM sys_role r;
+  </select>
 </mapper>

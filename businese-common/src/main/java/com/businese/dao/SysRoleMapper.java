@@ -29,4 +29,6 @@ public interface SysRoleMapper {
     int updateByPrimaryKey(SysRole record);
 
     List<SysRole> getRolesByUserId(Integer userId);
+
+    List<SysRole> getRoles();
 }
