@@ -52,40 +52,49 @@
                                 <div class="layui-col-md6">
                                     <label for="username" class="layui-label">用户名</label>
                                     <input type="text" id="username" placeholder="请输入用户名" class="layui-input">
+                                    <font id="usernametip" style="color: red;margin-left: 10px;display: none">*用户名不能为空</font>
                                 </div>
 
                                 <div class="layui-col-md6">
                                     <label for="name" class="layui-label">姓名</label>
                                     <input type="text" id="name" placeholder="请输入姓名" class="layui-input">
+                                    <font id="nametip" style="color: red;margin-left: 10px;display: none">*姓名不能为空</font>
                                 </div>
 
                                 <div class="layui-col-md6">
                                     <label for="password" class="layui-label">密码</label>
                                     <input type="password" id="password" placeholder="请输入密码" class="layui-input">
+                                    <font id="passwordtip" style="color: red;margin-left: 10px;display: none">*密码不能为空</font>
                                 </div>
 
                                 <div class="layui-col-md6">
                                     <label for="confirm" class="layui-label">确认密码</label>
                                     <input type="password" id="confirm" placeholder="请确认密码" class="layui-input">
+                                    <font id="confirmtip" style="color: red;margin-left: 10px;display: none">*两次密码不一致</font>
                                 </div>
 
-                                <!--<div class="layui-unselect layui-form-select">
+                                <div class="layui-col-md6">
                                     <label for="roles" class="layui-label">角色</label>
-                                    <div class="layui-select-title">
-                                        <input type="text" id="roles" placeholder="请选择一个城市" value="" class="layui-input layui-unselect">
-                                        <i class="layui-edge"></i>
+                                    <input type="text" id="roles" placeholder="请选择角色" readonly="readonly" class="layui-input">
+                                    <font id="rolestip" style="color: red;margin-left: 10px;display: none">*角色不能为空</font>
+                                    <br />
+                                    <div style="margin-left: 185px;margin-top: 5px;width: 50%">
+                                        <input type="checkbox" name="lang" value="01"><span style="margin-right: 10px">天天挖坑</span>
+                                        <input type="checkbox" name="lang" value="02"><span style="margin-right: 10px">爱游戏</span>
+                                        <input type="checkbox" name="lang" value="03"><span style="margin-right: 10px">沃商店</span>
+                                        <input type="checkbox" name="lang" value="04"><span style="margin-right: 10px">咪咕</span>
+                                        <input type="checkbox" name="lang" value="05"><span style="margin-right: 10px">天天挖坑</span>
+                                        <input type="checkbox" name="lang" value="06"><span style="margin-right: 10px">爱游戏</span>
+                                        <input type="checkbox" name="lang" value="07"><span style="margin-right: 10px">沃商店</span>
+                                        <input type="checkbox" name="lang" value="08"><span style="margin-right: 10px">咪咕</span>
                                     </div>
-                                    <dl class="layui-anim layui-anim-upbit" style="">
-                                        <dd lay-value="" class="layui-select-tips layui-this">请选择一个城市</dd>
-                                        <dd lay-value="010" class="">北京</dd>
-                                        <dd lay-value="021" class="">上海</dd>
-                                        <dd lay-value="0571" class="">杭州</dd>
-                                    </dl>
-                                </div>-->
+                                </div>
+
+
                             </form>
                         </div>
                         <div align="right" style="height: 10%">
-                            <button class="layui-btn layui-btn-normal layui-btn-radius" >保存</button>
+                            <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="addUser()">保存</button>
                             <button class="layui-btn layui-btn-primary layui-btn-radius" style="margin-right: 20px;">取消</button>
                         </div>
                     </script>
@@ -228,6 +237,33 @@
     }
     function getAddBar() {
         return document.getElementById('add-bar').innerHTML;
+    }
+
+    function addUser() {
+        if(checkParam()){
+
+        }
+    }
+
+    function checkParam() {
+        if ($('#username').val()==''){
+            $('#usernametip').css("display",'inline');
+            return false;
+        }else if($('#name').val()==''){
+            $('#nametip').css("display",'inline');
+            return false;;
+        }else if($('#password').val()==''){
+            $('#passwordtip').css("display",'inline');
+            return false;;
+        }else if($('#confirm').val()!=$('#password').val()){
+            $('#confirmtip').css("display",'inline');
+            return false;;
+        }else if($('#roles').val()==''){
+            $('#rolestip').css("display",'inline');
+            return false;;
+        }
+
+        return true;
     }
 
 </script>

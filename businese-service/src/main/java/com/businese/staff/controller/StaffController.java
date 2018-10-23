@@ -27,67 +27,44 @@ public class StaffController {
 
     /**
      * 员工基本信息
-     *
      * @return
      */
     @RequestMapping("/baseInfo")
-    public String baseInfo() {
+    public String baseInfo(){
         return "staff/baseInfo";
     }
 
     /**
      * 销售额管理
-     *
      * @return
      */
     @RequestMapping("/sales")
-    public String sales() {
+    public String sales(){
         return "staff/sales";
     }
 
     /**
      * 查询员工列表
-     *
-     * @param userName 为""或NULL时查询所有
-     * @param page     第几页 默认1
-     * @param rows     一页几行 默认10
+     * @param userName  为""或NULL时查询所有
+     * @param page  第几页 默认1
+     * @param rows  一页几行 默认10
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/getStaffs", method = RequestMethod.POST)
+    @RequestMapping(value = "/getStaffs",method = RequestMethod.POST)
     public ResponseEntity getStaffs(@RequestParam(value = "userName") String userName,
-                                    @RequestParam(value = "page") Integer page,
-                                    @RequestParam(value = "limit") Integer rows) throws Exception {
+                                   @RequestParam(value = "page") Integer page,
+                                   @RequestParam(value = "limit") Integer rows) throws Exception{
 
-        List<SysUser> list = staffService.getStaffs(userName, page, rows);
+        List<SysUser> list = staffService.getStaffs(userName,page,rows);
         Integer count = staffService.getStaffsCount(userName);
 
         JSONObject result = new JSONObject();
-        result.put("data", list);
-        result.put("count", count);
-        result.put("code", 0);
-        result.put("msg", "");
+        result.put("data",list);
+        result.put("count",count);
+        result.put("code",0);
+        result.put("msg","");
 
-        return new ResponseEntity(result, HttpStatus.OK);
-    }
-
-
-    /**
-     * 删除员工信息
-     * @param userId
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ResponseEntity delete(@RequestParam(value = "userId") Integer userId) throws Exception {
-        JSONObject result = new JSONObject();
-        try {
-            staffService.delete(userId);
-            result.put("result", "success");
-        } catch (Exception e){
-            e.printStackTrace();
-            result.put("result", "failure");
-        }
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
