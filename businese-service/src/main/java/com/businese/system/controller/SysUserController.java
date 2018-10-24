@@ -59,13 +59,13 @@ public class SysUserController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public ResponseEntity add(@RequestBody JSONObject sysUserJson) throws Exception{
-        SysUser sysUser = jsonToModel(sysUserJson);
+    @RequestMapping(value = "/add",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    public ResponseEntity add(@RequestBody String sysUserJson){
+//        SysUser sysUser = jsonToModel(sysUserJson);
 
         JSONObject result = new JSONObject();
         try{
-            sysUserService.addSysUser(sysUser);
+//            sysUserService.addSysUser(sysUser);
             result.put("result","success");
         }catch (Exception e){
             e.printStackTrace();

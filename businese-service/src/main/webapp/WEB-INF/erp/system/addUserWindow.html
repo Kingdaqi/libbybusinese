@@ -44,6 +44,7 @@
                     url: 'sysUser/add',
                     data: {username:username,name:name,password:password,roleName:roles},
                     dataType:'json',
+                    contentType:'application/json;;charset=utf-8',
                     cache: false,
                     success: function(data){
                         if(data.result=='success'){
