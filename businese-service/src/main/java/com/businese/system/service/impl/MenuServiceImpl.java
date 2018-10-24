@@ -1,8 +1,8 @@
-package com.businese.user.service.impl;
+package com.businese.system.service.impl;
 
 import com.businese.dao.SysMenuMapper;
 import com.businese.model.SysMenu;
-import com.businese.user.service.MenuService;
+import com.businese.system.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

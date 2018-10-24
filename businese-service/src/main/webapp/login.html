@@ -233,7 +233,7 @@
 				var code = loginname+","+password+","+$("#code").val();
 				$.ajax({
 					type: "POST",
-					url: 'erp/sysUser/login',
+					url: 'erp/login/login',
 			    	data: {KEYDATA:code,tm:new Date().getTime()},
 					dataType:'json',
 					cache: false,

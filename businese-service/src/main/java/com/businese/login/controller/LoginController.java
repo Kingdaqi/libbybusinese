@@ -1,57 +1,29 @@
-package com.businese.user.controller;
+package com.businese.login.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.businese.login.service.LoginService;
 import com.businese.model.SysUser;
-import com.businese.user.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * create by Administrator on 2018/7/5
  * 后台管理系统--用户登录注册controller
  */
 @Controller
-@RequestMapping("erp/sysUser")
-public class SysUserController {
+@RequestMapping("erp/login")
+public class LoginController {
 
     @Autowired
-    private SysUserService sysUserService;
-
-    @ResponseBody
-    @RequestMapping("/addSysUser")
-    public String addSysUser(@RequestParam(value = "USERNAME") String username,@RequestParam(value = "PASSWORD") String password,
-                                  @RequestParam(value = "NAME") String name){
-
-        JSONObject json = new JSONObject();
-        String result = "01";
-
-        SysUser user = sysUserService.findUserByUserName(username);
-        if (user!=null){
-            result = "04";
-            json.put("result", result);
-            return json.toString();
-        }
-
-        //至此，用户名和邮箱地址都可以注册，无重复
-        SysUser sysUser = new SysUser();
-        int row = sysUserService.addSysUser(sysUser);
-
-        if (row==1) {
-            result = "00";
-        }
-
-        json.put("result", result);
-        return json.toString();
-    }
+    private LoginService loginService;
 
     @ResponseBody
     @RequestMapping(value="/login",produces = "application/json;charset=utf-8")
@@ -63,7 +35,7 @@ public class SysUserController {
         String username = split[0];
         String password = split[1];
 
-        SysUser sysUser = sysUserService.login(username, password);
+        SysUser sysUser = loginService.login(username, password);
 
         if (sysUser!=null){
             //登录成功

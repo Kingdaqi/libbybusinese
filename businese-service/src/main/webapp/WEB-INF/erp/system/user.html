@@ -13,18 +13,7 @@
     <script src="../../js/jquery.tips.js"></script>
     <script>
         $(document).ready(function() {
-            $.ajax({
-                type: "GET",
-                url: 'getRoles',
-                dataType:'json',
-                cache: false,
-                async:false,
-                success: function(data){
-                    if(data.data!=null){
-                        handleRoleBox(data.data);
-                    }
-                }
-            });
+
         });
     </script>
 </head>
@@ -61,52 +50,6 @@
                         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                     </script>
 
-                    <script type="text/html" id="add-bar">
-                        <div id="userInfo" style="height: 90%;">
-                            <form id="userInfoForm" style="width: 100%;height: 100%;">
-
-                                <div class="layui-col-md6">
-                                    <label for="username" class="layui-label">用户名</label>
-                                    <input type="text" id="username" placeholder="请输入用户名" class="layui-input">
-                                    <font id="usernametip" style="color: red;margin-left: 10px;display: none">*用户名不能为空</font>
-                                </div>
-
-                                <div class="layui-col-md6">
-                                    <label for="name" class="layui-label">姓名</label>
-                                    <input type="text" id="name" placeholder="请输入姓名" class="layui-input">
-                                    <font id="nametip" style="color: red;margin-left: 10px;display: none">*姓名不能为空</font>
-                                </div>
-
-                                <div class="layui-col-md6">
-                                    <label for="password" class="layui-label">密码</label>
-                                    <input type="password" id="password" placeholder="请输入密码" class="layui-input">
-                                    <font id="passwordtip" style="color: red;margin-left: 10px;display: none">*密码不能为空</font>
-                                </div>
-
-                                <div class="layui-col-md6">
-                                    <label for="confirm" class="layui-label">确认密码</label>
-                                    <input type="password" id="confirm" placeholder="请确认密码" class="layui-input">
-                                    <font id="confirmtip" style="color: red;margin-left: 10px;display: none">*两次密码不一致</font>
-                                </div>
-
-                                <div class="layui-col-md6">
-                                    <label for="roles" class="layui-label">角色</label>
-                                    <input type="text" id="roles" placeholder="请选择角色" readonly="readonly" class="layui-input">
-                                    <font id="rolestip" style="color: red;margin-left: 10px;display: none">*角色不能为空</font>
-                                    <br />
-                                    <div id="roleBox" style="margin-left: 185px;margin-top: 5px;width: 50%">
-                                        <!--<input type="checkbox" name="lang" value="01"><span style="margin-right: 10px">系统管理员</span>-->
-                                    </div>
-                                </div>
-
-
-                            </form>
-                        </div>
-                        <div align="right" style="height: 10%">
-                            <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="addUser()">保存</button>
-                            <button class="layui-btn layui-btn-primary layui-btn-radius" style="margin-right: 20px;">取消</button>
-                        </div>
-                    </script>
                 </div>
             </div>
         </div>
@@ -127,7 +70,7 @@
 
         table.render({
             elem: '#test-table-toolbar'
-            , url: 'getUsers'
+            , url: 'sysUser/getUsers'
             , method:'POST'
             , userName:""
             , toolbar: '#test-table-toolbar-toolbarDemo'
@@ -176,7 +119,7 @@
                 layer.confirm('确认删除该用户信息吗？', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: 'delete',
+                        url: 'sysUser/delete',
                         data: {userId:data.userid},
                         dataType:'json',
                         cache: false,
@@ -209,7 +152,7 @@
 
             table.render({
                 elem: '#test-table-toolbar'
-                , url: 'getUsers'
+                , url: 'sysUser/getUsers'
                 , method:'POST'
                 , userName:username
                 , toolbar: '#test-table-toolbar-toolbarDemo'
@@ -227,15 +170,13 @@
         }
         
         function add() {
-            var addBar = getAddBar();
-            addBar.
             layer.open({
-                type: 1,
-                title: '新增',
-                resize:1,
-                skin: 'layui-layer-rim',
+                type: 2,
                 area: ['800px', '600px'],
-                content: addBar
+                title: '新增',
+                fixed: false,
+                maxmin: false,
+                content: 'addUserWindow'
             });
         }
 
@@ -244,64 +185,6 @@
         var username = $('.layui-input-search').val()
         return username;
     }
-    function getAddBar() {
-        return document.getElementById('add-bar').innerHTML;
-    }
-
-    function addUser() {
-        if(checkParam()){
-
-        }
-    }
-
-    function checkParam() {
-        if ($('#username').val()==''){
-            $('#usernametip').css("display",'inline');
-            return false;
-        }else{
-            $('#usernametip').css("display",'none');
-        }
-
-        if($('#name').val()==''){
-            $('#nametip').css("display",'inline');
-            return false;;
-        }else{
-            $('#nametip').css("display",'none');
-        }
-
-        if($('#password').val()==''){
-            $('#passwordtip').css("display",'inline');
-            return false;;
-        }else{
-            $('#passwordtip').css("display",'none');
-        }
-
-        if($('#confirm').val()!=$('#password').val()){
-            $('#confirmtip').css("display",'inline');
-            return false;;
-        }else{
-            $('#confirmtip').css("display",'none');
-        }
-
-        if($('#roles').val()==''){
-            $('#rolestip').css("display",'inline');
-            return false;;
-        }else{
-            $('#rolestip').css("display",'none');
-        }
-
-        return true;
-    }
-
-    //拼接左侧菜单栏代码
-    function handleRoleBox(data){
-        var inputs = "";
-        $.each(data,function (index,item) {
-            inputs += "<input type=\"checkbox\" name=\"lang\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
-        })
-        $('#roleBox').append(inputs);
-    }
-
 </script>
 </body>
 </html>

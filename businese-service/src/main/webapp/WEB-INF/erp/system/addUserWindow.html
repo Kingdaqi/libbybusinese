@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>开启头部工具栏 - 数据表格</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../layui-v2.4.3/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../layui-v2.4.3/style/admin.css" media="all">
+    <script src="../../js/jquery-1.7.2.js"></script>
+    <script src="../../js/jquery.tips.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                type: "GET",
+                url: 'role/getRoles',
+                dataType:'json',
+                cache: false,
+                async:false,
+                success: function(data){
+                    if(data.data!=null){
+                        handleRoleBox(data.data);
+                    }
+                }
+            });
+        });
+        function handleRoleBox(data) {
+            var inputs = "";
+            $.each(data,function (index,item) {
+                inputs += "<input onclick='addRole()' type=\"checkbox\" name=\""+item.name+"\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
+            })
+            $("#roleBox").append(inputs);
+        }
+        function addUser() {
+            if(checkParam()){
+                var username = $("#username").val();
+                var name = $("#name").val();
+                var password = $("#password").val();
+                var roles = $("#roles").val();
+                $.ajax({
+                    type: "POST",
+                    url: 'sysUser/add',
+                    data: {username:username,name:name,password:password,roleName:roles},
+                    dataType:'json',
+                    cache: false,
+                    success: function(data){
+                        if(data.result=='success'){
+                            alert("创建用户成功");
+                        }else{
+                            alert("创建用户成功");
+                        }
+                    }
+                });
+            }
+        }
+        function checkParam() {
+            if ($('#username').val()==''){
+                $('#usernametip').css("display",'inline');
+                return false;
+            }else{
+                $('#usernametip').css("display",'none');
+            }
+
+            if($('#name').val()==''){
+                $('#nametip').css("display",'inline');
+                return false;;
+            }else{
+                $('#nametip').css("display",'none');
+            }
+
+            if($('#password').val()==''){
+                $('#passwordtip').css("display",'inline');
+                return false;;
+            }else{
+                $('#passwordtip').css("display",'none');
+            }
+
+            if($('#confirm').val()!=$('#password').val()){
+                $('#confirmtip').css("display",'inline');
+                return false;;
+            }else{
+                $('#confirmtip').css("display",'none');
+            }
+
+            if($('#roles').val()==''){
+                $('#rolestip').css("display",'inline');
+                return false;;
+            }else{
+                $('#rolestip').css("display",'none');
+            }
+
+            return true;
+        }
+        function addRole() {
+            var roles = "";
+            $(":checkbox[checked]").each(function(i){
+                var name = $(this).attr("name");
+                if (i==0) {
+                        roles += name;
+                    }else{
+                        roles += "，"+name
+                    }
+            });
+            $("#roles").val(roles);
+        }
+    </script>
+</head>
+<body style="height: 520px">
+
+    <div id="userInfo" style="height: 90%;">
+        <form id="userInfoForm" style="width: 100%;height: 100%;" action="sysUser/add" method="POST">
+
+            <div class="layui-col-md16">
+                <label for="username" class="layui-label">用户名</label>
+                <input type="text" id="username" placeholder="请输入用户名" class="layui-input">
+                <font id="usernametip" style="color: red;margin-left: 10px;display: none">*用户名不能为空</font>
+            </div>
+
+            <div class="layui-col-md16">
+                <label for="name" class="layui-label">姓名</label>
+                <input type="text" id="name" placeholder="请输入姓名" class="layui-input">
+                <font id="nametip" style="color: red;margin-left: 10px;display: none">*姓名不能为空</font>
+            </div>
+
+            <div class="layui-col-md16">
+                <label for="password" class="layui-label">密码</label>
+                <input type="password" id="password" placeholder="请输入密码" class="layui-input">
+                <font id="passwordtip" style="color: red;margin-left: 10px;display: none">*密码不能为空</font>
+            </div>
+
+            <div class="layui-col-md16">
+                <label for="confirm" class="layui-label">确认密码</label>
+                <input type="password" id="confirm" placeholder="请确认密码" class="layui-input">
+                <font id="confirmtip" style="color: red;margin-left: 10px;display: none">*两次密码不一致</font>
+            </div>
+
+            <div class="layui-col-md16">
+                <label for="roles" class="layui-label">角色</label>
+                <input type="text" id="roles" placeholder="请选择角色" readonly="readonly" class="layui-input">
+                <font id="rolestip" style="color: red;margin-left: 10px;display: none">*角色不能为空</font>
+                <br />
+                <div id="roleBox" style="margin-left: 185px;margin-top: 5px;width: 50%">
+                    <!--<input type="checkbox" name="lang" value="01"><span style="margin-right: 10px">系统管理员</span>-->
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+    <div align="right" style="height: 10%">
+        <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="addUser()">保存</button>
+        <button class="layui-btn layui-btn-primary layui-btn-radius" style="margin-right: 20px;" data-type="close">取消</button>
+    </div>
+
+<script src="../../layui-v2.4.3/layui/layui.js"></script>
+<script>
+    layui.use('layer', function(){
+    var $ = layui.$
+    ,layer = layui.layer
+    ,index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+    var active = {
+    //让层自适应iframe
+    auto: function(){
+    $('body').append('插入很多酱油。插入很多酱油。插入很多酱油。插入很多酱油。插入很多酱油。插入很多酱油。插入很多酱油。');
+    parent.layer.iframeAuto(index);
+    }
+
+    //在父层弹出一个层
+    ,parentPopup: function(){
+    top.layer.msg('Hi, man', {shade: 0.3})
+    }
+
+    //给父页面传值
+    ,setParent: function(){
+    var id = '#LAY_layer_iframe_demo'
+    ,mark = $('#LAY_mark')
+    ,val = mark.val();
+
+    if(val === ''){
+    mark.focus();
+    parent.layer.msg('请填写标记');
+    return true;
+    }
+
+    parent.layer.msg('您将标记 [ ' +val + ' ] 成功传送给了父窗口');
+    parent.layui.$(id).text('我被改变了');
+    parent.layer.tips('Look here', id, {
+    time: 5000
+    });
+    parent.layer.close(index);
+    }
+
+
+    //在内部关闭iframe
+    ,close: function(set){
+    parent.layer.close(index);
+    }
+    }
+
+    $('.layui-btn').on('click', function(){
+        var othis = $(this)
+        ,type = othis.data('type');
+        active[type] && active[type].call(this);
+        });
+    });
+</script>
+</body>
+</html>
+
+

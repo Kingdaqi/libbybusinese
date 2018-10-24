@@ -3,10 +3,9 @@ package com.businese.system.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.businese.model.SysRole;
 import com.businese.model.SysUser;
-import com.businese.user.service.RoleService;
-import com.businese.user.service.SysUserService;
+import com.businese.system.service.RoleService;
+import com.businese.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,11 +21,10 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/erp/system")
-public class SystemManageController {
+public class SystemController {
 
     @Autowired
     private RoleService roleService;
-
     @Autowired
     private SysUserService sysUserService;
 
@@ -83,6 +81,14 @@ public class SystemManageController {
     public String actionLog(){
         return "system/actionLog";
     }
+    /**
+     * 新增用户窗口
+     * @return
+     */
+    @RequestMapping("/addUserWindow")
+    public String addUserWindow(){
+        return "system/addUserWindow";
+    }
 
     /**
      * 查询用户列表
@@ -133,7 +139,6 @@ public class SystemManageController {
 
     /**
      * 获取角色列表
-     * @param userId
      * @return
      * @throws Exception
      */

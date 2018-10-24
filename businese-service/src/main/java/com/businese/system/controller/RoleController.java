@@ -1,8 +1,8 @@
-package com.businese.user.controller;
+package com.businese.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.businese.model.SysRole;
-import com.businese.user.service.RoleService;
+import com.businese.system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import java.util.List;
  * 角色管理
  */
 @Controller
-@RequestMapping("erp/role")
+@RequestMapping("erp/system/role")
 public class RoleController {
 
     @Autowired
@@ -77,7 +77,7 @@ public class RoleController {
         JSONObject result = new JSONObject();
         result.put("data",list);
         if(list!=null)
-            return new ResponseEntity(list, HttpStatus.OK);
+            return new ResponseEntity(result, HttpStatus.OK);
         else
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }

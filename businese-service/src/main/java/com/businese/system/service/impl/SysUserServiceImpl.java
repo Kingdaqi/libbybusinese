@@ -1,14 +1,15 @@
-package com.businese.user.service.impl;
+package com.businese.system.service.impl;
 
 import com.businese.dao.SysDeptMapper;
 import com.businese.dao.SysRoleMapper;
 import com.businese.dao.SysUserMapper;
-import com.businese.model.*;
-import com.businese.staff.service.StaffService;
-import com.businese.user.service.SysUserService;
+import com.businese.model.SysDept;
+import com.businese.model.SysRole;
+import com.businese.model.SysUser;
+import com.businese.model.SysUserExample;
+import com.businese.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,25 +43,9 @@ public class SysUserServiceImpl implements SysUserService {
         return null;
     }
 
-
-    public SysUser login(String username, String password) {
-        String result = "success";
-        sysUserExample.clear();
-        SysUserExample.Criteria criteria = sysUserExample.createCriteria();
-        criteria.andUsernameEqualTo(username);
-        criteria.andPasswordEqualTo(password);
-        List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
-
-        if(sysUsers!=null && sysUsers.size()>0){
-            return sysUsers.get(0);
-        }
-        return null;
-    }
-
     public SysUser findUserByUserId(Integer userId) {
         return sysUserMapper.selectByPrimaryKey(userId);
     }
-
 
     public List<SysUser> getUsers(String userName, Integer page, Integer rows) {
         List<SysUser> sysUsers = new ArrayList<SysUser>();

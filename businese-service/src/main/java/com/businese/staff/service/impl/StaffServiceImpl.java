@@ -1,18 +1,11 @@
 package com.businese.staff.service.impl;
 
-import com.businese.dao.SysDeptMapper;
-import com.businese.dao.SysRoleMapper;
-import com.businese.dao.SysUserMapper;
-import com.businese.model.SysDept;
-import com.businese.model.SysRole;
 import com.businese.model.SysUser;
-import com.businese.model.SysUserExample;
 import com.businese.staff.service.StaffService;
-import com.businese.user.service.SysUserService;
+import com.businese.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

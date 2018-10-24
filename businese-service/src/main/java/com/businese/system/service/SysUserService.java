@@ -1,4 +1,4 @@
-package com.businese.user.service;
+package com.businese.system.service;
 
 import com.businese.model.SysUser;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public interface SysUserService {
 
     /**
-     * 注册新用户
+     * 新增用户
      * @param sysUser
      * @return
      */
@@ -22,15 +22,6 @@ public interface SysUserService {
      * @return
      */
     SysUser findUserByUserName(String username);
-
-
-    /**
-     * 用户登录
-     * @param username
-     * @param password
-     * @return
-     */
-    SysUser login(String username, String password);
 
     /**
      * 根据id获取用户
