@@ -303,4 +303,10 @@
       UPDATETIME = #{updatetime,jdbcType=TIMESTAMP}
     where USERID = #{userid,jdbcType=INTEGER}
   </update>
+
+  <!--======================================================================================================-->
+  <select id="selectLastUserId" resultType="java.lang.Integer" >
+    select max(USERID) from sys_user
+    where state=1
+  </select>
 </mapper>

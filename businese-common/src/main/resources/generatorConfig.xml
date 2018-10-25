@@ -59,7 +59,7 @@
         <table schema="businese" tableName="sys_role"></table>
         <table schema="businese" tableName="sys_role_user"></table>
         <table schema="businese" tableName="sys_role_menu"></table>-->
-        <table schema="businese" tableName="sys_dept"></table>
+        <table schema="businese" tableName="sys_staff"></table>
 
     </context>
 </generatorConfiguration>

@@ -6,6 +6,7 @@ package com.businese.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.businese.model.SysUser;
+import com.businese.system.service.RoleUserService;
 import com.businese.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,8 @@ public class SysUserController {
 
     @Autowired
     private SysUserService sysUserService;
+    @Autowired
+    private RoleUserService roleUserService;
 
     /**
      * 查询用户列表
@@ -55,19 +58,40 @@ public class SysUserController {
     }
 
     /**
+     * 根据id查询用户
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getUserById",method = RequestMethod.POST)
+    public ResponseEntity getUserById(@RequestParam(value = "userId") Integer userId) throws Exception{
+
+        SysUser sysUser = sysUserService.getUserById(userId);
+
+        JSONObject result = new JSONObject();
+        result.put("data",sysUser);
+
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
+
+    /**
      * 新增用户
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
-    public ResponseEntity add(@RequestBody String sysUserJson){
-//        SysUser sysUser = jsonToModel(sysUserJson);
-
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public ResponseEntity add(HttpServletRequest request,@RequestBody SysUser sysUser){
         JSONObject result = new JSONObject();
+        String createBy = request.getSession().getAttribute("username").toString();
         try{
-//            sysUserService.addSysUser(sysUser);
+            sysUser.setCreateby(createBy);
+            SysUser user = sysUserService.addSysUser(sysUser);
+            if (user!=null){
+                roleUserService.add(user);
+            }
             result.put("result","success");
         }catch (Exception e){
+            result.put("result","error");
             e.printStackTrace();
         }
 
@@ -81,10 +105,11 @@ public class SysUserController {
      * @throws Exception
      */
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
-    public ResponseEntity delete(@RequestParam(value = "userid") Integer userId) throws Exception{
+    public ResponseEntity delete(@RequestParam(value = "userId") Integer userId) throws Exception{
         JSONObject result = new JSONObject();
         try{
             sysUserService.delete(userId);
+            roleUserService.delete(userId);
             result.put("result","success");
         }catch (Exception e){
             e.printStackTrace();
@@ -93,19 +118,21 @@ public class SysUserController {
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
-    private SysUser jsonToModel(JSONObject sysUserJson) {
-        SysUser sysUser = new SysUser();
-
-        if(sysUserJson.get("userid")!=null){
-            sysUser.setUserid(sysUserJson.getInteger("userid"));
+    /**
+     * 校验用户名是否已存在
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/checkUserName",method = RequestMethod.POST)
+    public ResponseEntity checkUserName(@RequestParam(value="username") String userName){
+        JSONObject result = new JSONObject();
+        SysUser user = sysUserService.findUserByUserName(userName);
+        if (user==null){
+            result.put("result","success");
+        }else{
+            result.put("result","exist");
         }
 
-        sysUser.setUsername(sysUserJson.get("username")==null?null:sysUserJson.getString("username"));
-        sysUser.setName(sysUserJson.get("name")==null?null:sysUserJson.getString("name"));
-        sysUser.setPassword(sysUserJson.get("password")==null?null:sysUserJson.getString("password"));
-        sysUser.setRoleName(sysUserJson.get("roleName")==null?null:sysUserJson.getString("roleName"));
-
-        return sysUser;
+        return new ResponseEntity(result, HttpStatus.OK);
     }
-
 }

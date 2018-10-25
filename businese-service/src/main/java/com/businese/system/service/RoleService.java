@@ -10,4 +10,6 @@ public interface RoleService {
      * @return
      */
     List<SysRole> getRoles();
+
+    SysRole selectByRoleName(String roleName);
 }

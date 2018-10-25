@@ -81,6 +81,7 @@ public class SystemController {
     public String actionLog(){
         return "system/actionLog";
     }
+
     /**
      * 新增用户窗口
      * @return
@@ -91,66 +92,12 @@ public class SystemController {
     }
 
     /**
-     * 查询用户列表
-     *
-     * @param userName 为""或NULL时查询所有
-     * @param page     第几页 默认1
-     * @param rows     一页几行 默认10
+     * 编辑用户窗口
      * @return
-     * @throws Exception
      */
-    @RequestMapping(value = "/getUsers", method = RequestMethod.POST)
-    public ResponseEntity getUsers(@RequestParam(value = "userName") String userName,
-                                   @RequestParam(value = "page") Integer page,
-                                   @RequestParam(value = "limit") Integer rows) throws Exception {
-
-        List<SysUser> list = sysUserService.getUsers(userName, page, rows);
-        Integer count = sysUserService.getUsersCount(userName);
-
-        JSONObject result = new JSONObject();
-        result.put("data", list);
-        result.put("count", count);
-        result.put("code", 0);
-        result.put("msg", "");
-
-        return new ResponseEntity(result, HttpStatus.OK);
+    @RequestMapping("/editUserWindow")
+    public String editUserWindow(){
+        return "system/editUserWindow";
     }
 
-
-    /**
-     * 删除用户信息
-     * @param userId
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ResponseEntity delete(@RequestParam(value = "userId") Integer userId) throws Exception {
-        JSONObject result = new JSONObject();
-        try {
-            sysUserService.delete(userId);
-            result.put("result", "success");
-            return new ResponseEntity(result, HttpStatus.OK);
-        } catch (Exception e){
-            e.printStackTrace();
-            result.put("result", "failure");
-            return new ResponseEntity(result, HttpStatus.OK);
-        }
-    }
-
-    /**
-     * 获取角色列表
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/getRoles", method = RequestMethod.GET)
-    public ResponseEntity getRoles(HttpServletRequest request) throws Exception {
-        List<SysRole> list = roleService.getRoles();
-
-        JSONObject result = new JSONObject();
-        result.put("data",list);
-        if(list!=null)
-            return new ResponseEntity(result, HttpStatus.OK);
-        else
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
 }

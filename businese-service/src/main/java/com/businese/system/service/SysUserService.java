@@ -14,7 +14,7 @@ public interface SysUserService {
      * @param sysUser
      * @return
      */
-    int addSysUser(SysUser sysUser);
+    SysUser addSysUser(SysUser sysUser);
 
     /**
      * 根据用户名查询用户
@@ -51,4 +51,6 @@ public interface SysUserService {
      * @return
      */
     Integer getUsersCount(String userName);
+
+    SysUser getUserById(Integer userId);
 }

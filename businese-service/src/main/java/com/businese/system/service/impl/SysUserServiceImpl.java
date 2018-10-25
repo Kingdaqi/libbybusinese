@@ -11,6 +11,7 @@ import com.businese.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,8 +29,18 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysRoleMapper sysRoleMapper;
 
-    public int addSysUser(SysUser sysUser) {
-        return sysUserMapper.insert(sysUser);
+    public SysUser addSysUser(SysUser sysUser) {
+        Integer userId = createUserId();
+        sysUser.setUserid(userId);
+        sysUser.setDeptName("");
+        sysUser.setState(1);
+        sysUser.setCreatetime(new Date());
+        sysUserMapper.insert(sysUser);
+        return sysUser;
+    }
+
+    private Integer createUserId() {
+        return sysUserMapper.selectLastUserId()+1;
     }
 
     public SysUser findUserByUserName(String username) {
@@ -62,13 +73,21 @@ public class SysUserServiceImpl implements SysUserService {
         for (SysUser user:users) {
             Integer deptId = user.getDeptid();
             SysDept sysDept = sysDeptMapper.selectByPrimaryKey(deptId);
-            user.setDeptName(sysDept.getDeptName());
+            String deptName = "";
+            if (sysDept!=null){
+                deptName = sysDept.getDeptName();
+            }
+            user.setDeptName(deptName);
 
             Integer userId = user.getUserid();
             List<SysRole> roles = sysRoleMapper.getRolesByUserId(userId);
             String roleName = "";
             for (SysRole sysRole:roles) {
-                roleName += sysRole.getName();
+                if (roleName.equals("")){
+                    roleName += sysRole.getName();
+                }else{
+                    roleName += ","+sysRole.getName();
+                }
             }
             user.setRoleName(roleName);
 
@@ -87,6 +106,30 @@ public class SysUserServiceImpl implements SysUserService {
         int count = sysUserMapper.countByExample(sysUserExample);
 
         return count;
+    }
+
+    public SysUser getUserById(Integer userId) {
+        SysUser sysUser = sysUserMapper.selectByPrimaryKey(userId);
+        Integer deptId = sysUser.getDeptid();
+        SysDept sysDept = sysDeptMapper.selectByPrimaryKey(deptId);
+        String deptName = "";
+        if (sysDept!=null){
+            deptName = sysDept.getDeptName();
+        }
+        sysUser.setDeptName(deptName);
+
+        List<SysRole> roles = sysRoleMapper.getRolesByUserId(userId);
+        String roleName = "";
+        for (SysRole sysRole:roles) {
+            if (roleName.equals("")){
+                roleName += sysRole.getName();
+            }else{
+                roleName += ","+sysRole.getName();
+            }
+        }
+        sysUser.setRoleName(roleName);
+
+        return sysUser;
     }
 
     public void delete(Integer userId) {

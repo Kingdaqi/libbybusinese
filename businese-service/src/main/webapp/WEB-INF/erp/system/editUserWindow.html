@@ -13,6 +13,20 @@
     <script src="../../js/jquery.tips.js"></script>
     <script>
         $(document).ready(function() {
+            var editUserId = parent.$("#editUserId").val();
+            $.ajax({
+                type: "POST",
+                url: 'sysUser/getUserById',
+                data:{userId:editUserId},
+                dataType:'json',
+                cache: false,
+                async:false,
+                success: function(data){
+                    if(data.data!=null){
+                        handleContent(data.data);
+                    }
+                }
+            });
             $.ajax({
                 type: "GET",
                 url: 'role/getRoles',
@@ -25,15 +39,29 @@
                     }
                 }
             });
+
         });
+        function handleContent(item) {
+            $("#username").val(item.username);
+            $("#name").val(item.name);
+            $("#roles").val(item.roleName);
+        }
         function handleRoleBox(data) {
+            var roleName = $("#roles").val();
             var inputs = "";
             $.each(data,function (index,item) {
-                inputs += "<input onclick='addRole()' type=\"checkbox\" name=\""+item.name+"\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
+                if(isContains(roleName,item.name)){
+                    inputs += "<input checked='checked' onclick='addRole()' type=\"checkbox\" name=\""+item.name+"\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
+                }else{
+                    inputs += "<input onclick='addRole()' type=\"checkbox\" name=\""+item.name+"\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
+                }
             })
             $("#roleBox").append(inputs);
         }
-        function addUser() {
+        function isContains(str, substr) {
+            return new RegExp(substr).test(str);
+        }
+        function updataUser() {
             if(checkParam()){
                 var username = $("#username").val();
                 var name = $("#name").val();
@@ -175,7 +203,7 @@
         </form>
     </div>
     <div align="right" style="height: 10%">
-        <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="addUser()">保存</button>
+        <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="updataUser()">更新</button>
         <button class="layui-btn layui-btn-primary layui-btn-radius" style="margin-right: 20px;" data-type="close">取消</button>
     </div>
 
