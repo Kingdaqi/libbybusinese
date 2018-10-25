@@ -1,5 +1,8 @@
 package com.businese.staff.service.impl;
 
+import com.businese.dao.SysStaffMapper;
+import com.businese.model.SysStaff;
+import com.businese.model.SysStaffExample;
 import com.businese.model.SysUser;
 import com.businese.staff.service.StaffService;
 import com.businese.system.service.SysUserService;
@@ -15,18 +18,36 @@ import java.util.List;
 public class StaffServiceImpl implements StaffService {
 
     @Autowired
-    private SysUserService sysUserService;
+    private SysStaffMapper sysStaffMapper;
+    @Autowired
+    private SysStaffExample sysStaffExample;
 
-    public List<SysUser> getStaffs(String userName, Integer page, Integer rows) {
-        return sysUserService.getUsers(userName,page,rows);
+    public List<SysStaff> getStaffs(String name, Integer page, Integer rows) {
+        sysStaffExample.clear();
+        SysStaffExample.Criteria criteria = sysStaffExample.createCriteria();
+        if (name!=null && !"".equals(name)){
+            criteria.andNameEqualTo(name);
+        }
+
+        sysStaffExample.setStart((page-1)*rows);
+        sysStaffExample.setLimit(rows);
+
+        return sysStaffMapper.selectByExample(sysStaffExample);
     }
 
-    public Integer getStaffsCount(String userName) {
-        return sysUserService.getUsersCount(userName);
+    public Integer getStaffsCount(String name) {
+        sysStaffExample.clear();
+        SysStaffExample.Criteria criteria = sysStaffExample.createCriteria();
+        if (name!=null && !"".equals(name)){
+            criteria.andNameEqualTo(name);
+        }
+        int count = sysStaffMapper.countByExample(sysStaffExample);
+
+        return count;
     }
 
-    public void delete(Integer userId) {
-        sysUserService.delete(userId);
+    public void delete(Integer id) {
+        sysStaffMapper.deleteByPrimaryKey(id);
     }
 
 }

@@ -27,4 +27,5 @@ public interface SysStaffMapper {
     int updateByPrimaryKeySelective(SysStaff record);
 
     int updateByPrimaryKey(SysStaff record);
+
 }

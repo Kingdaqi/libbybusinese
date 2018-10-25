@@ -1,5 +1,6 @@
 package com.businese.staff.service;
 
+import com.businese.model.SysStaff;
 import com.businese.model.SysUser;
 
 import java.util.List;
@@ -10,23 +11,23 @@ import java.util.List;
 public interface StaffService {
     /**
      * 查询员工列表
-     * @param userName
+     * @param name
      * @param page
      * @param rows
      * @return
      */
-    List<SysUser> getStaffs(String userName, Integer page, Integer rows);
+    List<SysStaff> getStaffs(String name, Integer page, Integer rows);
 
     /**
      * 查询符合条件的员工总数量
-     * @param userName
+     * @param name
      * @return
      */
-    Integer getStaffsCount(String userName);
+    Integer getStaffsCount(String name);
 
     /**
      *
-     * @param userId
+     * @param id
      */
-    void delete(Integer userId);
+    void delete(Integer id);
 }

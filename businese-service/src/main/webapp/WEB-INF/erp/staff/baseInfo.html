@@ -35,13 +35,14 @@
                     <script type="text/html" id="test-table-toolbar-toolbarDemo">
                         <div class="layui-table-tool">
                             <button class="layui-btn layui-btn-sm1 layui-btn-normal" lay-event="add">新增</button>
-                            <input type="text" placeholder="用户名..." class="layui-input-search"/>
+                            <input type="text" placeholder="姓名..." class="layui-input-search"/>
                             <button class="layui-btn layui-btn-sm1 layui-btn-normal" lay-event="search">搜索</button>
                         </div>
                     </script>
-
+                    <input type="hidden" id="editStaffId">
                     <script type="text/html" id="test-table-toolbar-barDemo">
                         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">查看详情</a>
                         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                     </script>
 
@@ -67,16 +68,24 @@
             elem: '#test-table-toolbar'
             , url: 'getStaffs'
             , method:'POST'
-            , userName:""
+            , searchParam:""
             , toolbar: '#test-table-toolbar-toolbarDemo'
             , title: '用户数据表'
             , cols: [[
-                {field: 'userid', title: 'ID', width: 200, fixed: 'left', unresize: true, sort: true}
-                , {field: 'username', title: '用户名', width: 210}
-                , {field: 'name', title: '姓名', width: 210}
-                , {field: 'deptName', title: '所属部门', width: 210}
-                , {field: 'roleName', title: '职位', width: 240}
-                , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 240}
+                {field: 'id', title: 'ID', width: 70, fixed: 'left', unresize: true, sort: true}
+                , {field: 'name', title: '姓名', width: 100, fixed: 'left', unresize: true, sort: true}
+                , {field: 'workid', title: '工号', width: 120}
+                , {field: 'gender', title: '性别', width: 80}
+                , {field: 'wedlock', title: '婚姻状况', width: 120}
+                , {field: 'nationid', title: '民族', width: 80}
+                , {field: 'nativeplace', title: '籍贯', width: 120}
+                , {field: 'politicid', title: '政治面貌', width: 120}
+                , {field: 'email', title: '电子邮件', width: 200}
+                , {field: 'phone', title: '电话号码', width: 130}
+                , {field: 'address', title: '联系地址', width: 200}
+                , {field: 'departmentid', title: '所属部门', width: 120}
+                , {field: 'posid', title: '职位', width: 120}
+                , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 200}
             ]]
             , page: true
         });
@@ -111,11 +120,11 @@
             var data = obj.data;
             //alert(data);
             if (obj.event === 'del') {
-                layer.confirm('确认删除该员工信息吗？', function (index) {
+                layer.confirm('确认删除该用户信息吗？', function (index) {
                     $.ajax({
                         type: "POST",
                         url: 'delete',
-                        data: {userId:data.userid},
+                        data: {id:data.id},
                         dataType:'json',
                         cache: false,
                         success: function(data){
@@ -130,62 +139,71 @@
                     layer.close(index);
                 });
             } else if (obj.event === 'edit') {
-                layer.prompt({
-                    formType: 2
-                    , value: data.email
-                }, function (value, index) {
-                    obj.update({
-                        email: value
-                    });
-                    layer.close(index);
-                });
+                setEditStaffId(data.id);
+                edit();
             }
         });
 
         function search() {
-            var username = getSearchContent();
+            var name = getSearchContent();
 
             table.render({
                 elem: '#test-table-toolbar'
                 , url: 'getStaffs'
                 , method:'POST'
-                , userName:username
+                , searchParam:name
                 , toolbar: '#test-table-toolbar-toolbarDemo'
                 , title: '用户数据表'
                 , cols: [[
-                    {field: 'userid', title: 'ID', width: 200, fixed: 'left', unresize: true, sort: true}
-                    , {field: 'username', title: '用户名', width: 210}
-                    , {field: 'name', title: '姓名', width: 210}
-                    , {field: 'deptName', title: '所属部门', width: 210}
-                    , {field: 'roleName', title: '角色', width: 240}
-                    , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 240}
+                    {field: 'id', title: 'ID', width: 70, fixed: 'left', unresize: true, sort: true}
+                    , {field: 'name', title: '姓名', width: 100, fixed: 'left', unresize: true, sort: true}
+                    , {field: 'workid', title: '工号', width: 120}
+                    , {field: 'gender', title: '性别', width: 80}
+                    , {field: 'wedlock', title: '婚姻状况', width: 120}
+                    , {field: 'nationid', title: '民族', width: 80}
+                    , {field: 'nativeplace', title: '籍贯', width: 120}
+                    , {field: 'politicid', title: '政治面貌', width: 120}
+                    , {field: 'email', title: '电子邮件', width: 200}
+                    , {field: 'phone', title: '电话号码', width: 130}
+                    , {field: 'address', title: '联系地址', width: 200}
+                    , {field: 'departmentid', title: '所属部门', width: 120}
+                    , {field: 'posid', title: '职位', width: 120}
+                    , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 200}
                 ]]
                 , page: true
             });
         }
-        
+
         function add() {
-            var addBar = getAddBar();
             layer.open({
-                type: 1,
-                title: '新增',
-                skin: 'layui-layer-rim',
+                type: 2,
                 area: ['800px', '600px'],
-                content: addBar
+                title: '新增',
+                fixed: false,
+                maxmin: false,
+                content: 'addStaffWindow'
+            });
+        }
+
+        function edit() {
+            layer.open({
+                type: 2,
+                area: ['800px', '600px'],
+                title: '编辑',
+                fixed: false,
+                maxmin: false,
+                content: 'editStaffWindow'
             });
         }
 
     });
     function getSearchContent() {
-        var username = $('.layui-input-search').val()
-        return username;
+        var name = $('.layui-input-search').val()
+        return name;
     }
-    function getAddBar() {
-        return document.getElementById('add-bar').innerHTML;
+    function setEditStaffId(id) {
+        $("#editStaffId").val(id);
     }
-
 </script>
 </body>
 </html>
-
-

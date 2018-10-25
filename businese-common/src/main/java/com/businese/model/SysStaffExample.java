@@ -1,16 +1,38 @@
 package com.businese.model;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
+@Component("sysStaffExample")
 public class SysStaffExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
+
+    protected int start;
+
+    protected int limit;
+
+    public int getStart() {
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
 
     public SysStaffExample() {
         oredCriteria = new ArrayList<Criteria>();

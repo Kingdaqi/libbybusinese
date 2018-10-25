@@ -47,7 +47,7 @@
     }, j.prototype.render = function () {
         var e = this, a = e.config;
         if (a.elem = t(a.elem), a.where = a.where || {}, a.id = a.id || a.elem.attr("id") || a.index, a.request = t.extend({
-            userName:"userName",
+            searchParam:"searchParam",
             pageName: "page",
             limitName: "limit"
         }, a.request), a.response = t.extend({
@@ -169,7 +169,7 @@
         };
         if (i.startTime = (new Date).getTime(), a.url) {
             var r = {};
-            r[l.pageName] = e, r[l.limitName] = a.limit, r[l.userName] = a.userName;
+            r[l.pageName] = e, r[l.limitName] = a.limit, r[l.searchParam] = a.searchParam;
             var d = t.extend(r, a.where);
             a.contentType && 0 == a.contentType.indexOf("application/json") && (d = JSON.stringify(d)), t.ajax({
                 type: a.method || "get",

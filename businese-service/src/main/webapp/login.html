@@ -230,7 +230,7 @@
 			if(check()){
 				var loginname = $("#loginname").val();
 				var password = $("#password").val();
-				var code = loginname+","+password+","+$("#code").val();
+				var code = loginname+","+password;
 				$.ajax({
 					type: "POST",
 					url: 'erp/login/login',

@@ -1,6 +1,7 @@
 package com.businese.staff.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.businese.model.SysStaff;
 import com.businese.model.SysUser;
 import com.businese.staff.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,20 +44,39 @@ public class StaffController {
     }
 
     /**
+     * 跳转新增员工页面
+     * @return
+     */
+    @RequestMapping("/addStaffWindow")
+    public String addStaffWindow(){
+        return "staff/addStaffWindow";
+    }
+
+    /**
+     * 跳转编辑员工页面
+     * @return
+     */
+    @RequestMapping("/editStaffWindow")
+    public String editStaffWindow(){
+        return "staff/editStaffWindow";
+    }
+
+
+    /**
      * 查询员工列表
-     * @param userName  为""或NULL时查询所有
+     * @param name  为""或NULL时查询所有
      * @param page  第几页 默认1
      * @param rows  一页几行 默认10
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/getStaffs",method = RequestMethod.POST)
-    public ResponseEntity getStaffs(@RequestParam(value = "userName") String userName,
+    public ResponseEntity getStaffs(@RequestParam(value = "searchParam") String name,
                                    @RequestParam(value = "page") Integer page,
                                    @RequestParam(value = "limit") Integer rows) throws Exception{
 
-        List<SysUser> list = staffService.getStaffs(userName,page,rows);
-        Integer count = staffService.getStaffsCount(userName);
+        List<SysStaff> list = staffService.getStaffs(name,page,rows);
+        Integer count = staffService.getStaffsCount(name);
 
         JSONObject result = new JSONObject();
         result.put("data",list);

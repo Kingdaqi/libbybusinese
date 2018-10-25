@@ -27,7 +27,9 @@ public class LoginController {
 
     @ResponseBody
     @RequestMapping(value="/login",produces = "application/json;charset=utf-8")
-    public String login(HttpServletRequest request, @RequestParam(value = "KEYDATA") String keyData, @RequestParam(value = "tm") String loginDate){
+    public String login(HttpServletRequest request,
+                        @RequestParam(value = "KEYDATA") String keyData,
+                        @RequestParam(value = "tm") String loginDate){
         JSONObject json = new JSONObject();
 
         String result = "success";

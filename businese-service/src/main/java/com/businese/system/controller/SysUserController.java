@@ -41,7 +41,7 @@ public class SysUserController {
      * @throws Exception
      */
     @RequestMapping(value = "/getUsers",method = RequestMethod.POST)
-    public ResponseEntity getUsers(@RequestParam(value = "userName") String userName,
+    public ResponseEntity getUsers(@RequestParam(value = "searchParam") String userName,
                                     @RequestParam(value = "page") Integer page,
                                     @RequestParam(value = "limit") Integer rows) throws Exception{
 
