@@ -44,7 +44,7 @@ public class StaffController {
     }
 
     /**
-     * 跳转新增员工页面
+     * 跳转编辑员工页面
      * @return
      */
     @RequestMapping("/addStaffWindow")
@@ -53,14 +53,13 @@ public class StaffController {
     }
 
     /**
-     * 跳转编辑员工页面
+     * 跳转新增员工页面
      * @return
      */
     @RequestMapping("/editStaffWindow")
     public String editStaffWindow(){
         return "staff/editStaffWindow";
     }
-
 
     /**
      * 查询员工列表
