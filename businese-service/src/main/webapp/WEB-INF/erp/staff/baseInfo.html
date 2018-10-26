@@ -41,9 +41,9 @@
                     </script>
                     <input type="hidden" id="editStaffId">
                     <script type="text/html" id="test-table-toolbar-barDemo">
-                        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
                         <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">查看详情</a>
-                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
                     </script>
 
                 </div>
@@ -85,7 +85,7 @@
                 , {field: 'address', title: '联系地址', width: 200}
                 , {field: 'departmentid', title: '所属部门', width: 120}
                 , {field: 'posid', title: '职位', width: 120}
-                , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 200}
+                , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 220}
             ]]
             , page: true
         });
@@ -120,7 +120,7 @@
             var data = obj.data;
             //alert(data);
             if (obj.event === 'del') {
-                layer.confirm('确认删除该用户信息吗？', function (index) {
+                layer.confirm('确认删除该员工信息吗？', function (index) {
                     $.ajax({
                         type: "POST",
                         url: 'delete',
@@ -168,7 +168,7 @@
                     , {field: 'address', title: '联系地址', width: 200}
                     , {field: 'departmentid', title: '所属部门', width: 120}
                     , {field: 'posid', title: '职位', width: 120}
-                    , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 200}
+                    , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 220}
                 ]]
                 , page: true
             });
@@ -177,7 +177,7 @@
         function add() {
             layer.open({
                 type: 2,
-                area: ['800px', '600px'],
+                area: ['1200px', '600px'],
                 title: '新增',
                 fixed: false,
                 maxmin: false,
@@ -188,7 +188,7 @@
         function edit() {
             layer.open({
                 type: 2,
-                area: ['800px', '600px'],
+                area: ['1200px', '600px'],
                 title: '编辑',
                 fixed: false,
                 maxmin: false,

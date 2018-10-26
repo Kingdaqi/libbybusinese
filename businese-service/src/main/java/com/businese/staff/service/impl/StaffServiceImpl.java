@@ -50,4 +50,26 @@ public class StaffServiceImpl implements StaffService {
         sysStaffMapper.deleteByPrimaryKey(id);
     }
 
+    public SysStaff getStaffByName(String name) {
+        sysStaffExample.clear();
+        SysStaffExample.Criteria criteria = sysStaffExample.createCriteria();
+        if (name!=null && !"".equals(name)){
+            criteria.andNameEqualTo(name);
+        }
+        List<SysStaff> sysStaffs = sysStaffMapper.selectByExample(sysStaffExample);
+        if (sysStaffs!=null && sysStaffs.size()>0){
+            return sysStaffs.get(0);
+        }
+
+        return null;
+    }
+
+    public SysStaff addSysStaff(SysStaff sysStaff) {
+        return null;
+    }
+
+    public SysStaff getStaffById(Integer id) {
+        return null;
+    }
+
 }

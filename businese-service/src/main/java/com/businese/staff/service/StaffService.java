@@ -26,8 +26,29 @@ public interface StaffService {
     Integer getStaffsCount(String name);
 
     /**
-     *
+     * 根据员工id删除员工
      * @param id
      */
     void delete(Integer id);
+
+    /**
+     * 根据员工姓名查询员工
+     * @param name
+     * @return
+     */
+    SysStaff getStaffByName(String name);
+
+    /**
+     * 新增员工
+     * @param sysStaff
+     * @return
+     */
+    SysStaff addSysStaff(SysStaff sysStaff);
+
+    /**
+     * 根据员工id查询员工
+     * @param id
+     * @return
+     */
+    SysStaff getStaffById(Integer id);
 }
