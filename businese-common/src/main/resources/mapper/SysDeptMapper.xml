@@ -7,6 +7,20 @@
     <result column="PARENT_ID" property="parentId" jdbcType="INTEGER" />
     <result column="STATE" property="state" jdbcType="INTEGER" />
   </resultMap>
+  <!--==============================================================================================-->
+  <resultMap id="TreeResultMap" type="com.businese.model.SysDept">
+    <id column="DEPT_ID" property="deptId" jdbcType="INTEGER" />
+    <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
+    <collection property="children" ofType="com.businese.model.SysDept">
+      <id column="DEPT_ID" property="deptId" jdbcType="INTEGER" />
+      <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
+      <collection property="children" ofType="com.businese.model.SysDept">
+        <id column="DEPT_ID" property="deptId" jdbcType="INTEGER" />
+        <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
+      </collection>
+    </collection>
+  </resultMap>
+  <!--==============================================================================================-->
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -193,4 +207,11 @@
       STATE = #{state,jdbcType=INTEGER}
     where DEPT_ID = #{deptId,jdbcType=INTEGER}
   </update>
+
+  <!--==============================================================================================-->
+  <select id="getDeptTree" resultMap="TreeResultMap">
+    select m1.`id`,m1.`name`,m2.`id` as id2,m2.`name` as name2,m3.`id` as id3,m3.`name` as name3 from menu m1,menu m2,menu m3 where m1.`id`=m2.`parentId` and m2.`id`=m3.`parentId` and m3.`enabled`=true
+  </select>
+
+
 </mapper>

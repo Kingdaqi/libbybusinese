@@ -15,7 +15,7 @@
         $(document).ready(function() {
             $.ajax({
                 type: "GET",
-                url: 'role/getRoles',
+                url: 'getRoles',
                 dataType:'json',
                 cache: false,
                 async:false,
@@ -27,11 +27,12 @@
             });
         });
         function handleRoleBox(data) {
-            var inputs = "";
+            var options = "";
             $.each(data,function (index,item) {
-                inputs += "<input onclick='addRole()' type=\"checkbox\" name=\""+item.name+"\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
+                // options += "<input onclick='addRole()' type=\"checkbox\" name=\""++"\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
+                options += "<option value=\""+item.id+"\">"+item.name+"</option>";
             })
-            $("#roleBox").append(inputs);
+            $("#posid").append(options);
         }
         function addStaff() {
             if(checkParam()){
@@ -50,7 +51,6 @@
                             ,name:$("#school").val()
                             ,name:$("#idcard").val()
                             ,name:$("#wedlock").val()
-                            ,name:$("#engageform").val()
                             ,name:$("#begindate").val()
                             ,name:$("#conversiontime").val()
                             ,name:$("#begincontract").val()
@@ -114,7 +114,7 @@
                 $('#politicidtip').css("display",'none');
             }
 
-            if($('#nationid').val()!=$('#password').val()){
+            if($('#nationid').val()==''){
                 $('#nationidtip').css("display",'block');
                 return false;;
             }else{
@@ -198,13 +198,6 @@
                 $('#wedlocktip').css("display",'none');
             }
 
-            if($('#engageform').val()==''){
-                $('#engageformtip').css("display",'block');
-                return false;;
-            }else{
-                $('#engageformtip').css("display",'none');
-            }
-
             if($('#begindate').val()==''){
                 $('#begindatetip').css("display",'block');
                 return false;;
@@ -213,18 +206,6 @@
             }
 
             return true;
-        }
-        function addRole() {
-            var roles = "";
-            $(":checkbox[checked]").each(function(i){
-                var name = $(this).attr("name");
-                if (i==0) {
-                        roles += name;
-                    }else{
-                        roles += "，"+name
-                    }
-            });
-            $("#roles").val(roles);
         }
         function changeGender(flag) {
             if (flag==0){
@@ -237,11 +218,17 @@
                 $(".layui-radio[value='男']").removeAttr("checked");
             }
         }
+        function showDept() {
+            $("#department").css("display","inline-grid");
+        }
+        function hideDept() {
+            $("#department").css("display","none");
+        }
     </script>
 </head>
-<body style="height: 660px">
+<body style="height: 550px">
 
-    <div id="userInfo" style="height: 90%;">
+    <div id="userInfo" style="height: 90%;margin-left: 30px;">
         <form id="userInfoForm" style="width: 100%;height: 100%;" action="sysUser/add" method="POST">
 
             <div class="layui-col-md18">
@@ -293,20 +280,20 @@
                 <font id="addresstip" class="layui-tip-font">*联系地址不能为空</font>
             </div>
 
-            <!--<div class="layui-col-md18">
-                <label for="workid">工号</label>
-                <input type="text" id="workid" placeholder="工号" class="layui-input">
-            </div>-->
-
             <div class="layui-col-md18">
                 <label for="posid"><font style="color: red">*</font>职位</label>
-                <input type="text" id="posid" placeholder="职位" class="layui-input">
+                <select class="layui-select-pos" name="type" id="posid" lay-verify="required" lay-filter="posid">
+                    <option value="">请选择职位</option>
+                </select>
                 <font id="posidtip" class="layui-tip-font">*职位不能为空</font>
             </div>
 
             <div class="layui-col-md18">
                 <label for="departmentid"><font style="color: red">*</font>所属部门</label>
-                <input type="text" id="departmentid" placeholder="所属部门" class="layui-input">
+                <input type="text" id="departmentid" placeholder="所属部门" onclick="showDept()"  class="layui-input">
+                <ul id="department" class="layui-ul" onmouseleave="hideDept()">
+                    <i style="font-size: 15px;" class="layui-icon layui-icon-left">请选择部门</i>
+                </ul>
                 <font id="departmentidtip" class="layui-tip-font">*所属部门</font>
             </div>
 
@@ -347,12 +334,6 @@
             </div>
 
             <div class="layui-col-md18">
-                <label for="engageform"><font style="color: red">*</font>聘用形式</label>
-                <input type="text" id="engageform" placeholder="聘用形式" class="layui-input">
-                <font id="engageformtip" class="layui-tip-font">*聘用形式不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
                 <label for="begindate"><font style="color: red">*</font>入职日期</label>
                 <input type="text" id="begindate" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
                 <font id="begindatetip" class="layui-tip-font">*入职日期不能为空</font>
@@ -373,24 +354,15 @@
                 <input type="text" id="endcontract" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
             </div>
 
-            <!--<div class="layui-col-md18">
-                <label for="roles"><font style="color: red">*</font>角色</label>
-                <input type="text" id="roles" placeholder="请选择角色" readonly="readonly" class="layui-input">
-                <font id="rolestip" class="layui-tip-font">*角色不能为空</font>
-                <br />
-                <div id="roleBox" style="margin-left: 185px;margin-top: 5px;width: 50%">
-                    &lt;!&ndash;<input type="checkbox" name="lang" value="01"><span style="margin-right: 10px">系统管理员</span>&ndash;&gt;
-                </div>
-            </div>-->
-
         </form>
     </div>
     <div align="right" style="height: 10%">
         <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="addStaff()">确认</button>
-        <button class="layui-btn layui-btn-primary layui-btn-radius" style="margin-right: 20px;" data-type="close">取消</button>
+        <button class="layui-btn layui-btn-primary layui-btn-radius" style="margin-right: 90px;" data-type="close">取消</button>
     </div>
 
 <script src="../../layui-v2.4.3/layui/layui.js"></script>
+<script src="../../layui-v2.4.3/layui/layui.all.js"></script>
 <script>
     layui.use('layer', function(){
     var $ = layui.$
@@ -411,7 +383,45 @@
         });
     });
 </script>
+<script>
+    window.onload = function () {
+        var tree_data;
+        $.ajax({
+            type: "GET",
+            url: 'getDeptTree',
+            dataType:'json',
+            contentType:'application/json;;charset=utf-8',
+            cache: false,
+            success: function(data){
+                if(data.data!=null){
+                    tree_data = data.data;
+                    //     [{ //节点
+                    //     name: '父节点1'
+                    //     ,children: [{
+                    //         name: '子节点11'
+                    //     },{
+                    //         name: '子节点12'
+                    //     }]
+                    // },{
+                    //     name: '父节点2'
+                    //     ,children: [{
+                    //         name: '子节点21'
+                    //         ,children: [{
+                    //             name: '子节点211'
+                    //         }]
+                    //     }]
+                    // }];
+                }
+            }
+        });
 
+        layui.tree({
+            elem: '#department' //传入元素选择器
+            ,class:"layui-show"
+            ,nodes:tree_data
+        });
+    }
+</script>
 <script>/*日期选择模块*/
     layui.config({
         base: '../../layui-v2.4.3/' //静态资源所在路径

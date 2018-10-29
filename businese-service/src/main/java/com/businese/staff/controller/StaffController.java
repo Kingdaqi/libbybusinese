@@ -1,9 +1,13 @@
 package com.businese.staff.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.businese.model.SysDept;
+import com.businese.model.SysRole;
 import com.businese.model.SysStaff;
 import com.businese.model.SysUser;
 import com.businese.staff.service.StaffService;
+import com.businese.system.service.DeptService;
+import com.businese.system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +30,10 @@ public class StaffController {
 
     @Autowired
     private StaffService staffService;
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private DeptService deptService;
 
     /**
      * 员工基本信息
@@ -165,6 +173,40 @@ public class StaffController {
         }
 
         return new ResponseEntity(result, HttpStatus.OK);
+    }
+
+    /**
+     * 获取所有角色
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getRoles",method = RequestMethod.GET)
+    public ResponseEntity getRoles() throws Exception{
+        List<SysRole> list = roleService.getRoles();
+
+        JSONObject result = new JSONObject();
+        result.put("data",list);
+        if(list!=null)
+            return new ResponseEntity(result, HttpStatus.OK);
+        else
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * 获取所有部门
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getDeptTree",method = RequestMethod.GET)
+    public ResponseEntity getDeptTree() throws Exception{
+        List<SysDept> list = deptService.getDeptTree();
+
+        JSONObject result = new JSONObject();
+        result.put("data",list);
+        if(list!=null)
+            return new ResponseEntity(result, HttpStatus.OK);
+        else
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
 }

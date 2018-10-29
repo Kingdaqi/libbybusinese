@@ -1,5 +1,7 @@
 package com.businese.model;
 
+import java.util.List;
+
 public class SysDept {
     private Integer deptId;
 
@@ -8,6 +10,16 @@ public class SysDept {
     private Integer parentId;
 
     private Integer state;
+
+    private List<SysDept> children;
+
+    public List<SysDept> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<SysDept> children) {
+        this.children = children;
+    }
 
     public Integer getDeptId() {
         return deptId;
