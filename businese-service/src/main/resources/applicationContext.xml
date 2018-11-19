@@ -75,7 +75,7 @@
 
     <!-- 把事务控制在service层 -->
     <aop:config>
-        <aop:pointcut id="servicePointcut" expression="execution(public * com.businese.service.*.*(..))" />
+        <aop:pointcut id="servicePointcut" expression="execution(public * com.businese.*.service.*.*(..))" />
         <aop:advisor pointcut-ref="servicePointcut" advice-ref="advice" />
     </aop:config>
 

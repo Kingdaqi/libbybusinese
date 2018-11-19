@@ -12,11 +12,11 @@
     <id column="DEPT_ID" property="deptId" jdbcType="INTEGER" />
     <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
     <collection property="children" ofType="com.businese.model.SysDept">
-      <id column="DEPT_ID" property="deptId" jdbcType="INTEGER" />
-      <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
+      <id column="DEPT_ID2" property="deptId" jdbcType="INTEGER" />
+      <result column="DEPT_NAME2" property="deptName" jdbcType="VARCHAR" />
       <collection property="children" ofType="com.businese.model.SysDept">
-        <id column="DEPT_ID" property="deptId" jdbcType="INTEGER" />
-        <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
+        <id column="DEPT_ID3" property="deptId" jdbcType="INTEGER" />
+        <result column="DEPT_NAME3" property="deptName" jdbcType="VARCHAR" />
       </collection>
     </collection>
   </resultMap>
@@ -210,8 +210,19 @@
 
   <!--==============================================================================================-->
   <select id="getDeptTree" resultMap="TreeResultMap">
-    select m1.`id`,m1.`name`,m2.`id` as id2,m2.`name` as name2,m3.`id` as id3,m3.`name` as name3 from menu m1,menu m2,menu m3 where m1.`id`=m2.`parentId` and m2.`id`=m3.`parentId` and m3.`enabled`=true
+    SELECT
+      d1.DEPT_ID,
+      d1.DEPT_NAME,
+      d2.DEPT_ID AS DEPT_ID2,
+      d2.DEPT_NAME AS DEPT_NAME2,
+      d3.DEPT_ID AS DEPT_ID3,
+      d3.DEPT_NAME AS DEPT_NAME3
+    FROM
+      sys_dept d1
+      LEFT JOIN sys_dept d2
+        on d1.DEPT_ID = d2.PARENT_ID
+      LEFT JOIN sys_dept d3
+        on d2.DEPT_ID = d3.PARENT_ID AND d3.STATE = 1
   </select>
-
 
 </mapper>

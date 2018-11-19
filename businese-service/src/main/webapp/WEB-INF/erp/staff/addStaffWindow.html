@@ -362,7 +362,7 @@
     </div>
 
 <script src="../../layui-v2.4.3/layui/layui.js"></script>
-<script src="../../layui-v2.4.3/layui/layui.all.js"></script>
+<!--<script src="../../layui-v2.4.3/layui/layui.all.js"></script>-->
 <script>
     layui.use('layer', function(){
     var $ = layui.$
@@ -394,23 +394,22 @@
             cache: false,
             success: function(data){
                 if(data.data!=null){
-                    tree_data = data.data;
-                    //     [{ //节点
-                    //     name: '父节点1'
-                    //     ,children: [{
-                    //         name: '子节点11'
-                    //     },{
-                    //         name: '子节点12'
-                    //     }]
-                    // },{
-                    //     name: '父节点2'
-                    //     ,children: [{
-                    //         name: '子节点21'
-                    //         ,children: [{
-                    //             name: '子节点211'
-                    //         }]
-                    //     }]
-                    // }];
+                    tree_data = [{ //节点
+                        name: '父节点1'
+                        ,children: [{
+                            name: '子节点11'
+                        },{
+                            name: '子节点12'
+                        }]
+                    },{
+                        name: '父节点2'
+                        ,children: [{
+                            name: '子节点21'
+                            ,children: [{
+                                name: '子节点211'
+                            }]
+                        }]
+                    }];
                 }
             }
         });
