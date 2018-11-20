@@ -3,9 +3,9 @@ package com.businese.model;
 import java.util.List;
 
 public class SysDept {
-    private Integer deptId;
+    private Integer id;
 
-    private String deptName;
+    private String name;
 
     private Integer parentId;
 
@@ -13,28 +13,20 @@ public class SysDept {
 
     private List<SysDept> children;
 
-    public List<SysDept> getChildren() {
-        return children;
+    public Integer getId() {
+        return id;
     }
 
-    public void setChildren(List<SysDept> children) {
-        this.children = children;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getDeptId() {
-        return deptId;
+    public String getName() {
+        return name;
     }
 
-    public void setDeptId(Integer deptId) {
-        this.deptId = deptId;
-    }
-
-    public String getDeptName() {
-        return deptName;
-    }
-
-    public void setDeptName(String deptName) {
-        this.deptName = deptName == null ? null : deptName.trim();
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getParentId() {
@@ -51,5 +43,13 @@ public class SysDept {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public List<SysDept> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<SysDept> children) {
+        this.children = children;
     }
 }

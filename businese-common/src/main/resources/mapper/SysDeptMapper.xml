@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.businese.dao.SysDeptMapper" >
   <resultMap id="BaseResultMap" type="com.businese.model.SysDept" >
-    <id column="DEPT_ID" property="deptId" jdbcType="INTEGER" />
-    <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
+    <id column="DEPT_ID" property="id" jdbcType="INTEGER" />
+    <result column="DEPT_NAME" property="name" jdbcType="VARCHAR" />
     <result column="PARENT_ID" property="parentId" jdbcType="INTEGER" />
     <result column="STATE" property="state" jdbcType="INTEGER" />
   </resultMap>
   <!--==============================================================================================-->
   <resultMap id="TreeResultMap" type="com.businese.model.SysDept">
-    <id column="DEPT_ID" property="deptId" jdbcType="INTEGER" />
-    <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
+    <id column="DEPT_ID" property="id" jdbcType="INTEGER" />
+    <result column="DEPT_NAME" property="name" jdbcType="VARCHAR" />
     <collection property="children" ofType="com.businese.model.SysDept">
-      <id column="DEPT_ID2" property="deptId" jdbcType="INTEGER" />
-      <result column="DEPT_NAME2" property="deptName" jdbcType="VARCHAR" />
+      <id column="DEPT_ID2" property="id" jdbcType="INTEGER" />
+      <result column="DEPT_NAME2" property="name" jdbcType="VARCHAR" />
       <collection property="children" ofType="com.businese.model.SysDept">
-        <id column="DEPT_ID3" property="deptId" jdbcType="INTEGER" />
-        <result column="DEPT_NAME3" property="deptName" jdbcType="VARCHAR" />
+        <id column="DEPT_ID3" property="id" jdbcType="INTEGER" />
+        <result column="DEPT_NAME3" property="name" jdbcType="VARCHAR" />
       </collection>
     </collection>
   </resultMap>
@@ -100,11 +100,11 @@
     select 
     <include refid="Base_Column_List" />
     from sys_dept
-    where DEPT_ID = #{deptId,jdbcType=INTEGER}
+    where DEPT_ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sys_dept
-    where DEPT_ID = #{deptId,jdbcType=INTEGER}
+    where DEPT_ID = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.businese.model.SysDeptExample" >
     delete from sys_dept
@@ -115,16 +115,16 @@
   <insert id="insert" parameterType="com.businese.model.SysDept" >
     insert into sys_dept (DEPT_ID, DEPT_NAME, PARENT_ID, 
       STATE)
-    values (#{deptId,jdbcType=INTEGER}, #{deptName,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER},
       #{state,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.businese.model.SysDept" >
     insert into sys_dept
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="deptId != null" >
+      <if test="id != null" >
         DEPT_ID,
       </if>
-      <if test="deptName != null" >
+      <if test="name != null" >
         DEPT_NAME,
       </if>
       <if test="parentId != null" >
@@ -135,11 +135,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="deptId != null" >
-        #{deptId,jdbcType=INTEGER},
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
       </if>
-      <if test="deptName != null" >
-        #{deptName,jdbcType=VARCHAR},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null" >
         #{parentId,jdbcType=INTEGER},
@@ -158,11 +158,11 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update sys_dept
     <set >
-      <if test="record.deptId != null" >
-        DEPT_ID = #{record.deptId,jdbcType=INTEGER},
+      <if test="record.id != null" >
+        DEPT_ID = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.deptName != null" >
-        DEPT_NAME = #{record.deptName,jdbcType=VARCHAR},
+      <if test="record.name != null" >
+        DEPT_NAME = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.parentId != null" >
         PARENT_ID = #{record.parentId,jdbcType=INTEGER},
@@ -177,8 +177,8 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update sys_dept
-    set DEPT_ID = #{record.deptId,jdbcType=INTEGER},
-      DEPT_NAME = #{record.deptName,jdbcType=VARCHAR},
+    set DEPT_ID = #{record.id,jdbcType=INTEGER},
+      DEPT_NAME = #{record.name,jdbcType=VARCHAR},
       PARENT_ID = #{record.parentId,jdbcType=INTEGER},
       STATE = #{record.state,jdbcType=INTEGER}
     <if test="_parameter != null" >
@@ -188,8 +188,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.businese.model.SysDept" >
     update sys_dept
     <set >
-      <if test="deptName != null" >
-        DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      <if test="name != null" >
+        DEPT_NAME = #{name,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null" >
         PARENT_ID = #{parentId,jdbcType=INTEGER},
@@ -198,14 +198,14 @@
         STATE = #{state,jdbcType=INTEGER},
       </if>
     </set>
-    where DEPT_ID = #{deptId,jdbcType=INTEGER}
+    where DEPT_ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.businese.model.SysDept" >
     update sys_dept
-    set DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+    set DEPT_NAME = #{name,jdbcType=VARCHAR},
       PARENT_ID = #{parentId,jdbcType=INTEGER},
       STATE = #{state,jdbcType=INTEGER}
-    where DEPT_ID = #{deptId,jdbcType=INTEGER}
+    where DEPT_ID = #{id,jdbcType=INTEGER}
   </update>
 
   <!--==============================================================================================-->

@@ -82,7 +82,7 @@ public class StaffController {
     @RequestMapping(value = "/getStaffs",method = RequestMethod.POST)
     public ResponseEntity getStaffs(@RequestParam(value = "searchParam") String name,
                                    @RequestParam(value = "page") Integer page,
-                                   @RequestParam(value = "limit") Integer rows) throws Exception{
+                                   @RequestParam(value = "limit") Integer rows) {
 
         List<SysStaff> list = staffService.getStaffs(name,page,rows);
         Integer count = staffService.getStaffsCount(name);
@@ -103,7 +103,7 @@ public class StaffController {
      * @throws Exception
      */
     @RequestMapping(value = "/getStaffById",method = RequestMethod.POST)
-    public ResponseEntity getStaffById(@RequestParam(value = "id") Integer id) throws Exception{
+    public ResponseEntity getStaffById(@RequestParam(value = "id") Integer id) {
 
         SysStaff sysStaff = staffService.getStaffById(id);
 
@@ -144,7 +144,7 @@ public class StaffController {
      * @throws Exception
      */
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
-    public ResponseEntity delete(@RequestParam(value = "id") Integer id) throws Exception{
+    public ResponseEntity delete(@RequestParam(value = "id") Integer id) {
         JSONObject result = new JSONObject();
         try{
             staffService.delete(id);
@@ -181,7 +181,7 @@ public class StaffController {
      * @throws Exception
      */
     @RequestMapping(value = "/getRoles",method = RequestMethod.GET)
-    public ResponseEntity getRoles() throws Exception{
+    public ResponseEntity getRoles() {
         List<SysRole> list = roleService.getRoles();
 
         JSONObject result = new JSONObject();
@@ -198,7 +198,7 @@ public class StaffController {
      * @throws Exception
      */
     @RequestMapping(value = "/getDeptTree",method = RequestMethod.GET)
-    public ResponseEntity getDeptTree() throws Exception{
+    public ResponseEntity getDeptTree() {
         List<SysDept> list = deptService.getDeptTree();
 
         JSONObject result = new JSONObject();

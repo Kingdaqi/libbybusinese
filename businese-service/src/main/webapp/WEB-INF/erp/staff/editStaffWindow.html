@@ -13,23 +13,9 @@
     <script src="../../js/jquery.tips.js"></script>
     <script>
         $(document).ready(function() {
-            var editUserId = parent.$("#editUserId").val();
-            $.ajax({
-                type: "POST",
-                url: 'sysUser/getUserById',
-                data:{userId:editUserId},
-                dataType:'json',
-                cache: false,
-                async:false,
-                success: function(data){
-                    if(data.data!=null){
-                        handleContent(data.data);
-                    }
-                }
-            });
             $.ajax({
                 type: "GET",
-                url: 'role/getRoles',
+                url: 'getRoles',
                 dataType:'json',
                 cache: false,
                 async:false,
@@ -39,226 +25,516 @@
                     }
                 }
             });
-
         });
-        function handleContent(item) {
-            $("#username").val(item.username);
-            $("#name").val(item.name);
-            $("#roles").val(item.roleName);
-        }
         function handleRoleBox(data) {
-            var roleName = $("#roles").val();
-            var inputs = "";
+            var options = "";
             $.each(data,function (index,item) {
-                if(isContains(roleName,item.name)){
-                    inputs += "<input checked='checked' onclick='addRole()' type=\"checkbox\" name=\""+item.name+"\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
-                }else{
-                    inputs += "<input onclick='addRole()' type=\"checkbox\" name=\""+item.name+"\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
-                }
+                // options += "<input onclick='addRole()' type=\"checkbox\" name=\""++"\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
+                options += "<option value=\""+item.id+"\">"+item.name+"</option>";
             })
-            $("#roleBox").append(inputs);
+            $("#posid").append(options);
         }
-        function isContains(str, substr) {
-            return new RegExp(substr).test(str);
-        }
-        function updataUser() {
+        function addStaff() {
             if(checkParam()){
-                var username = $("#username").val();
-                var name = $("#name").val();
-                var password = $("#password").val();
-                var roles = $("#roles").val();
-                var data = {username:username,name:name,password:password,roleName:roles};
+                var data = {name:$("#name").val()
+                    ,gender:$(".layui-radio[checked='checked']").val()
+                    ,name:$("#birthday").val()
+                    ,name:$("#politicid").val()
+                    ,name:$("#nationid").val()
+                    ,name:$("#nativeplace").val()
+                    ,name:$("#email").val()
+                    ,name:$("#address").val()
+                    ,name:$("#posid").val()
+                    ,name:$("#departmentid").val()
+                    ,name:$("#phone").val()
+                    ,name:$("#tiptopdegree").val()
+                    ,name:$("#school").val()
+                    ,name:$("#idcard").val()
+                    ,name:$("#wedlock").val()
+                    ,name:$("#begindate").val()
+                    ,name:$("#conversiontime").val()
+                    ,name:$("#begincontract").val()
+                    ,name:$("#endcontract").val()};
                 $.ajax({
                     type: "POST",
-                    url: 'sysUser/add',
+                    url: 'add',
                     data: JSON.stringify(data),
                     dataType:'json',
                     contentType:'application/json;;charset=utf-8',
                     cache: false,
                     success: function(data){
                         if(data.result=='success'){
-                            layer.msg("创建用户成功",{icon:1,time:1000,yes:setTimeout("closeWindow()",1000)});
+                            layer.confirm("修改员工成功，工号为"+data.workId+".",{icon:6,btn: ['确认'],title:"提示"},function () {
+                                window.parent.location.reload();
+                            });
                         }else{
-                            layer.msg("创建用户失败",{icon:1,time:1000});
+                            layer.msg("修改员工失败",{icon:5,time:1000});
                         }
                     }
                 });
             }
         }
-        function closeWindow() {
-            //layer.close(layer.index);
-            window.parent.location.reload();
-        }
         function checkParam() {
-            if ($('#username').val()==''){
-                $('#usernametip').css("display",'inline');
-                $('#usernametip2').css("display",'none');
+            if ($('#name').val()==''){
+                $('#nametip').css("display",'block');
+                $('#nametip2').css("display",'none');
                 return false;
             }else{
-                $('#usernametip').css("display",'none');
-                var username = $("#username").val();
+                $('#nametip').css("display",'none');
+                var name = $("#name").val();
                 $.ajax({
                     type: "POST",
-                    url: 'sysUser/checkUserName',
-                    data: {username:username},
+                    url: 'checkStaffName',
+                    data: {name:name},
                     dataType:'json',
                     cache: false,
                     success: function(data){
                         if(data.result=='success'){
-                            $('#usernametip2').css("display",'none');
+                            $('#nametip2').css("display",'none');
                         }else{
-                            $("#username").val(username);
-                            $('#usernametip2').css("display",'inline');
+                            $("#name").val(name);
+                            $('#nametip2').css("display",'block');
                             return false;
                         }
                     }
                 });
             }
 
-            if($('#name').val()==''){
-                $('#nametip').css("display",'inline');
+            if($('#birthday').val()==''){
+                $('#birthdaytip').css("display",'block');
                 return false;;
             }else{
-                $('#nametip').css("display",'none');
+                $('#birthdaytip').css("display",'none');
             }
 
-            if($('#password').val()==''){
-                $('#passwordtip').css("display",'inline');
+            if($('#politicid').val()==''){
+                $('#politicidtip').css("display",'block');
                 return false;;
             }else{
-                $('#passwordtip').css("display",'none');
+                $('#politicidtip').css("display",'none');
             }
 
-            if($('#confirm').val()!=$('#password').val()){
-                $('#confirmtip').css("display",'inline');
+            if($('#nationid').val()==''){
+                $('#nationidtip').css("display",'block');
                 return false;;
             }else{
-                $('#confirmtip').css("display",'none');
+                $('#nationidtip').css("display",'none');
             }
 
-            if($('#roles').val()==''){
-                $('#rolestip').css("display",'inline');
+            if($('#nativeplace').val()==''){
+                $('#nativeplacetip').css("display",'block');
                 return false;;
             }else{
-                $('#rolestip').css("display",'none');
+                $('#nativeplacetip').css("display",'none');
+            }
+
+            if($('#email').val()==''){
+                $('#emailtip').css("display",'block');
+                return false;;
+            }else{
+                $('#emailtip').css("display",'none');
+            }
+
+            if($('#address').val()==''){
+                $('#addresstip').css("display",'block');
+                return false;;
+            }else{
+                $('#addresstip').css("display",'none');
+            }
+
+            if($('#posid').val()==''){
+                $('#posidtip').css("display",'block');
+                return false;;
+            }else{
+                $('#posidtip').css("display",'none');
+            }
+
+            if($('#departmentid').val()==''){
+                $('#departmentidtip').css("display",'block');
+                return false;;
+            }else{
+                $('#departmentidtip').css("display",'none');
+            }
+
+            if($('#phone').val()==''){
+                $('#phonetip').css("display",'block');
+                return false;;
+            }else{
+                $('#phonetip').css("display",'none');
+            }
+
+            if($('#tiptopdegree').val()==''){
+                $('#tiptopdegreetip').css("display",'block');
+                return false;;
+            }else{
+                $('#tiptopdegreetip').css("display",'none');
+            }
+
+            if($('#school').val()==''){
+                $('#schooltip').css("display",'block');
+                return false;;
+            }else{
+                $('#schooltip').css("display",'none');
+            }
+
+            if($('#specialty').val()==''){
+                $('#specialtytip').css("display",'block');
+                return false;;
+            }else{
+                $('#specialtytip').css("display",'none');
+            }
+
+            if($('#idcard').val()==''){
+                $('#idcardtip').css("display",'block');
+                return false;;
+            }else{
+                $('#idcardtip').css("display",'none');
+            }
+
+            if($('#wedlock').val()==''){
+                $('#wedlocktip').css("display",'block');
+                return false;;
+            }else{
+                $('#wedlocktip').css("display",'none');
+            }
+
+            if($('#begindate').val()==''){
+                $('#begindatetip').css("display",'block');
+                return false;;
+            }else{
+                $('#begindatetip').css("display",'none');
             }
 
             return true;
         }
-        function addRole() {
-            var roles = "";
-            $(":checkbox[checked]").each(function(i){
-                var name = $(this).attr("name");
-                if (i==0) {
-                        roles += name;
-                    }else{
-                        roles += "，"+name
-                    }
-            });
-            $("#roles").val(roles);
+        function changeGender(flag) {
+            if (flag==0){
+                //男选中
+                $(".layui-radio[value='男']").attr("checked","checked");
+                $(".layui-radio[value='女']").removeAttr("checked");
+            }else{
+                //女选中
+                $(".layui-radio[value='女']").attr("checked","checked");
+                $(".layui-radio[value='男']").removeAttr("checked");
+            }
+        }
+        function showDept() {
+            $("#department").css("display","inline-grid");
+        }
+        function hideDept() {
+            $("#department").css("display","none");
         }
     </script>
 </head>
-<body style="height: 520px">
+<body style="height: 550px">
 
-    <div id="userInfo" style="height: 90%;">
-        <form id="userInfoForm" style="width: 100%;height: 100%;" action="sysUser/add" method="POST">
+<div id="userInfo" style="height: 90%;margin-left: 30px;">
+    <form id="userInfoForm" style="width: 100%;height: 100%;" action="sysUser/add" method="POST">
 
-            <div class="layui-col-md16">
-                <label for="username" class="layui-label">用户名</label>
-                <input type="text" id="username" placeholder="请输入用户名" class="layui-input">
-                <font id="usernametip" style="color: red;margin-left: 10px;display: none">*用户名不能为空</font>
-                <font id="usernametip2" style="color: red;margin-left: 10px;display: none">*用户名已存在</font>
-            </div>
+        <div class="layui-col-md18">
+            <label for="name"><font style="color: red">*</font>姓名</label>
+            <input type="text" id="name" placeholder="员工姓名" class="layui-input">
+            <font id="nametip" class="layui-tip-font">*姓名不能为空</font>
+            <font id="nametip2" class="layui-tip-font">*姓名已存在，请尝试加入数字输入，例如"张三2"</font>
+        </div>
 
-            <div class="layui-col-md16">
-                <label for="name" class="layui-label">姓名</label>
-                <input type="text" id="name" placeholder="请输入姓名" class="layui-input">
-                <font id="nametip" style="color: red;margin-left: 10px;display: none">*姓名不能为空</font>
-            </div>
+        <div class="layui-col-md18" style="padding-top: 11px;">
+            <label><font style="color: red">*</font>性别</label>
+            <input class="layui-radio" type="radio" name="gender" value="男" checked="checked" onclick="changeGender(0)">男
+            <input class="layui-radio" type="radio" name="gender" value="女" onclick="changeGender(1)">女
+        </div>
 
-            <div class="layui-col-md16">
-                <label for="password" class="layui-label">密码</label>
-                <input type="password" id="password" placeholder="请输入密码" class="layui-input">
-                <font id="passwordtip" style="color: red;margin-left: 10px;display: none">*密码不能为空</font>
-            </div>
+        <div class="layui-col-md18">
+            <label for="birthday"><font style="color: red">*</font>出生日期</label>
+            <input type="text" id="birthday" contenteditable="false" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+            <font id="birthdaytip" class="layui-tip-font">*出生日期不能为空</font>
+        </div>
 
-            <div class="layui-col-md16">
-                <label for="confirm" class="layui-label">确认密码</label>
-                <input type="password" id="confirm" placeholder="请确认密码" class="layui-input">
-                <font id="confirmtip" style="color: red;margin-left: 10px;display: none">*两次密码不一致</font>
-            </div>
+        <div class="layui-col-md18">
+            <label for="politicid"><font style="color: red">*</font>政治面貌</label>
+            <input type="text" id="politicid" placeholder="政治面貌" class="layui-input">
+            <font id="politicidtip" class="layui-tip-font">*政治面貌不能为空</font>
+        </div>
 
-            <div class="layui-col-md16">
-                <label for="roles" class="layui-label">角色</label>
-                <input type="text" id="roles" placeholder="请选择角色" readonly="readonly" class="layui-input">
-                <font id="rolestip" style="color: red;margin-left: 10px;display: none">*角色不能为空</font>
-                <br />
-                <div id="roleBox" style="margin-left: 185px;margin-top: 5px;width: 50%">
-                    <!--<input type="checkbox" name="lang" value="01"><span style="margin-right: 10px">系统管理员</span>-->
-                </div>
-            </div>
+        <div class="layui-col-md18">
+            <label for="nationid"><font style="color: red">*</font>民族</label>
+            <input type="text" id="nationid" placeholder="民族" class="layui-input">
+            <font id="nationidtip" class="layui-tip-font">*民族不能为空</font>
+        </div>
 
+        <div class="layui-col-md18">
+            <label for="nativeplace"><font style="color: red">*</font>籍贯</label>
+            <input type="text" id="nativeplace" placeholder="籍贯" class="layui-input">
+            <font id="nativeplacetip" class="layui-tip-font">*籍贯不能为空</font>
+        </div>
 
-        </form>
-    </div>
-    <div align="right" style="height: 10%">
-        <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="updataUser()">更新</button>
-        <button class="layui-btn layui-btn-primary layui-btn-radius" style="margin-right: 20px;" data-type="close">取消</button>
-    </div>
+        <div class="layui-col-md18">
+            <label for="email"><font style="color: red">*</font>电子邮箱</label>
+            <input type="text" id="email" placeholder="电子邮箱" class="layui-input">
+            <font id="emailtip" class="layui-tip-font">*电子邮箱不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="address"><font style="color: red">*</font>联系地址</label>
+            <input type="text" id="address" placeholder="联系地址" class="layui-input">
+            <font id="addresstip" class="layui-tip-font">*联系地址不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="posid"><font style="color: red">*</font>职位</label>
+            <select class="layui-select-pos" name="type" id="posid" lay-verify="required" lay-filter="posid">
+                <option value="">请选择职位</option>
+            </select>
+            <font id="posidtip" class="layui-tip-font">*职位不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="departmentid"><font style="color: red">*</font>所属部门</label>
+            <input type="text" id="departmentid" placeholder="所属部门" onclick="showDept()"  class="layui-input">
+            <ul id="department" class="layui-ul" onmouseleave="hideDept()">
+                <i style="font-size: 15px;" class="layui-icon layui-icon-left">请选择部门</i>
+            </ul>
+            <font id="departmentidtip" class="layui-tip-font">*所属部门</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="phone"><font style="color: red">*</font>联系方式</label>
+            <input type="text" id="phone" placeholder="联系方式" class="layui-input">
+            <font id="phonetip" class="layui-tip-font">*联系方式不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="tiptopdegree"><font style="color: red">*</font>最高学历</label>
+            <input type="text" id="tiptopdegree" placeholder="最高学历" class="layui-input">
+            <font id="tiptopdegreetip" class="layui-tip-font">*最高学历不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="school"><font style="color: red">*</font>毕业院校</label>
+            <input type="text" id="school" placeholder="毕业院校" class="layui-input">
+            <font id="schooltip" class="layui-tip-font">*毕业院校不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="specialty"><font style="color: red">*</font>专业名称</label>
+            <input type="text" id="specialty" placeholder="专业名称" class="layui-input">
+            <font id="specialtytip" class="layui-tip-font">*专业名称不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="idcard"><font style="color: red">*</font>身份证号</label>
+            <input type="text" id="idcard" placeholder="身份证号" class="layui-input">
+            <font id="idcardtip" class="layui-tip-font">*身份证号不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="wedlock"><font style="color: red">*</font>婚姻状况</label>
+            <input type="text" id="wedlock" placeholder="婚姻状况" class="layui-input">
+            <font id="wedlocktip" class="layui-tip-font">*婚姻状况不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="begindate"><font style="color: red">*</font>入职日期</label>
+            <input type="text" id="begindate" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+            <font id="begindatetip" class="layui-tip-font">*入职日期不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="conversiontime">转正日期</label>
+            <input type="text" id="conversiontime" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="begincontract">合同起始日期</label>
+            <input type="text" id="begincontract" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="endcontract">合同终止日期</label>
+            <input type="text" id="endcontract" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+        </div>
+
+    </form>
+</div>
+<div align="right" style="height: 10%">
+    <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="addStaff()">确认</button>
+    <button class="layui-btn layui-btn-primary layui-btn-radius" style="margin-right: 90px;" data-type="close">取消</button>
+</div>
 
 <script src="../../layui-v2.4.3/layui/layui.js"></script>
+<!--<script src="../../layui-v2.4.3/layui/layui.all.js"></script>-->
 <script>
     layui.use('layer', function(){
-    var $ = layui.$
-    ,layer = layui.layer
-    ,index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        var $ = layui.$
+            ,layer = layui.layer
+            ,index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 
-    var active = {
-    //让层自适应iframe
-    auto: function(){
-    $('body').append('插入很多酱油。插入很多酱油。插入很多酱油。插入很多酱油。插入很多酱油。插入很多酱油。插入很多酱油。');
-    parent.layer.iframeAuto(index);
-    }
+        var active = {
+            //在内部关闭iframe
+            close: function(set){
+                parent.layer.close(index);
+            }
+        }
 
-    //在父层弹出一个层
-    ,parentPopup: function(){
-    top.layer.msg('Hi, man', {shade: 0.3})
-    }
-
-    //给父页面传值
-    ,setParent: function(){
-    var id = '#LAY_layer_iframe_demo'
-    ,mark = $('#LAY_mark')
-    ,val = mark.val();
-
-    if(val === ''){
-    mark.focus();
-    parent.layer.msg('请填写标记');
-    return true;
-    }
-
-    parent.layer.msg('您将标记 [ ' +val + ' ] 成功传送给了父窗口');
-    parent.layui.$(id).text('我被改变了');
-    parent.layer.tips('Look here', id, {
-    time: 5000
-    });
-    parent.layer.close(index);
-    }
-
-
-    //在内部关闭iframe
-    ,close: function(set){
-    parent.layer.close(index);
-    }
-    }
-
-    $('.layui-btn').on('click', function(){
-        var othis = $(this)
-        ,type = othis.data('type');
-        active[type] && active[type].call(this);
+        $('.layui-btn').on('click', function(){
+            var othis = $(this)
+                ,type = othis.data('type');
+            active[type] && active[type].call(this);
         });
     });
+</script>
+<script>
+    window.onload = function () {
+        var tree_data;
+        $.ajax({
+            type: "GET",
+            url: 'getDeptTree',
+            dataType:'json',
+            contentType:'application/json;;charset=utf-8',
+            cache: false,
+            async:false,
+            success: function(data){
+                if(data.data!=null){
+                    tree_data = data.data;
+                }
+            }
+        });
+
+        layui.tree({
+            elem: '#department' //传入元素选择器
+            ,class:"layui-show"
+            ,click: function(item){ //点击节点回调
+                // layer.msg('当前节id：'+ item.id + '当前节名称：'+ item.name);
+                $("#departmentid").attr("value",item.name);
+            }
+            ,nodes:tree_data
+        });
+    }
+</script>
+<script>/*日期选择模块*/
+layui.config({
+    base: '../../layui-v2.4.3/' //静态资源所在路径
+}).extend({
+    index: 'lib/index' //主入口模块
+}).use(['index', 'laydate'], function(){
+    var laydate = layui.laydate;
+
+    //示例代码
+
+    //常规用法
+    laydate.render({
+        elem: '#birthday'
+    });
+
+    //国际版
+    laydate.render({
+        elem: '#test-laydate-normal-en'
+        ,lang: 'en'
+    });
+
+    //年选择器
+    laydate.render({
+        elem: '#test-laydate-type-year'
+        ,type: 'year'
+    });
+
+    //年月选择器
+    laydate.render({
+        elem: '#test-laydate-type-month'
+        ,type: 'month'
+    });
+
+    //日期选择器
+    laydate.render({
+        elem: '#test-laydate-type-date'
+        //,type: 'date' //type 默认为 date，所以可不填
+    });
+
+    //时间选择器
+    laydate.render({
+        elem: '#test-laydate-type-time'
+        ,type: 'time'
+    });
+
+    //日期时间选择器
+    laydate.render({
+        elem: '#test-laydate-type-datetime'
+        ,type: 'datetime'
+    });
+
+    //日期范围
+    laydate.render({
+        elem: '#test-laydate-range-date'
+        ,range: true
+    });
+
+    //年范围
+    laydate.render({
+        elem: '#test-laydate-range-year'
+        ,type: 'year'
+        ,range: true
+    });
+
+    //年月范围
+    laydate.render({
+        elem: '#test-laydate-range-month'
+        ,type: 'month'
+        ,range: true
+    });
+
+    //时间范围
+    laydate.render({
+        elem: '#test-laydate-range-time'
+        ,type: 'time'
+        ,range: true
+    });
+
+    //日期时间范围
+    laydate.render({
+        elem: '#test-laydate-range-datetime'
+        ,type: 'datetime'
+        ,range: true
+    });
+
+    //自定义格式
+    laydate.render({
+        elem: '#test-laydate-format-date1'
+        ,format: 'yyyy年MM月dd日'
+    });
+    laydate.render({
+        elem: '#test-laydate-format-date2'
+        ,format: 'dd/MM/yyyy'
+    });
+    laydate.render({
+        elem: '#test-laydate-format-month'
+        ,type: 'month'
+        ,format: 'yyyyMM'
+    });
+    laydate.render({
+        elem: '#test-laydate-format-time'
+        ,type: 'time'
+        ,format: 'H点m分'
+    });
+    laydate.render({
+        elem: '#test-laydate-format-range1'
+        ,range: '~'
+    });
+    laydate.render({
+        elem: '#test-laydate-format-range2'
+        ,type: 'datetime'
+        ,range: '到'
+        ,format: 'yyyy年M月d日H时m分s秒'
+    });
+
+    //同时绑定多个
+    lay('.laydate-item').each(function(){
+        laydate.render({
+            elem: this
+            ,trigger: 'click'
+        });
+    });
+
+});
 </script>
 </body>
 </html>

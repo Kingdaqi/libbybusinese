@@ -6,6 +6,7 @@ import com.businese.system.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,15 @@ public class DeptServiceImpl implements DeptService {
     private SysDeptMapper sysDeptMapper;
 
     public List<SysDept> getDeptTree() {
-        return sysDeptMapper.getDeptTree();
+        List<SysDept> depts = sysDeptMapper.getDeptTree();
+        List<SysDept> deptTree = new ArrayList<SysDept>();
+        for (SysDept sysDept: depts) {
+            if (sysDept.getId()==0){
+                //去除重复部分部门
+                deptTree.add(sysDept);
+            }
+        }
+
+        return deptTree;
     }
 }

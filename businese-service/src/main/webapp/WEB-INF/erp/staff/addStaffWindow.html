@@ -392,24 +392,10 @@
             dataType:'json',
             contentType:'application/json;;charset=utf-8',
             cache: false,
+            async:false,
             success: function(data){
                 if(data.data!=null){
-                    tree_data = [{ //节点
-                        name: '父节点1'
-                        ,children: [{
-                            name: '子节点11'
-                        },{
-                            name: '子节点12'
-                        }]
-                    },{
-                        name: '父节点2'
-                        ,children: [{
-                            name: '子节点21'
-                            ,children: [{
-                                name: '子节点211'
-                            }]
-                        }]
-                    }];
+                    tree_data = data.data;
                 }
             }
         });
@@ -417,6 +403,10 @@
         layui.tree({
             elem: '#department' //传入元素选择器
             ,class:"layui-show"
+            ,click: function(item){ //点击节点回调
+                // layer.msg('当前节id：'+ item.id + '当前节名称：'+ item.name);
+                $("#departmentid").attr("value",item.name);
+            }
             ,nodes:tree_data
         });
     }

@@ -75,7 +75,7 @@ public class SysUserServiceImpl implements SysUserService {
             SysDept sysDept = sysDeptMapper.selectByPrimaryKey(deptId);
             String deptName = "";
             if (sysDept!=null){
-                deptName = sysDept.getDeptName();
+                deptName = sysDept.getName();
             }
             user.setDeptName(deptName);
 
@@ -114,7 +114,7 @@ public class SysUserServiceImpl implements SysUserService {
         SysDept sysDept = sysDeptMapper.selectByPrimaryKey(deptId);
         String deptName = "";
         if (sysDept!=null){
-            deptName = sysDept.getDeptName();
+            deptName = sysDept.getName();
         }
         sysUser.setDeptName(deptName);
 
