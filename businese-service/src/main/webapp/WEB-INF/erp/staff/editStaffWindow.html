@@ -64,11 +64,11 @@
                     cache: false,
                     success: function(data){
                         if(data.result=='success'){
-                            layer.confirm("修改员工成功，工号为"+data.workId+".",{icon:6,btn: ['确认'],title:"提示"},function () {
+                            layer.confirm("修改员工信息成功，工号为"+data.workId+".",{icon:6,btn: ['确认'],title:"提示"},function () {
                                 window.parent.location.reload();
                             });
                         }else{
-                            layer.msg("修改员工失败",{icon:5,time:1000});
+                            layer.msg("修改员工信息失败",{icon:5,time:1000});
                         }
                     }
                 });
