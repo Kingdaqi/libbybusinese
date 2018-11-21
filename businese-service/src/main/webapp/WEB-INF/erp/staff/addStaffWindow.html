@@ -39,13 +39,13 @@
                 var data = {name:$("#name").val()
                             ,gender:$(".layui-radio[checked='checked']").val()
                             ,name:$("#birthday").val()
-                            ,name:$("#politicid").val()
-                            ,name:$("#nationid").val()
+                            ,name:$("#politic").val()
+                            ,name:$("#nation").val()
                             ,name:$("#nativeplace").val()
                             ,name:$("#email").val()
                             ,name:$("#address").val()
                             ,name:$("#posid").val()
-                            ,name:$("#departmentid").val()
+                            ,name:$("#deptName").val()
                             ,name:$("#phone").val()
                             ,name:$("#tiptopdegree").val()
                             ,name:$("#school").val()
@@ -107,18 +107,18 @@
                 $('#birthdaytip').css("display",'none');
             }
 
-            if($('#politicid').val()==''){
-                $('#politicidtip').css("display",'block');
+            if($('#politic').val()==''){
+                $('#politictip').css("display",'block');
                 return false;;
             }else{
-                $('#politicidtip').css("display",'none');
+                $('#politictip').css("display",'none');
             }
 
-            if($('#nationid').val()==''){
-                $('#nationidtip').css("display",'block');
+            if($('#nation').val()==''){
+                $('#nationtip').css("display",'block');
                 return false;;
             }else{
-                $('#nationidtip').css("display",'none');
+                $('#nationtip').css("display",'none');
             }
 
             if($('#nativeplace').val()==''){
@@ -149,11 +149,11 @@
                 $('#posidtip').css("display",'none');
             }
 
-            if($('#departmentid').val()==''){
-                $('#departmentidtip').css("display",'block');
+            if($('#deptName').val()==''){
+                $('#deptNametip').css("display",'block');
                 return false;;
             }else{
-                $('#departmentidtip').css("display",'none');
+                $('#deptNametip').css("display",'none');
             }
 
             if($('#phone').val()==''){
@@ -219,17 +219,17 @@
             }
         }
         function showDept() {
-            $("#department").css("display","inline-grid");
+            $("#dept").css("display","inline-grid");
         }
         function hideDept() {
-            $("#department").css("display","none");
+            $("#dept").css("display","none");
         }
     </script>
 </head>
 <body style="height: 550px">
 
     <div id="userInfo" style="height: 90%;margin-left: 30px;">
-        <form id="userInfoForm" style="width: 100%;height: 100%;" action="sysUser/add" method="POST">
+        <form id="userInfoForm" style="width: 100%;height: 100%;" action="sysUser/save" method="POST">
 
             <div class="layui-col-md18">
                 <label for="name"><font style="color: red">*</font>姓名</label>
@@ -251,15 +251,15 @@
             </div>
 
             <div class="layui-col-md18">
-                <label for="politicid"><font style="color: red">*</font>政治面貌</label>
-                <input type="text" id="politicid" placeholder="政治面貌" class="layui-input">
-                <font id="politicidtip" class="layui-tip-font">*政治面貌不能为空</font>
+                <label for="politic"><font style="color: red">*</font>政治面貌</label>
+                <input type="text" id="politic" placeholder="政治面貌" class="layui-input">
+                <font id="politictip" class="layui-tip-font">*政治面貌不能为空</font>
             </div>
 
             <div class="layui-col-md18">
-                <label for="nationid"><font style="color: red">*</font>民族</label>
-                <input type="text" id="nationid" placeholder="民族" class="layui-input">
-                <font id="nationidtip" class="layui-tip-font">*民族不能为空</font>
+                <label for="nation"><font style="color: red">*</font>民族</label>
+                <input type="text" id="nation" placeholder="民族" class="layui-input">
+                <font id="nationtip" class="layui-tip-font">*民族不能为空</font>
             </div>
 
             <div class="layui-col-md18">
@@ -289,12 +289,13 @@
             </div>
 
             <div class="layui-col-md18">
-                <label for="departmentid"><font style="color: red">*</font>所属部门</label>
-                <input type="text" id="departmentid" placeholder="所属部门" onclick="showDept()"  class="layui-input">
-                <ul id="department" class="layui-ul" onmouseleave="hideDept()">
+                <label for="deptName"><font style="color: red">*</font>所属部门</label>
+                <input type="hidden" id="departmentid">
+                <input type="text" id="deptName" placeholder="所属部门" readonly="readonly" onclick="showDept()"  class="layui-input">
+                <ul id="dept" class="layui-ul" onmouseleave="hideDept()">
                     <i style="font-size: 15px;" class="layui-icon layui-icon-left">请选择部门</i>
                 </ul>
-                <font id="departmentidtip" class="layui-tip-font">*所属部门</font>
+                <font id="deptNametip" class="layui-tip-font">*所属部门</font>
             </div>
 
             <div class="layui-col-md18">
@@ -401,11 +402,12 @@
         });
 
         layui.tree({
-            elem: '#department' //传入元素选择器
+            elem: '#dept' //传入元素选择器
             ,class:"layui-show"
             ,click: function(item){ //点击节点回调
                 // layer.msg('当前节id：'+ item.id + '当前节名称：'+ item.name);
-                $("#departmentid").attr("value",item.name);
+                $("#deptName").attr("value",item.name);
+                $("#departmentid").attr("value",item.id);
             }
             ,nodes:tree_data
         });

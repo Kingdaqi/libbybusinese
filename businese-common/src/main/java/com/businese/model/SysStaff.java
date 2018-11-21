@@ -15,11 +15,11 @@ public class SysStaff {
 
     private String wedlock;
 
-    private Integer nationid;
+    private String nation;
 
     private String nativeplace;
 
-    private Integer politicid;
+    private String politic;
 
     private String email;
 
@@ -29,9 +29,11 @@ public class SysStaff {
 
     private Integer departmentid;
 
-    private Integer joblevelid;
-
     private Integer posid;
+
+    private String deptName;
+
+    private String positionName;
 
     private String engageform;
 
@@ -107,12 +109,12 @@ public class SysStaff {
         this.wedlock = wedlock == null ? null : wedlock.trim();
     }
 
-    public Integer getNationid() {
-        return nationid;
+    public String getNation() {
+        return nation;
     }
 
-    public void setNationid(Integer nationid) {
-        this.nationid = nationid;
+    public void setNation(String nation) {
+        this.nation = nation == null ? null : nation.trim();
     }
 
     public String getNativeplace() {
@@ -123,12 +125,12 @@ public class SysStaff {
         this.nativeplace = nativeplace == null ? null : nativeplace.trim();
     }
 
-    public Integer getPoliticid() {
-        return politicid;
+    public String getPolitic() {
+        return politic;
     }
 
-    public void setPoliticid(Integer politicid) {
-        this.politicid = politicid;
+    public void setPolitic(String politic) {
+        this.politic = politic == null ? null : politic.trim();
     }
 
     public String getEmail() {
@@ -161,14 +163,6 @@ public class SysStaff {
 
     public void setDepartmentid(Integer departmentid) {
         this.departmentid = departmentid;
-    }
-
-    public Integer getJoblevelid() {
-        return joblevelid;
-    }
-
-    public void setJoblevelid(Integer joblevelid) {
-        this.joblevelid = joblevelid;
     }
 
     public Integer getPosid() {
@@ -281,5 +275,21 @@ public class SysStaff {
 
     public void setWorkage(Integer workage) {
         this.workage = workage;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getPositionName() {
+        return positionName;
+    }
+
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
     }
 }

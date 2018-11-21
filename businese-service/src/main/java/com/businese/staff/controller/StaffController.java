@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.businese.model.SysDept;
 import com.businese.model.SysRole;
 import com.businese.model.SysStaff;
-import com.businese.model.SysUser;
 import com.businese.staff.service.StaffService;
 import com.businese.system.service.DeptService;
 import com.businese.system.service.RoleService;
+import com.businese.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +54,7 @@ public class StaffController {
     }
 
     /**
-     * 跳转编辑员工页面
+     * 跳转新增员工页面
      * @return
      */
     @RequestMapping("/addStaffWindow")
@@ -63,7 +63,7 @@ public class StaffController {
     }
 
     /**
-     * 跳转新增员工页面
+     * 跳转编辑员工页面
      * @return
      */
     @RequestMapping("/editStaffWindow")
@@ -109,6 +109,11 @@ public class StaffController {
 
         JSONObject result = new JSONObject();
         result.put("data",sysStaff);
+        result.put("birthday",Utils.dataFormat(sysStaff.getBirthday()));
+        result.put("begindate",Utils.dataFormat(sysStaff.getBegindate()));
+        result.put("conversiontime",Utils.dataFormat(sysStaff.getConversiontime()));
+        result.put("begincontract",Utils.dataFormat(sysStaff.getBegincontract()));
+        result.put("endcontract",Utils.dataFormat(sysStaff.getEndcontract()));
 
         return new ResponseEntity(result, HttpStatus.OK);
     }
@@ -118,8 +123,8 @@ public class StaffController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public ResponseEntity add(HttpServletRequest request, @RequestBody SysStaff sysStaff){
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    public ResponseEntity save(HttpServletRequest request, @RequestBody SysStaff sysStaff){
         JSONObject result = new JSONObject();
 //        String createBy = request.getSession().getAttribute("username").toString();
         try{
@@ -132,6 +137,26 @@ public class StaffController {
         }catch (Exception e){
             result.put("result","error");
             e.printStackTrace();
+        }
+
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
+
+    /**
+     * 修改员工信息
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public ResponseEntity update(HttpServletRequest request, @RequestBody SysStaff sysStaff){
+        JSONObject result = new JSONObject();
+//      String createBy = request.getSession().getAttribute("username").toString();
+//      sysUser.setCreateby(createBy);
+        int count =  staffService.updateSysStaff(sysStaff);
+        if (count>0){
+            result.put("result","success");
+        }else{
+            result.put("result","error");
         }
 
         return new ResponseEntity(result, HttpStatus.OK);

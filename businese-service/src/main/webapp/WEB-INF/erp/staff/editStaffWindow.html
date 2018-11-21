@@ -13,6 +13,7 @@
     <script src="../../js/jquery.tips.js"></script>
     <script>
         $(document).ready(function() {
+            var editStaffId = parent.$("#editStaffId").val();
             $.ajax({
                 type: "GET",
                 url: 'getRoles',
@@ -25,6 +26,19 @@
                     }
                 }
             });
+            $.ajax({
+                type: "POST",
+                url: 'getStaffById',
+                data:{id:editStaffId},
+                dataType:'json',
+                cache: false,
+                async:false,
+                success: function(data){
+                    if(data.data!=null){
+                        handleEditStaffInfo(data);
+                    }
+                }
+            });
         });
         function handleRoleBox(data) {
             var options = "";
@@ -34,18 +48,61 @@
             })
             $("#posid").append(options);
         }
+        function handleEditStaffInfo(dataInfo) {
+            var data = dataInfo.data;
+
+            $("#id").attr("value",data.id);
+            $("#name").attr("value",data.name);
+            $("#oldname").attr("value",data.name);//检验名字是否修改
+            if (data.gender=='男'){
+                //男选中
+                $(".layui-radio[value='男']").attr("checked","checked");
+                $(".layui-radio[value='女']").removeAttr("checked");
+            }else{
+                //女选中
+                $(".layui-radio[value='女']").attr("checked","checked");
+                $(".layui-radio[value='男']").removeAttr("checked");
+            }
+            $("#birthday").attr("value",dataInfo.birthday);
+            $("#politic").attr("value",data.politic);
+            $("#nation").attr("value",data.nation);
+            $("#nativeplace").attr("value",data.nativeplace);
+            $("#email").attr("value",data.email);
+            $("#address").attr("value",data.address);
+
+            $("#posid").attr("value",data.posid);
+            $("#deptName").attr("value",data.deptName);
+            $("#departmentid").attr("value",data.departmentid);
+
+            $("#phone").attr("value",data.phone);
+            $("#tiptopdegree").attr("value",data.tiptopdegree);
+            $("#school").attr("value",data.school);
+            $("#specialty").attr("value",data.specialty);
+            $("#idcard").attr("value",data.idcard);
+            $("#wedlock").attr("value",data.wedlock);
+            $("#begindate").attr("value",dataInfo.begindate);
+            $("#conversiontime").attr("value",dataInfo.conversiontime);
+            $("#begincontract").attr("value",dataInfo.begincontract);
+            $("#endcontract").attr("value",dataInfo.endcontract);
+            $("#workid").attr("value",data.workid);
+        }
+        function dateFormat(date) {
+            var newDate = new Date(date);
+            var dateStr = newDate.toJSON().toString()
+            return dateStr.substr(0,10);
+        }
         function addStaff() {
             if(checkParam()){
                 var data = {name:$("#name").val()
                     ,gender:$(".layui-radio[checked='checked']").val()
                     ,name:$("#birthday").val()
-                    ,name:$("#politicid").val()
-                    ,name:$("#nationid").val()
+                    ,name:$("#politic").val()
+                    ,name:$("#nation").val()
                     ,name:$("#nativeplace").val()
                     ,name:$("#email").val()
                     ,name:$("#address").val()
                     ,name:$("#posid").val()
-                    ,name:$("#departmentid").val()
+                    ,name:$("#deptName").val()
                     ,name:$("#phone").val()
                     ,name:$("#tiptopdegree").val()
                     ,name:$("#school").val()
@@ -57,7 +114,7 @@
                     ,name:$("#endcontract").val()};
                 $.ajax({
                     type: "POST",
-                    url: 'add',
+                    url: 'update',
                     data: JSON.stringify(data),
                     dataType:'json',
                     contentType:'application/json;;charset=utf-8',
@@ -92,9 +149,15 @@
                         if(data.result=='success'){
                             $('#nametip2').css("display",'none');
                         }else{
-                            $("#name").val(name);
-                            $('#nametip2').css("display",'block');
-                            return false;
+                            if(name==$("#oldname").val()){
+                                //说明没有修改名字
+                                $('#nametip2').css("display",'none');
+                            }else{
+                                $("#name").val(name);
+                                $('#nametip2').css("display",'block');
+                                return false;
+                            }
+
                         }
                     }
                 });
@@ -107,18 +170,18 @@
                 $('#birthdaytip').css("display",'none');
             }
 
-            if($('#politicid').val()==''){
-                $('#politicidtip').css("display",'block');
+            if($('#politic').val()==''){
+                $('#politictip').css("display",'block');
                 return false;;
             }else{
-                $('#politicidtip').css("display",'none');
+                $('#politictip').css("display",'none');
             }
 
-            if($('#nationid').val()==''){
-                $('#nationidtip').css("display",'block');
+            if($('#nation').val()==''){
+                $('#nationtip').css("display",'block');
                 return false;;
             }else{
-                $('#nationidtip').css("display",'none');
+                $('#nationtip').css("display",'none');
             }
 
             if($('#nativeplace').val()==''){
@@ -149,11 +212,11 @@
                 $('#posidtip').css("display",'none');
             }
 
-            if($('#departmentid').val()==''){
-                $('#departmentidtip').css("display",'block');
+            if($('#deptName').val()==''){
+                $('#deptNametip').css("display",'block');
                 return false;;
             }else{
-                $('#departmentidtip').css("display",'none');
+                $('#deptNametip').css("display",'none');
             }
 
             if($('#phone').val()==''){
@@ -219,20 +282,23 @@
             }
         }
         function showDept() {
-            $("#department").css("display","inline-grid");
+            $("#dept").css("display","inline-grid");
         }
         function hideDept() {
-            $("#department").css("display","none");
+            $("#dept").css("display","none");
         }
     </script>
 </head>
 <body style="height: 550px">
 
 <div id="userInfo" style="height: 90%;margin-left: 30px;">
-    <form id="userInfoForm" style="width: 100%;height: 100%;" action="sysUser/add" method="POST">
+    <form id="userInfoForm" style="width: 100%;height: 100%;" action="sysUser/update" method="POST">
+
+        <input type="hidden" id="id">
 
         <div class="layui-col-md18">
             <label for="name"><font style="color: red">*</font>姓名</label>
+            <input type="hidden" id="oldname">
             <input type="text" id="name" placeholder="员工姓名" class="layui-input">
             <font id="nametip" class="layui-tip-font">*姓名不能为空</font>
             <font id="nametip2" class="layui-tip-font">*姓名已存在，请尝试加入数字输入，例如"张三2"</font>
@@ -251,15 +317,15 @@
         </div>
 
         <div class="layui-col-md18">
-            <label for="politicid"><font style="color: red">*</font>政治面貌</label>
-            <input type="text" id="politicid" placeholder="政治面貌" class="layui-input">
-            <font id="politicidtip" class="layui-tip-font">*政治面貌不能为空</font>
+            <label for="politic"><font style="color: red">*</font>政治面貌</label>
+            <input type="text" id="politic" placeholder="政治面貌" class="layui-input">
+            <font id="politictip" class="layui-tip-font">*政治面貌不能为空</font>
         </div>
 
         <div class="layui-col-md18">
-            <label for="nationid"><font style="color: red">*</font>民族</label>
-            <input type="text" id="nationid" placeholder="民族" class="layui-input">
-            <font id="nationidtip" class="layui-tip-font">*民族不能为空</font>
+            <label for="nation"><font style="color: red">*</font>民族</label>
+            <input type="text" id="nation" placeholder="民族" class="layui-input">
+            <font id="nationtip" class="layui-tip-font">*民族不能为空</font>
         </div>
 
         <div class="layui-col-md18">
@@ -289,12 +355,13 @@
         </div>
 
         <div class="layui-col-md18">
-            <label for="departmentid"><font style="color: red">*</font>所属部门</label>
-            <input type="text" id="departmentid" placeholder="所属部门" onclick="showDept()"  class="layui-input">
-            <ul id="department" class="layui-ul" onmouseleave="hideDept()">
+            <label for="deptName"><font style="color: red">*</font>所属部门</label>
+            <input type="hidden" id="departmentid">
+            <input type="text" id="deptName" placeholder="所属部门" readonly="readonly" onclick="showDept()"  class="layui-input">
+            <ul id="dept" class="layui-ul" onmouseleave="hideDept()">
                 <i style="font-size: 15px;" class="layui-icon layui-icon-left">请选择部门</i>
             </ul>
-            <font id="departmentidtip" class="layui-tip-font">*所属部门</font>
+            <font id="deptNametip" class="layui-tip-font">*所属部门</font>
         </div>
 
         <div class="layui-col-md18">
@@ -354,6 +421,11 @@
             <input type="text" id="endcontract" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
         </div>
 
+        <div class="layui-col-md18">
+            <label for="workid">工号</label>
+            <input type="text" id="workid" readonly="readonly" class="layui-input" style="background-color: lightgrey">
+        </div>
+
     </form>
 </div>
 <div align="right" style="height: 10%">
@@ -401,11 +473,12 @@
         });
 
         layui.tree({
-            elem: '#department' //传入元素选择器
+            elem: '#dept' //传入元素选择器
             ,class:"layui-show"
             ,click: function(item){ //点击节点回调
                 // layer.msg('当前节id：'+ item.id + '当前节名称：'+ item.name);
-                $("#departmentid").attr("value",item.name);
+                $("#deptName").attr("value",item.name);
+                $("#departmentid").attr("value",item.id);
             }
             ,nodes:tree_data
         });

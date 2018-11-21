@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 @Component("sysStaffExample")
 public class SysStaffExample {
     protected String orderByClause;
@@ -554,63 +555,73 @@ public class SysStaffExample {
             return (Criteria) this;
         }
 
-        public Criteria andNationidIsNull() {
-            addCriterion("nationId is null");
+        public Criteria andNationIsNull() {
+            addCriterion("nation is null");
             return (Criteria) this;
         }
 
-        public Criteria andNationidIsNotNull() {
-            addCriterion("nationId is not null");
+        public Criteria andNationIsNotNull() {
+            addCriterion("nation is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNationidEqualTo(Integer value) {
-            addCriterion("nationId =", value, "nationid");
+        public Criteria andNationEqualTo(String value) {
+            addCriterion("nation =", value, "nation");
             return (Criteria) this;
         }
 
-        public Criteria andNationidNotEqualTo(Integer value) {
-            addCriterion("nationId <>", value, "nationid");
+        public Criteria andNationNotEqualTo(String value) {
+            addCriterion("nation <>", value, "nation");
             return (Criteria) this;
         }
 
-        public Criteria andNationidGreaterThan(Integer value) {
-            addCriterion("nationId >", value, "nationid");
+        public Criteria andNationGreaterThan(String value) {
+            addCriterion("nation >", value, "nation");
             return (Criteria) this;
         }
 
-        public Criteria andNationidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("nationId >=", value, "nationid");
+        public Criteria andNationGreaterThanOrEqualTo(String value) {
+            addCriterion("nation >=", value, "nation");
             return (Criteria) this;
         }
 
-        public Criteria andNationidLessThan(Integer value) {
-            addCriterion("nationId <", value, "nationid");
+        public Criteria andNationLessThan(String value) {
+            addCriterion("nation <", value, "nation");
             return (Criteria) this;
         }
 
-        public Criteria andNationidLessThanOrEqualTo(Integer value) {
-            addCriterion("nationId <=", value, "nationid");
+        public Criteria andNationLessThanOrEqualTo(String value) {
+            addCriterion("nation <=", value, "nation");
             return (Criteria) this;
         }
 
-        public Criteria andNationidIn(List<Integer> values) {
-            addCriterion("nationId in", values, "nationid");
+        public Criteria andNationLike(String value) {
+            addCriterion("nation like", value, "nation");
             return (Criteria) this;
         }
 
-        public Criteria andNationidNotIn(List<Integer> values) {
-            addCriterion("nationId not in", values, "nationid");
+        public Criteria andNationNotLike(String value) {
+            addCriterion("nation not like", value, "nation");
             return (Criteria) this;
         }
 
-        public Criteria andNationidBetween(Integer value1, Integer value2) {
-            addCriterion("nationId between", value1, value2, "nationid");
+        public Criteria andNationIn(List<String> values) {
+            addCriterion("nation in", values, "nation");
             return (Criteria) this;
         }
 
-        public Criteria andNationidNotBetween(Integer value1, Integer value2) {
-            addCriterion("nationId not between", value1, value2, "nationid");
+        public Criteria andNationNotIn(List<String> values) {
+            addCriterion("nation not in", values, "nation");
+            return (Criteria) this;
+        }
+
+        public Criteria andNationBetween(String value1, String value2) {
+            addCriterion("nation between", value1, value2, "nation");
+            return (Criteria) this;
+        }
+
+        public Criteria andNationNotBetween(String value1, String value2) {
+            addCriterion("nation not between", value1, value2, "nation");
             return (Criteria) this;
         }
 
@@ -684,63 +695,73 @@ public class SysStaffExample {
             return (Criteria) this;
         }
 
-        public Criteria andPoliticidIsNull() {
-            addCriterion("politicId is null");
+        public Criteria andPoliticIsNull() {
+            addCriterion("politic is null");
             return (Criteria) this;
         }
 
-        public Criteria andPoliticidIsNotNull() {
-            addCriterion("politicId is not null");
+        public Criteria andPoliticIsNotNull() {
+            addCriterion("politic is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPoliticidEqualTo(Integer value) {
-            addCriterion("politicId =", value, "politicid");
+        public Criteria andPoliticEqualTo(String value) {
+            addCriterion("politic =", value, "politic");
             return (Criteria) this;
         }
 
-        public Criteria andPoliticidNotEqualTo(Integer value) {
-            addCriterion("politicId <>", value, "politicid");
+        public Criteria andPoliticNotEqualTo(String value) {
+            addCriterion("politic <>", value, "politic");
             return (Criteria) this;
         }
 
-        public Criteria andPoliticidGreaterThan(Integer value) {
-            addCriterion("politicId >", value, "politicid");
+        public Criteria andPoliticGreaterThan(String value) {
+            addCriterion("politic >", value, "politic");
             return (Criteria) this;
         }
 
-        public Criteria andPoliticidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("politicId >=", value, "politicid");
+        public Criteria andPoliticGreaterThanOrEqualTo(String value) {
+            addCriterion("politic >=", value, "politic");
             return (Criteria) this;
         }
 
-        public Criteria andPoliticidLessThan(Integer value) {
-            addCriterion("politicId <", value, "politicid");
+        public Criteria andPoliticLessThan(String value) {
+            addCriterion("politic <", value, "politic");
             return (Criteria) this;
         }
 
-        public Criteria andPoliticidLessThanOrEqualTo(Integer value) {
-            addCriterion("politicId <=", value, "politicid");
+        public Criteria andPoliticLessThanOrEqualTo(String value) {
+            addCriterion("politic <=", value, "politic");
             return (Criteria) this;
         }
 
-        public Criteria andPoliticidIn(List<Integer> values) {
-            addCriterion("politicId in", values, "politicid");
+        public Criteria andPoliticLike(String value) {
+            addCriterion("politic like", value, "politic");
             return (Criteria) this;
         }
 
-        public Criteria andPoliticidNotIn(List<Integer> values) {
-            addCriterion("politicId not in", values, "politicid");
+        public Criteria andPoliticNotLike(String value) {
+            addCriterion("politic not like", value, "politic");
             return (Criteria) this;
         }
 
-        public Criteria andPoliticidBetween(Integer value1, Integer value2) {
-            addCriterion("politicId between", value1, value2, "politicid");
+        public Criteria andPoliticIn(List<String> values) {
+            addCriterion("politic in", values, "politic");
             return (Criteria) this;
         }
 
-        public Criteria andPoliticidNotBetween(Integer value1, Integer value2) {
-            addCriterion("politicId not between", value1, value2, "politicid");
+        public Criteria andPoliticNotIn(List<String> values) {
+            addCriterion("politic not in", values, "politic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticBetween(String value1, String value2) {
+            addCriterion("politic between", value1, value2, "politic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoliticNotBetween(String value1, String value2) {
+            addCriterion("politic not between", value1, value2, "politic");
             return (Criteria) this;
         }
 
@@ -1011,66 +1032,6 @@ public class SysStaffExample {
 
         public Criteria andDepartmentidNotBetween(Integer value1, Integer value2) {
             addCriterion("departmentId not between", value1, value2, "departmentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andJoblevelidIsNull() {
-            addCriterion("jobLevelId is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andJoblevelidIsNotNull() {
-            addCriterion("jobLevelId is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andJoblevelidEqualTo(Integer value) {
-            addCriterion("jobLevelId =", value, "joblevelid");
-            return (Criteria) this;
-        }
-
-        public Criteria andJoblevelidNotEqualTo(Integer value) {
-            addCriterion("jobLevelId <>", value, "joblevelid");
-            return (Criteria) this;
-        }
-
-        public Criteria andJoblevelidGreaterThan(Integer value) {
-            addCriterion("jobLevelId >", value, "joblevelid");
-            return (Criteria) this;
-        }
-
-        public Criteria andJoblevelidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("jobLevelId >=", value, "joblevelid");
-            return (Criteria) this;
-        }
-
-        public Criteria andJoblevelidLessThan(Integer value) {
-            addCriterion("jobLevelId <", value, "joblevelid");
-            return (Criteria) this;
-        }
-
-        public Criteria andJoblevelidLessThanOrEqualTo(Integer value) {
-            addCriterion("jobLevelId <=", value, "joblevelid");
-            return (Criteria) this;
-        }
-
-        public Criteria andJoblevelidIn(List<Integer> values) {
-            addCriterion("jobLevelId in", values, "joblevelid");
-            return (Criteria) this;
-        }
-
-        public Criteria andJoblevelidNotIn(List<Integer> values) {
-            addCriterion("jobLevelId not in", values, "joblevelid");
-            return (Criteria) this;
-        }
-
-        public Criteria andJoblevelidBetween(Integer value1, Integer value2) {
-            addCriterion("jobLevelId between", value1, value2, "joblevelid");
-            return (Criteria) this;
-        }
-
-        public Criteria andJoblevelidNotBetween(Integer value1, Integer value2) {
-            addCriterion("jobLevelId not between", value1, value2, "joblevelid");
             return (Criteria) this;
         }
 

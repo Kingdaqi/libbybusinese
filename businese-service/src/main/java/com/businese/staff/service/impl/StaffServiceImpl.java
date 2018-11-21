@@ -1,11 +1,13 @@
 package com.businese.staff.service.impl;
 
+import com.businese.dao.SysDeptMapper;
+import com.businese.dao.SysRoleMapper;
 import com.businese.dao.SysStaffMapper;
+import com.businese.model.SysDept;
+import com.businese.model.SysRole;
 import com.businese.model.SysStaff;
 import com.businese.model.SysStaffExample;
-import com.businese.model.SysUser;
 import com.businese.staff.service.StaffService;
-import com.businese.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,10 @@ public class StaffServiceImpl implements StaffService {
     private SysStaffMapper sysStaffMapper;
     @Autowired
     private SysStaffExample sysStaffExample;
+    @Autowired
+    private SysDeptMapper sysDeptMapper;
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
 
     public List<SysStaff> getStaffs(String name, Integer page, Integer rows) {
         sysStaffExample.clear();
@@ -69,7 +75,22 @@ public class StaffServiceImpl implements StaffService {
     }
 
     public SysStaff getStaffById(Integer id) {
-        return null;
+        SysStaff sysStaff = sysStaffMapper.selectByPrimaryKey(id);
+        SysDept sysDept = sysDeptMapper.selectByPrimaryKey(sysStaff.getDepartmentid());
+        if (sysDept!=null){
+            sysStaff.setDeptName(sysDept.getName());
+        }
+
+        SysRole sysRole = sysRoleMapper.selectByPrimaryKey(sysStaff.getPosid());
+        if(sysRole!=null){
+            sysStaff.setPositionName(sysRole.getName());
+        }
+
+        return sysStaff;
+    }
+
+    public int updateSysStaff(SysStaff sysStaff) {
+        return sysStaffMapper.updateByPrimaryKeySelective(sysStaff);
     }
 
 }

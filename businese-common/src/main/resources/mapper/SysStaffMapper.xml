@@ -8,14 +8,13 @@
     <result column="birthday" property="birthday" jdbcType="DATE" />
     <result column="idCard" property="idcard" jdbcType="CHAR" />
     <result column="wedlock" property="wedlock" jdbcType="CHAR" />
-    <result column="nationId" property="nationid" jdbcType="INTEGER" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
     <result column="nativePlace" property="nativeplace" jdbcType="VARCHAR" />
-    <result column="politicId" property="politicid" jdbcType="INTEGER" />
+    <result column="politic" property="politic" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="departmentId" property="departmentid" jdbcType="INTEGER" />
-    <result column="jobLevelId" property="joblevelid" jdbcType="INTEGER" />
     <result column="posId" property="posid" jdbcType="INTEGER" />
     <result column="engageForm" property="engageform" jdbcType="VARCHAR" />
     <result column="tiptopDegree" property="tiptopdegree" jdbcType="CHAR" />
@@ -90,10 +89,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, gender, birthday, idCard, wedlock, nationId, nativePlace, politicId, email, 
-    phone, address, departmentId, jobLevelId, posId, engageForm, tiptopDegree, specialty, 
-    school, beginDate, workState, workID, contractTerm, conversionTime, notWorkDate, 
-    beginContract, endContract, workAge
+    id, name, gender, birthday, idCard, wedlock, nation, nativePlace, politic, email, 
+    phone, address, departmentId, posId, engageForm, tiptopDegree, specialty, school, 
+    beginDate, workState, workID, contractTerm, conversionTime, notWorkDate, beginContract, 
+    endContract, workAge
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.businese.model.SysStaffExample" >
     select
@@ -130,25 +129,23 @@
   </delete>
   <insert id="insert" parameterType="com.businese.model.SysStaff" >
     insert into sys_staff (id, name, gender, 
-      birthday, idCard, wedlock, nationId, 
-      nativePlace, politicId, email, 
+      birthday, idCard, wedlock, nation, 
+      nativePlace, politic, email, 
       phone, address, departmentId, 
-      jobLevelId, posId, engageForm, 
-      tiptopDegree, specialty, school, 
-      beginDate, workState, workID, 
-      contractTerm, conversionTime, notWorkDate, 
-      beginContract, endContract, workAge
-      )
+      posId, engageForm, tiptopDegree, 
+      specialty, school, beginDate, 
+      workState, workID, contractTerm, 
+      conversionTime, notWorkDate, beginContract, 
+      endContract, workAge)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
-      #{birthday,jdbcType=DATE}, #{idcard,jdbcType=CHAR}, #{wedlock,jdbcType=CHAR}, #{nationid,jdbcType=INTEGER}, 
-      #{nativeplace,jdbcType=VARCHAR}, #{politicid,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{idcard,jdbcType=CHAR}, #{wedlock,jdbcType=CHAR}, #{nation,jdbcType=VARCHAR}, 
+      #{nativeplace,jdbcType=VARCHAR}, #{politic,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{departmentid,jdbcType=INTEGER}, 
-      #{joblevelid,jdbcType=INTEGER}, #{posid,jdbcType=INTEGER}, #{engageform,jdbcType=VARCHAR}, 
-      #{tiptopdegree,jdbcType=CHAR}, #{specialty,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
-      #{begindate,jdbcType=DATE}, #{workstate,jdbcType=CHAR}, #{workid,jdbcType=CHAR}, 
-      #{contractterm,jdbcType=DOUBLE}, #{conversiontime,jdbcType=DATE}, #{notworkdate,jdbcType=DATE}, 
-      #{begincontract,jdbcType=DATE}, #{endcontract,jdbcType=DATE}, #{workage,jdbcType=INTEGER}
-      )
+      #{posid,jdbcType=INTEGER}, #{engageform,jdbcType=VARCHAR}, #{tiptopdegree,jdbcType=CHAR}, 
+      #{specialty,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{begindate,jdbcType=DATE}, 
+      #{workstate,jdbcType=CHAR}, #{workid,jdbcType=CHAR}, #{contractterm,jdbcType=DOUBLE}, 
+      #{conversiontime,jdbcType=DATE}, #{notworkdate,jdbcType=DATE}, #{begincontract,jdbcType=DATE}, 
+      #{endcontract,jdbcType=DATE}, #{workage,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.businese.model.SysStaff" >
     insert into sys_staff
@@ -171,14 +168,14 @@
       <if test="wedlock != null" >
         wedlock,
       </if>
-      <if test="nationid != null" >
-        nationId,
+      <if test="nation != null" >
+        nation,
       </if>
       <if test="nativeplace != null" >
         nativePlace,
       </if>
-      <if test="politicid != null" >
-        politicId,
+      <if test="politic != null" >
+        politic,
       </if>
       <if test="email != null" >
         email,
@@ -191,9 +188,6 @@
       </if>
       <if test="departmentid != null" >
         departmentId,
-      </if>
-      <if test="joblevelid != null" >
-        jobLevelId,
       </if>
       <if test="posid != null" >
         posId,
@@ -257,14 +251,14 @@
       <if test="wedlock != null" >
         #{wedlock,jdbcType=CHAR},
       </if>
-      <if test="nationid != null" >
-        #{nationid,jdbcType=INTEGER},
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
       </if>
       <if test="nativeplace != null" >
         #{nativeplace,jdbcType=VARCHAR},
       </if>
-      <if test="politicid != null" >
-        #{politicid,jdbcType=INTEGER},
+      <if test="politic != null" >
+        #{politic,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
@@ -277,9 +271,6 @@
       </if>
       <if test="departmentid != null" >
         #{departmentid,jdbcType=INTEGER},
-      </if>
-      <if test="joblevelid != null" >
-        #{joblevelid,jdbcType=INTEGER},
       </if>
       <if test="posid != null" >
         #{posid,jdbcType=INTEGER},
@@ -352,14 +343,14 @@
       <if test="record.wedlock != null" >
         wedlock = #{record.wedlock,jdbcType=CHAR},
       </if>
-      <if test="record.nationid != null" >
-        nationId = #{record.nationid,jdbcType=INTEGER},
+      <if test="record.nation != null" >
+        nation = #{record.nation,jdbcType=VARCHAR},
       </if>
       <if test="record.nativeplace != null" >
         nativePlace = #{record.nativeplace,jdbcType=VARCHAR},
       </if>
-      <if test="record.politicid != null" >
-        politicId = #{record.politicid,jdbcType=INTEGER},
+      <if test="record.politic != null" >
+        politic = #{record.politic,jdbcType=VARCHAR},
       </if>
       <if test="record.email != null" >
         email = #{record.email,jdbcType=VARCHAR},
@@ -372,9 +363,6 @@
       </if>
       <if test="record.departmentid != null" >
         departmentId = #{record.departmentid,jdbcType=INTEGER},
-      </if>
-      <if test="record.joblevelid != null" >
-        jobLevelId = #{record.joblevelid,jdbcType=INTEGER},
       </if>
       <if test="record.posid != null" >
         posId = #{record.posid,jdbcType=INTEGER},
@@ -431,14 +419,13 @@
       birthday = #{record.birthday,jdbcType=DATE},
       idCard = #{record.idcard,jdbcType=CHAR},
       wedlock = #{record.wedlock,jdbcType=CHAR},
-      nationId = #{record.nationid,jdbcType=INTEGER},
+      nation = #{record.nation,jdbcType=VARCHAR},
       nativePlace = #{record.nativeplace,jdbcType=VARCHAR},
-      politicId = #{record.politicid,jdbcType=INTEGER},
+      politic = #{record.politic,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       departmentId = #{record.departmentid,jdbcType=INTEGER},
-      jobLevelId = #{record.joblevelid,jdbcType=INTEGER},
       posId = #{record.posid,jdbcType=INTEGER},
       engageForm = #{record.engageform,jdbcType=VARCHAR},
       tiptopDegree = #{record.tiptopdegree,jdbcType=CHAR},
@@ -475,14 +462,14 @@
       <if test="wedlock != null" >
         wedlock = #{wedlock,jdbcType=CHAR},
       </if>
-      <if test="nationid != null" >
-        nationId = #{nationid,jdbcType=INTEGER},
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
       </if>
       <if test="nativeplace != null" >
         nativePlace = #{nativeplace,jdbcType=VARCHAR},
       </if>
-      <if test="politicid != null" >
-        politicId = #{politicid,jdbcType=INTEGER},
+      <if test="politic != null" >
+        politic = #{politic,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
@@ -495,9 +482,6 @@
       </if>
       <if test="departmentid != null" >
         departmentId = #{departmentid,jdbcType=INTEGER},
-      </if>
-      <if test="joblevelid != null" >
-        jobLevelId = #{joblevelid,jdbcType=INTEGER},
       </if>
       <if test="posid != null" >
         posId = #{posid,jdbcType=INTEGER},
@@ -551,14 +535,13 @@
       birthday = #{birthday,jdbcType=DATE},
       idCard = #{idcard,jdbcType=CHAR},
       wedlock = #{wedlock,jdbcType=CHAR},
-      nationId = #{nationid,jdbcType=INTEGER},
+      nation = #{nation,jdbcType=VARCHAR},
       nativePlace = #{nativeplace,jdbcType=VARCHAR},
-      politicId = #{politicid,jdbcType=INTEGER},
+      politic = #{politic,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       departmentId = #{departmentid,jdbcType=INTEGER},
-      jobLevelId = #{joblevelid,jdbcType=INTEGER},
       posId = #{posid,jdbcType=INTEGER},
       engageForm = #{engageform,jdbcType=VARCHAR},
       tiptopDegree = #{tiptopdegree,jdbcType=CHAR},

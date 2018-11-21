@@ -1,7 +1,6 @@
 package com.businese.staff.service;
 
 import com.businese.model.SysStaff;
-import com.businese.model.SysUser;
 
 import java.util.List;
 
@@ -51,4 +50,11 @@ public interface StaffService {
      * @return
      */
     SysStaff getStaffById(Integer id);
+
+    /**
+     * 修改员工信息
+     * @param sysStaff
+     * @return
+     */
+    int updateSysStaff(SysStaff sysStaff);
 }
