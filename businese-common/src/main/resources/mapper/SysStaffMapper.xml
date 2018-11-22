@@ -558,4 +558,12 @@
       workAge = #{workage,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--=========================================================================================================-->
+  <select id="selectMaxWorkId" resultType="java.lang.String">
+    SELECT max(workID) from sys_staff
+  </select>
+  <select id="getStaffByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT * from sys_staff where name = #{name,jdbcType=VARCHAR}
+  </select>
 </mapper>

@@ -91,27 +91,30 @@
             var dateStr = newDate.toJSON().toString()
             return dateStr.substr(0,10);
         }
-        function addStaff() {
+        function updateStaff() {
             if(checkParam()){
-                var data = {name:$("#name").val()
+                var data = {id:$("#id").val()
+                    ,name:$("#name").val()
                     ,gender:$(".layui-radio[checked='checked']").val()
-                    ,name:$("#birthday").val()
-                    ,name:$("#politic").val()
-                    ,name:$("#nation").val()
-                    ,name:$("#nativeplace").val()
-                    ,name:$("#email").val()
-                    ,name:$("#address").val()
-                    ,name:$("#posid").val()
-                    ,name:$("#deptName").val()
-                    ,name:$("#phone").val()
-                    ,name:$("#tiptopdegree").val()
-                    ,name:$("#school").val()
-                    ,name:$("#idcard").val()
-                    ,name:$("#wedlock").val()
-                    ,name:$("#begindate").val()
-                    ,name:$("#conversiontime").val()
-                    ,name:$("#begincontract").val()
-                    ,name:$("#endcontract").val()};
+                    ,birthday:$("#birthday").val()
+                    ,politic:$("#politic").val()
+                    ,nation:$("#nation").val()
+                    ,nativeplace:$("#nativeplace").val()
+                    ,email:$("#email").val()
+                    ,address:$("#address").val()
+                    ,posid:$("#posid").val()
+                    ,departmentid:$("#departmentid").val()
+                    ,phone:$("#phone").val()
+                    ,tiptopdegree:$("#tiptopdegree").val()
+                    ,school:$("#school").val()
+                    ,specialty:$("#specialty").val()
+                    ,idcard:$("#idcard").val()
+                    ,wedlock:$("#wedlock").val()
+                    ,begindate:$("#begindate").val()
+                    ,conversiontime:$("#conversiontime").val()
+                    ,begincontract:$("#begincontract").val()
+                    ,endcontract:$("#endcontract").val()
+                    ,workid:$("#workid").val()};
                 $.ajax({
                     type: "POST",
                     url: 'update',
@@ -137,6 +140,7 @@
                 $('#nametip2').css("display",'none');
                 return false;
             }else{
+                var flag = true;
                 $('#nametip').css("display",'none');
                 var name = $("#name").val();
                 $.ajax({
@@ -145,22 +149,24 @@
                     data: {name:name},
                     dataType:'json',
                     cache: false,
+                    async:false,
                     success: function(data){
                         if(data.result=='success'){
                             $('#nametip2').css("display",'none');
                         }else{
+                            //alert(name+"--"+$("#oldname").val())
                             if(name==$("#oldname").val()){
                                 //说明没有修改名字
                                 $('#nametip2').css("display",'none');
                             }else{
                                 $("#name").val(name);
                                 $('#nametip2').css("display",'block');
-                                return false;
+                                flag = false;
                             }
-
                         }
                     }
                 });
+                return flag;
             }
 
             if($('#birthday').val()==''){
@@ -429,7 +435,7 @@
     </form>
 </div>
 <div align="right" style="height: 10%">
-    <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="addStaff()">确认</button>
+    <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="updateStaff()">确认</button>
     <button class="layui-btn layui-btn-primary layui-btn-radius" style="margin-right: 90px;" data-type="close">取消</button>
 </div>
 

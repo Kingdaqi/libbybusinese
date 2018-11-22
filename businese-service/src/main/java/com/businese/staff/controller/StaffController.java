@@ -134,6 +134,7 @@ public class StaffController {
 //                roleUserService.add(user);
 //            }
             result.put("result","success");
+            result.put("workId",staff.getWorkid());
         }catch (Exception e){
             result.put("result","error");
             e.printStackTrace();
@@ -155,6 +156,7 @@ public class StaffController {
         int count =  staffService.updateSysStaff(sysStaff);
         if (count>0){
             result.put("result","success");
+            result.put("workId",sysStaff.getWorkid());
         }else{
             result.put("result","error");
         }

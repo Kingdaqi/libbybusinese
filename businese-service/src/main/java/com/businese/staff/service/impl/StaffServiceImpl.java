@@ -8,6 +8,7 @@ import com.businese.model.SysRole;
 import com.businese.model.SysStaff;
 import com.businese.model.SysStaffExample;
 import com.businese.staff.service.StaffService;
+import com.businese.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,12 +58,8 @@ public class StaffServiceImpl implements StaffService {
     }
 
     public SysStaff getStaffByName(String name) {
-        sysStaffExample.clear();
-        SysStaffExample.Criteria criteria = sysStaffExample.createCriteria();
-        if (name!=null && !"".equals(name)){
-            criteria.andNameEqualTo(name);
-        }
-        List<SysStaff> sysStaffs = sysStaffMapper.selectByExample(sysStaffExample);
+        List<SysStaff> sysStaffs = sysStaffMapper.getStaffByName(name);
+
         if (sysStaffs!=null && sysStaffs.size()>0){
             return sysStaffs.get(0);
         }
@@ -71,7 +68,11 @@ public class StaffServiceImpl implements StaffService {
     }
 
     public SysStaff addSysStaff(SysStaff sysStaff) {
-        return null;
+        String maxWorkId = sysStaffMapper.selectMaxWorkId();
+        String workId = Utils.getWorkId(maxWorkId);
+        sysStaff.setWorkid(workId);
+        sysStaffMapper.insert(sysStaff);
+        return sysStaff;
     }
 
     public SysStaff getStaffById(Integer id) {

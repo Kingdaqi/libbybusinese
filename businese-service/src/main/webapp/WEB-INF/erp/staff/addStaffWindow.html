@@ -38,26 +38,27 @@
             if(checkParam()){
                 var data = {name:$("#name").val()
                             ,gender:$(".layui-radio[checked='checked']").val()
-                            ,name:$("#birthday").val()
-                            ,name:$("#politic").val()
-                            ,name:$("#nation").val()
-                            ,name:$("#nativeplace").val()
-                            ,name:$("#email").val()
-                            ,name:$("#address").val()
-                            ,name:$("#posid").val()
-                            ,name:$("#deptName").val()
-                            ,name:$("#phone").val()
-                            ,name:$("#tiptopdegree").val()
-                            ,name:$("#school").val()
-                            ,name:$("#idcard").val()
-                            ,name:$("#wedlock").val()
-                            ,name:$("#begindate").val()
-                            ,name:$("#conversiontime").val()
-                            ,name:$("#begincontract").val()
-                            ,name:$("#endcontract").val()};
+                            ,birthday:$("#birthday").val()
+                            ,politic:$("#politic").val()
+                            ,nation:$("#nation").val()
+                            ,nativeplace:$("#nativeplace").val()
+                            ,email:$("#email").val()
+                            ,address:$("#address").val()
+                            ,posid:$("#posid").val()
+                            ,departmentid:$("#departmentid").val()
+                            ,phone:$("#phone").val()
+                            ,tiptopdegree:$("#tiptopdegree").val()
+                            ,school:$("#school").val()
+                            ,specialty:$("#specialty").val()
+                            ,idcard:$("#idcard").val()
+                            ,wedlock:$("#wedlock").val()
+                            ,begindate:$("#begindate").val()
+                            ,conversiontime:$("#conversiontime").val()
+                            ,begincontract:$("#begincontract").val()
+                            ,endcontract:$("#endcontract").val()};
                 $.ajax({
                     type: "POST",
-                    url: 'add',
+                    url: 'save',
                     data: JSON.stringify(data),
                     dataType:'json',
                     contentType:'application/json;;charset=utf-8',
@@ -80,6 +81,7 @@
                 $('#nametip2').css("display",'none');
                 return false;
             }else{
+                var flag = true;
                 $('#nametip').css("display",'none');
                 var name = $("#name").val();
                 $.ajax({
@@ -88,16 +90,18 @@
                     data: {name:name},
                     dataType:'json',
                     cache: false,
+                    async:false,
                     success: function(data){
                         if(data.result=='success'){
                             $('#nametip2').css("display",'none');
                         }else{
                             $("#name").val(name);
                             $('#nametip2').css("display",'block');
-                            return false;
+                            flag = false;
                         }
                     }
                 });
+                return flag;
             }
 
             if($('#birthday').val()==''){
@@ -229,7 +233,7 @@
 <body style="height: 550px">
 
     <div id="userInfo" style="height: 90%;margin-left: 30px;">
-        <form id="userInfoForm" style="width: 100%;height: 100%;" action="sysUser/save" method="POST">
+        <form id="userInfoForm" style="width: 100%;height: 100%;" action="staff/save" method="POST">
 
             <div class="layui-col-md18">
                 <label for="name"><font style="color: red">*</font>姓名</label>
