@@ -100,4 +100,13 @@ public class SystemController {
         return "system/editUserWindow";
     }
 
+    /**
+     * 编辑个人信息窗口
+     * @return
+     */
+    @RequestMapping("/editPersonalInfoWindow")
+    public String editPersonalInfoWindow(){
+        return "system/editPersonalInfoWindow";
+    }
+
 }

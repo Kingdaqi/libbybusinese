@@ -1,81 +1,120 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>个人信息</title>
-<link  type="text/css" rel="stylesheet"  href="../css/style.css"/>
-<link  type="text/css" rel="stylesheet"  href="../css/index.css"/>
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<!-- 动态菜单JS -->
-<script type="text/javascript" src="../js/menu.js"></script>
- <script>
-  $(".ui-xz1").on("onmouseover",function () {
-      $(this).css("background:#ff0303;color:#fff;");
-  })
- </script>
+ <meta charset="utf-8">
+ <title>开启头部工具栏 - 数据表格</title>
+ <meta name="renderer" content="webkit">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <meta name="viewport"
+       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+ <link rel="stylesheet" href="../../layui-v2.4.3/layui/css/layui.css" media="all">
+ <link rel="stylesheet" href="../../layui-v2.4.3/style/admin.css" media="all">
+ <script src="../../js/jquery-1.7.2.js"></script>
+ <script src="../../js/jquery.tips.js"></script>
 </head>
-
 <body>
 
- <div class="right-menu">
-  <div class="main-hd">
-   <div class="page-teb" >
+<div class="layui-card layadmin-header">
+ <div class="layui-breadcrumb" lay-filter="breadcrumb">
+  <a lay-href="">主页</a>
+  <a><cite>组件</cite></a>
+  <a><cite>数据表格</cite></a>
+  <a><cite>开启头部工具栏</cite></a>
+ </div>
+</div>
 
-    <div class="l-tab-content" style="background:#fff;">
-     <div class="tab-content-item">
-      <div class="home">
-      <!--个人信息管理   开始-->
-        <div class="yg-gl">
-         <div class="yg-add">
-          <button class="ui-xz1" data-method="offset" >编辑个人资料</button>
-          <button class="ui-xz1" data-method="offset" >修改密码</button>
-         </div>
-         <div class="yg-tab">
-          <div class="grid">
-          <div class="layoutitem" style="width:100%;border:none;">
-           <form method="post"> 
-            <table class="gridbar" border="0" cellpadding="0" cellspacing="0">
-            <thead>
-             <tr>
-              <th scope="col">编号</th>
-              <th scope="col">ID</th>
-              <th>员工账号</th>
-              <th>员工密码</th>
-              <th>员工角色</th>
-              <th>员工真实姓名</th>
-              <th>手机号码</th>
-              <th>QQ号</th>
-              <th>微信账号</th>
-              <th>注册账号的时间</th>
-             </tr>
-             <tr>
-              <td>1</td>
-              <td>170525123</td>
-              <td>小丫头</td>
-              <td>123456a</td>
-              <td>销售人员</td>
-              <td>王思怡</td>
-              <td>13445987512</td>
-              <td>1032658754</td>
-              <td>cb-12365r</td>
-              <td>2017-05-25</td>
-             </tr>
-             </thead>
-            </table>
-            </form>
-           </div>
-         </div>
-        </div>
-       
-      <!--个人信息管理   结束-->
+<div class="layui-fluid">
+ <div class="layui-row layui-col-space15">
+  <div class="layui-col-md12">
+   <div class="layui-card">
+    <!--<div class="layui-card-header">开启头部工具栏</div>-->
+    <div class="layui-card-body">
 
+     <table class="layui-show" id="test-table-toolbar" lay-filter="test-table-toolbar"></table>
+
+     <script type="text/html" id="test-table-toolbar-toolbarDemo">
+      <div class="layui-table-tool">
+       <button class="layui-btn layui-btn-sm1 layui-btn-normal" lay-event="edit">编辑个人资料</button>
+       <button class="layui-btn layui-btn-sm1 layui-btn-normal" lay-event="modifyPassword">修改密码</button>
       </div>
-     </div>
+     </script>
+     <input type="hidden" id="editStaffId">
+
     </div>
    </div>
   </div>
  </div>
- </div>
+</div>
 
+<script src="../../layui-v2.4.3/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '../../layui-v2.4.3/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'table'], function () {
+        var $ = layui.jquery;
+        var admin = layui.admin
+            , table = layui.table;
+
+        table.render({
+            elem: '#test-table-toolbar'
+            , url: 'personalInfo/getPersonalInfo'
+            , method:'GET'
+            , toolbar: '#test-table-toolbar-toolbarDemo'
+            , title: '用户数据表'
+            , cols: [[
+                {field: 'id', title: 'ID', width: 70, fixed: 'left', unresize: true, sort: true}
+                , {field: 'name', title: '姓名', width: 100, fixed: 'left', unresize: true, sort: true}
+                , {field: 'workid', title: '工号', width: 100}
+                , {field: 'gender', title: '性别', width: 60}
+                , {field: 'wedlock', title: '婚姻状况', width: 120}
+                , {field: 'nation', title: '民族', width: 80}
+                , {field: 'nativeplace', title: '籍贯', width: 120}
+                , {field: 'politic', title: '政治面貌', width: 100}
+                , {field: 'email', title: '电子邮件', width: 200}
+                , {field: 'phone', title: '电话号码', width: 130}
+                , {field: 'address', title: '联系地址', width: 200}
+            ]]
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test-table-toolbar)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：' + data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                    break;
+                case 'search':
+                    search();
+                    break;
+                case 'edit':
+                    edit();
+                    break;
+            };
+        });
+
+        function edit() {
+            layer.open({
+                type: 2,
+                area: ['1200px', '600px'],
+                title: '编辑个人资料',
+                fixed: false,
+                maxmin: false,
+                content: 'editPersonalInfoWindow'
+            });
+        }
+
+    });
+
+</script>
 </body>
 </html>
