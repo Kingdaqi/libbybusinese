@@ -159,6 +159,7 @@ public class StaffController {
         JSONObject result = new JSONObject();
         String updateBy = request.getSession().getAttribute("username").toString();
         int count =  staffService.updateSysStaff(sysStaff,updateBy);
+
         if (count>0){
             result.put("result","success");
             result.put("workId",sysStaff.getWorkid());
