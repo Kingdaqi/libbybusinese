@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.businese.model.SysDept;
 import com.businese.model.SysRole;
 import com.businese.model.SysStaff;
+import com.businese.model.SysUser;
 import com.businese.staff.service.StaffService;
 import com.businese.system.service.DeptService;
 import com.businese.system.service.RoleService;
+import com.businese.system.service.SysUserService;
 import com.businese.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -126,15 +128,19 @@ public class StaffController {
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     public ResponseEntity save(HttpServletRequest request, @RequestBody SysStaff sysStaff){
         JSONObject result = new JSONObject();
-//        String createBy = request.getSession().getAttribute("username").toString();
         try{
-//            sysUser.setCreateby(createBy);
+            //新增员工
             SysStaff staff = staffService.addSysStaff(sysStaff);
-//            if (staff!=null){
-//                roleUserService.add(user);
-//            }
             result.put("result","success");
             result.put("workId",staff.getWorkid());
+
+            //新增员工成功后，初始化用户名，密码
+            if (staff!=null){
+                String createBy = request.getSession().getAttribute("username").toString();
+                SysUser sysUser = new SysUser();
+                sysUser.setCreateby(createBy);
+                staffService.initSysUser(staff,sysUser);
+            }
         }catch (Exception e){
             result.put("result","error");
             e.printStackTrace();
@@ -151,9 +157,8 @@ public class StaffController {
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public ResponseEntity update(HttpServletRequest request, @RequestBody SysStaff sysStaff){
         JSONObject result = new JSONObject();
-//      String createBy = request.getSession().getAttribute("username").toString();
-//      sysUser.setCreateby(createBy);
-        int count =  staffService.updateSysStaff(sysStaff);
+        String updateBy = request.getSession().getAttribute("username").toString();
+        int count =  staffService.updateSysStaff(sysStaff,updateBy);
         if (count>0){
             result.put("result","success");
             result.put("workId",sysStaff.getWorkid());
@@ -175,7 +180,6 @@ public class StaffController {
         JSONObject result = new JSONObject();
         try{
             staffService.delete(id);
-//            roleUserService.delete(userId);
             result.put("result","success");
         }catch (Exception e){
             e.printStackTrace();

@@ -3,15 +3,16 @@ package com.businese.staff.service.impl;
 import com.businese.dao.SysDeptMapper;
 import com.businese.dao.SysRoleMapper;
 import com.businese.dao.SysStaffMapper;
-import com.businese.model.SysDept;
-import com.businese.model.SysRole;
-import com.businese.model.SysStaff;
-import com.businese.model.SysStaffExample;
+import com.businese.model.*;
 import com.businese.staff.service.StaffService;
+import com.businese.system.service.RoleUserService;
+import com.businese.system.service.SysUserService;
+import com.businese.utils.PinYinUtil;
 import com.businese.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +29,10 @@ public class StaffServiceImpl implements StaffService {
     private SysDeptMapper sysDeptMapper;
     @Autowired
     private SysRoleMapper sysRoleMapper;
+    @Autowired
+    private SysUserService sysUserService;
+    @Autowired
+    private RoleUserService roleUserService;
 
     public List<SysStaff> getStaffs(String name, Integer page, Integer rows) {
         sysStaffExample.clear();
@@ -54,7 +59,12 @@ public class StaffServiceImpl implements StaffService {
     }
 
     public void delete(Integer id) {
+        SysStaff sysStaff = sysStaffMapper.selectByPrimaryKey(id);
         sysStaffMapper.deleteByPrimaryKey(id);
+        //删除员工信息后，需要删除对应的登陆用户，以及用户与关系
+        SysUser user = sysUserService.findUserByName(sysStaff.getName());
+        sysUserService.delete(user.getUserid());
+        roleUserService.delete(user.getUserid());
     }
 
     public SysStaff getStaffByName(String name) {
@@ -90,8 +100,38 @@ public class StaffServiceImpl implements StaffService {
         return sysStaff;
     }
 
-    public int updateSysStaff(SysStaff sysStaff) {
-        return sysStaffMapper.updateByPrimaryKeySelective(sysStaff);
+    public int updateSysStaff(SysStaff sysStaff, String updateBy) {
+        SysStaff staff = sysStaffMapper.selectByPrimaryKey(sysStaff.getId());
+        int i = sysStaffMapper.updateByPrimaryKeySelective(sysStaff);
+
+
+        SysUser user = sysUserService.findUserByName(staff.getName());
+        //修改了职位（角色），需要更新用户与角色关系
+        if(staff.getPosid()!=sysStaff.getPosid()){
+            roleUserService.update(user.getUserid(),sysStaff.getPosid());
+        }
+        //修改了员工姓名，需要更新用户表name字段
+        if(!staff.getName().equals(sysStaff.getName())){
+            user.setName(sysStaff.getName());
+            user.setUpdateby(updateBy);
+            user.setUpdatetime(new Date());
+
+            sysUserService.update(user);
+        }
+
+        return i;
+    }
+
+    public void initSysUser(SysStaff staff, SysUser sysUser) {
+        sysUser.setDeptid(staff.getDepartmentid());//部门id
+        sysUser.setUsername(PinYinUtil.getPinYin(staff.getName()).replace(" ",""));//登陆用户名
+        sysUser.setPassword("111111");//密码
+        sysUser.setName(staff.getName());//对应员工名
+
+        //根据员工信息新增用户
+        SysUser user = sysUserService.addSysUser(sysUser);
+        //用户新增成功后建立用户与角色关系
+        roleUserService.add(user.getUserid(),staff.getPosid());
     }
 
 }

@@ -41,4 +41,13 @@ public class Utils {
         }
         return workIdStr+String.valueOf(workId);
     }
+
+    /**
+     * 生成用户id
+     * @param lastUserId
+     * @return
+     */
+    public static Integer createUserId(Integer lastUserId) {
+        return lastUserId+1;
+    }
 }

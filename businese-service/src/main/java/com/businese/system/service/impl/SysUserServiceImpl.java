@@ -8,6 +8,7 @@ import com.businese.model.SysRole;
 import com.businese.model.SysUser;
 import com.businese.model.SysUserExample;
 import com.businese.system.service.SysUserService;
+import com.businese.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -30,23 +31,32 @@ public class SysUserServiceImpl implements SysUserService {
     private SysRoleMapper sysRoleMapper;
 
     public SysUser addSysUser(SysUser sysUser) {
-        Integer userId = createUserId();
+        Integer userId = Utils.createUserId(sysUserMapper.selectLastUserId());
+
         sysUser.setUserid(userId);
         sysUser.setDeptName("");
         sysUser.setState(1);
         sysUser.setCreatetime(new Date());
         sysUserMapper.insert(sysUser);
-        return sysUser;
-    }
 
-    private Integer createUserId() {
-        return sysUserMapper.selectLastUserId()+1;
+        return sysUser;
     }
 
     public SysUser findUserByUserName(String username) {
         sysUserExample.clear();
         SysUserExample.Criteria criteria = sysUserExample.createCriteria();
         criteria.andUsernameEqualTo(username);
+        List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
+        if(sysUsers!=null && sysUsers.size()>0){
+            return sysUsers.get(0);
+        }
+        return null;
+    }
+
+    public SysUser findUserByName(String name) {
+        sysUserExample.clear();
+        SysUserExample.Criteria criteria = sysUserExample.createCriteria();
+        criteria.andNameEqualTo(name);
         List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
         if(sysUsers!=null && sysUsers.size()>0){
             return sysUsers.get(0);
@@ -130,6 +140,10 @@ public class SysUserServiceImpl implements SysUserService {
         sysUser.setRoleName(roleName);
 
         return sysUser;
+    }
+
+    public void update(SysUser user) {
+        sysUserMapper.updateByPrimaryKeySelective(user);
     }
 
     public void delete(Integer userId) {

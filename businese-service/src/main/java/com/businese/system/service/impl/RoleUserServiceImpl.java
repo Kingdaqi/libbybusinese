@@ -43,4 +43,24 @@ public class RoleUserServiceImpl implements RoleUserService {
         criteria.andUseridEqualTo(userId);
         sysRoleUserMapper.deleteByExample(sysRoleUserExample);
     }
+
+    public void update(Integer userId, Integer newRoleId) {
+        SysRoleUser sysRoleUser = new SysRoleUser();
+        sysRoleUser.setUserid(userId);
+        sysRoleUser.setRoleid(newRoleId);
+
+        sysRoleUserExample.clear();
+        SysRoleUserExample.Criteria criteria = sysRoleUserExample.createCriteria();
+        criteria.andUseridEqualTo(userId);
+
+        sysRoleUserMapper.updateByExampleSelective(sysRoleUser, sysRoleUserExample);
+    }
+
+    public int add(Integer userId, Integer roleId) {
+        SysRoleUser sysRoleUser = new SysRoleUser();
+        sysRoleUser.setUserid(userId);
+        sysRoleUser.setRoleid(roleId);
+
+        return sysRoleUserMapper.insert(sysRoleUser);
+    }
 }

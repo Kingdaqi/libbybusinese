@@ -41,8 +41,8 @@
                     </script>
                     <input type="hidden" id="editStaffId">
                     <script type="text/html" id="test-table-toolbar-barDemo">
-                        <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
-                        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">查看详情</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="layui-icon">&#xe642;</i>查看编辑</a>
+                        <!--<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">查看详情</a>-->
                         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
                     </script>
 
@@ -83,7 +83,7 @@
                 , {field: 'email', title: '电子邮件', width: 200}
                 , {field: 'phone', title: '电话号码', width: 130}
                 , {field: 'address', title: '联系地址', width: 200}
-                , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 220}
+                , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 180}
             ]]
             , page: true
         });
@@ -164,7 +164,7 @@
                     , {field: 'email', title: '电子邮件', width: 200}
                     , {field: 'phone', title: '电话号码', width: 130}
                     , {field: 'address', title: '联系地址', width: 200}
-                    , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 220}
+                    , {fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 180}
                 ]]
                 , page: true
             });
@@ -185,7 +185,7 @@
             layer.open({
                 type: 2,
                 area: ['1200px', '600px'],
-                title: '编辑',
+                title: '查看编辑',
                 fixed: false,
                 maxmin: false,
                 content: 'editStaffWindow'
@@ -200,6 +200,7 @@
     function setEditStaffId(id) {
         $("#editStaffId").val(id);
     }
+
 </script>
 </body>
 </html>

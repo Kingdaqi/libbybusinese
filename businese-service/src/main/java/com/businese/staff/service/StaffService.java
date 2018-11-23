@@ -1,6 +1,7 @@
 package com.businese.staff.service;
 
 import com.businese.model.SysStaff;
+import com.businese.model.SysUser;
 
 import java.util.List;
 
@@ -54,7 +55,14 @@ public interface StaffService {
     /**
      * 修改员工信息
      * @param sysStaff
+     * @param updateBy
      * @return
      */
-    int updateSysStaff(SysStaff sysStaff);
+    int updateSysStaff(SysStaff sysStaff, String updateBy);
+
+    /**
+     * 根据新增员工信息初始化用户密码
+     * @param sysUser
+     */
+    void initSysUser(SysStaff staff, SysUser sysUser);
 }
