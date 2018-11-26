@@ -1,9 +1,9 @@
 package com.businese.login.service.impl;
 
 import com.businese.dao.SysUserMapper;
+import com.businese.login.service.LoginService;
 import com.businese.model.SysUser;
 import com.businese.model.SysUserExample;
-import com.businese.login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

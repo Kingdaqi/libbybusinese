@@ -24,7 +24,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserMapper sysUserMapper;
     @Autowired
-    private SysUserExample sysUserExample;
+    private SysUserExample SysUserExamplee;
     @Autowired
     private SysDeptMapper sysDeptMapper;
     @Autowired
@@ -43,10 +43,10 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     public SysUser findUserByUserName(String username) {
-        sysUserExample.clear();
-        SysUserExample.Criteria criteria = sysUserExample.createCriteria();
+        SysUserExamplee.clear();
+        SysUserExample.Criteria criteria = SysUserExamplee.createCriteria();
         criteria.andUsernameEqualTo(username);
-        List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
+        List<SysUser> sysUsers = sysUserMapper.selectByExample(SysUserExamplee);
         if(sysUsers!=null && sysUsers.size()>0){
             return sysUsers.get(0);
         }
@@ -54,10 +54,11 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     public SysUser findUserByName(String name) {
-        sysUserExample.clear();
-        SysUserExample.Criteria criteria = sysUserExample.createCriteria();
+        SysUserExamplee.clear();
+        SysUserExample.Criteria criteria = SysUserExamplee.createCriteria();
         criteria.andNameEqualTo(name);
-        List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
+
+        List<SysUser> sysUsers = sysUserMapper.selectByExample(SysUserExamplee);
         if(sysUsers!=null && sysUsers.size()>0){
             return sysUsers.get(0);
         }
@@ -70,15 +71,15 @@ public class SysUserServiceImpl implements SysUserService {
 
     public List<SysUser> getUsers(String userName, Integer page, Integer rows) {
         List<SysUser> sysUsers = new ArrayList<SysUser>();
-        sysUserExample.clear();
-        SysUserExample.Criteria criteria = sysUserExample.createCriteria();
+        SysUserExamplee.clear();
+        SysUserExample.Criteria criteria = SysUserExamplee.createCriteria();
         if (userName!=null && !"".equals(userName)){
             criteria.andUsernameEqualTo(userName);
         }
 
-        sysUserExample.setStart((page-1)*rows);
-        sysUserExample.setLimit(rows);
-        List<SysUser> users= sysUserMapper.selectByExample(sysUserExample);
+        SysUserExamplee.setStart((page-1)*rows);
+        SysUserExamplee.setLimit(rows);
+        List<SysUser> users= sysUserMapper.selectByExample(SysUserExamplee);
 
         for (SysUser user:users) {
             Integer deptId = user.getDeptid();
@@ -108,12 +109,12 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     public Integer getUsersCount(String userName) {
-        sysUserExample.clear();
-        SysUserExample.Criteria criteria = sysUserExample.createCriteria();
+        SysUserExamplee.clear();
+        SysUserExample.Criteria criteria = SysUserExamplee.createCriteria();
         if (userName!=null && !"".equals(userName)){
             criteria.andUsernameEqualTo(userName);
         }
-        int count = sysUserMapper.countByExample(sysUserExample);
+        int count = sysUserMapper.countByExample(SysUserExamplee);
 
         return count;
     }

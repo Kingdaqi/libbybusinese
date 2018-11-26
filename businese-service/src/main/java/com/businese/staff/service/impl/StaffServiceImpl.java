@@ -71,7 +71,17 @@ public class StaffServiceImpl implements StaffService {
         List<SysStaff> sysStaffs = sysStaffMapper.getStaffByName(name);
 
         if (sysStaffs!=null && sysStaffs.size()>0){
-            return sysStaffs.get(0);
+            SysStaff sysStaff = sysStaffs.get(0);
+            SysDept sysDept = sysDeptMapper.selectByPrimaryKey(sysStaff.getDepartmentid());
+            if (sysDept!=null){
+                sysStaff.setDeptName(sysDept.getName());
+            }
+
+            SysRole sysRole = sysRoleMapper.selectByPrimaryKey(sysStaff.getPosid());
+            if(sysRole!=null){
+                sysStaff.setPositionName(sysRole.getName());
+            }
+            return sysStaff;
         }
 
         return null;
@@ -127,6 +137,7 @@ public class StaffServiceImpl implements StaffService {
         sysUser.setUsername(PinYinUtil.getPinYin(staff.getName()).replace(" ",""));//登陆用户名
         sysUser.setPassword("111111");//密码
         sysUser.setName(staff.getName());//对应员工名
+        sysUser.setStaffid(staff.getId());//对应员工id
 
         //根据员工信息新增用户
         SysUser user = sysUserService.addSysUser(sysUser);

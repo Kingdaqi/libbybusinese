@@ -70,6 +70,7 @@
             $("#address").attr("value",data.address);
 
             $("#posid").attr("value",data.posid);
+            $("#positionname").attr("value",data.positionName);
             $("#deptName").attr("value",data.deptName);
             $("#departmentid").attr("value",data.departmentid);
 
@@ -123,11 +124,11 @@
                     cache: false,
                     success: function(data){
                         if(data.result=='success'){
-                            layer.confirm("修改员工信息成功，工号为"+data.workId+".",{icon:6,btn: ['确认'],title:"提示"},function () {
+                            layer.confirm("修改个人信息成功，工号为"+data.workId+".",{icon:6,btn: ['确认'],title:"提示"},function () {
                                 window.parent.location.reload();
                             });
                         }else{
-                            layer.msg("修改员工信息失败",{icon:5,time:1000});
+                            layer.msg("修改个人信息失败",{icon:5,time:1000});
                         }
                     }
                 });
@@ -352,21 +353,17 @@
         </div>
 
         <div class="layui-col-md18">
-            <label for="posid"><font style="color: red">*</font>职位</label>
-            <select class="layui-select-pos" name="type" id="posid" lay-verify="required" lay-filter="posid">
-                <option value="">请选择职位</option>
-            </select>
+            <label for="posid">职位</label>
+            <input type="hidden" id="posid">
+            <input type="text" id="positionname" readonly="readonly" class="layui-input" style="background-color: lightgrey">
             <font id="posidtip" class="layui-tip-font">*职位不能为空</font>
         </div>
 
         <div class="layui-col-md18">
-            <label for="deptName"><font style="color: red">*</font>所属部门</label>
+            <label for="deptName">所属部门</label>
             <input type="hidden" id="departmentid">
-            <input type="text" id="deptName" placeholder="所属部门" readonly="readonly" onclick="showDept()"  class="layui-input">
-            <ul id="dept" class="layui-ul" onmouseleave="hideDept()">
-                <i style="font-size: 15px;" class="layui-icon layui-icon-left">请选择部门</i>
-            </ul>
-            <font id="deptNametip" class="layui-tip-font">*所属部门</font>
+            <input type="text" id="deptName" placeholder="所属部门" readonly="readonly" class="layui-input" style="background-color: lightgrey">
+            <font id="deptNametip" class="layui-tip-font">*所属部门不能为空</font>
         </div>
 
         <div class="layui-col-md18">
@@ -407,23 +404,23 @@
 
         <div class="layui-col-md18">
             <label for="begindate"><font style="color: red">*</font>入职日期</label>
-            <input type="text" id="begindate" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+            <input type="text" id="begindate" placeholder="yyyy-MM-dd" class="layui-input" style="background-color: lightgrey">
             <font id="begindatetip" class="layui-tip-font">*入职日期不能为空</font>
         </div>
 
         <div class="layui-col-md18">
             <label for="conversiontime">转正日期</label>
-            <input type="text" id="conversiontime" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+            <input type="text" id="conversiontime" placeholder="yyyy-MM-dd" class="layui-input" style="background-color: lightgrey">
         </div>
 
         <div class="layui-col-md18">
             <label for="begincontract">合同起始日期</label>
-            <input type="text" id="begincontract" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+            <input type="text" id="begincontract" placeholder="yyyy-MM-dd" class="layui-input" style="background-color: lightgrey">
         </div>
 
         <div class="layui-col-md18">
             <label for="endcontract">合同终止日期</label>
-            <input type="text" id="endcontract" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+            <input type="text" id="endcontract" placeholder="yyyy-MM-dd" class="layui-input" style="background-color: lightgrey">
         </div>
 
         <div class="layui-col-md18">
@@ -460,35 +457,7 @@
         });
     });
 </script>
-<script>
-    window.onload = function () {
-        var tree_data;
-        $.ajax({
-            type: "GET",
-            url: 'personalInfo/getDeptTree',
-            dataType:'json',
-            contentType:'application/json;;charset=utf-8',
-            cache: false,
-            async:false,
-            success: function(data){
-                if(data.data!=null){
-                    tree_data = data.data;
-                }
-            }
-        });
 
-        layui.tree({
-            elem: '#dept' //传入元素选择器
-            ,class:"layui-show"
-            ,click: function(item){ //点击节点回调
-                // layer.msg('当前节id：'+ item.id + '当前节名称：'+ item.name);
-                $("#deptName").attr("value",item.name);
-                $("#departmentid").attr("value",item.id);
-            }
-            ,nodes:tree_data
-        });
-    }
-</script>
 <script>/*日期选择模块*/
 layui.config({
     base: '../../layui-v2.4.3/' //静态资源所在路径

@@ -42,7 +42,9 @@ public class LoginController {
         if (sysUser!=null){
             //登录成功
             request.getSession().setAttribute("userId",sysUser.getUserid());
+            request.getSession().setAttribute("staffId",sysUser.getStaffid());
             request.getSession().setAttribute("username",sysUser.getUsername());
+            request.getSession().setAttribute("name",sysUser.getName());
             json.put("name", sysUser.getName());
         }else{
             //登录失败

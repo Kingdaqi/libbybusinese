@@ -1,12 +1,12 @@
 package com.businese.model;
 
-import org.springframework.data.annotation.Id;
-
 import java.util.Date;
 import java.util.List;
 
 public class SysUser {
     private Integer userid;
+
+    private Integer staffid;
 
     private Integer deptid;
 
@@ -34,14 +34,6 @@ public class SysUser {
 
     private String roleName;
 
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
     public List<SysRole> getRoles() {
         return roles;
     }
@@ -58,13 +50,28 @@ public class SysUser {
         this.deptName = deptName;
     }
 
-    @Id
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
     public Integer getUserid() {
         return userid;
     }
 
     public void setUserid(Integer userid) {
         this.userid = userid;
+    }
+
+    public Integer getStaffid() {
+        return staffid;
+    }
+
+    public void setStaffid(Integer staffid) {
+        this.staffid = staffid;
     }
 
     public Integer getDeptid() {

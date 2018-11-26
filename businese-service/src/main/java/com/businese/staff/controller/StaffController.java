@@ -8,7 +8,6 @@ import com.businese.model.SysUser;
 import com.businese.staff.service.StaffService;
 import com.businese.system.service.DeptService;
 import com.businese.system.service.RoleService;
-import com.businese.system.service.SysUserService;
 import com.businese.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -136,7 +135,7 @@ public class StaffController {
 
             //新增员工成功后，初始化用户名，密码
             if (staff!=null){
-                String createBy = request.getSession().getAttribute("username").toString();
+                String createBy = request.getSession().getAttribute("name").toString();
                 SysUser sysUser = new SysUser();
                 sysUser.setCreateby(createBy);
                 staffService.initSysUser(staff,sysUser);
@@ -157,7 +156,7 @@ public class StaffController {
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public ResponseEntity update(HttpServletRequest request, @RequestBody SysStaff sysStaff){
         JSONObject result = new JSONObject();
-        String updateBy = request.getSession().getAttribute("username").toString();
+        String updateBy = request.getSession().getAttribute("name").toString();
         int count =  staffService.updateSysStaff(sysStaff,updateBy);
 
         if (count>0){

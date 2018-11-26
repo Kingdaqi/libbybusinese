@@ -1,20 +1,10 @@
 package com.businese.system.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.businese.model.SysRole;
-import com.businese.model.SysUser;
 import com.businese.system.service.RoleService;
 import com.businese.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * create by Administrator on 2018/10/16

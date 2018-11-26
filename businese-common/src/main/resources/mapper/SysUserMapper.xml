@@ -3,6 +3,7 @@
 <mapper namespace="com.businese.dao.SysUserMapper" >
   <resultMap id="BaseResultMap" type="com.businese.model.SysUser" >
     <id column="USERID" property="userid" jdbcType="INTEGER" />
+    <result column="STAFFID" property="staffid" jdbcType="INTEGER" />
     <result column="DEPTID" property="deptid" jdbcType="INTEGER" />
     <result column="USERNAME" property="username" jdbcType="VARCHAR" />
     <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
@@ -73,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    USERID, DEPTID, USERNAME, PASSWORD, NAME, STATE, CREATEBY, CREATEDEPT, CREATETIME, 
+    USERID, STAFFID, DEPTID, USERNAME, PASSWORD, NAME, STATE, CREATEBY, CREATEDEPT, CREATETIME, 
     UPDATEBY, UPDATETIME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.businese.model.SysUserExample" >
@@ -88,9 +89,6 @@
     </if>
     <if test="orderByClause != null" >
       order by ${orderByClause}
-    </if>
-    <if test="limit != 0" >
-      limit ${start},${limit}
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -110,20 +108,25 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.businese.model.SysUser" >
-    insert into sys_user (USERID, DEPTID, USERNAME, 
-      PASSWORD, NAME, STATE, 
-      CREATEBY, CREATEDEPT, CREATETIME, 
-      UPDATEBY, UPDATETIME)
-    values (#{userid,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},
-      #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
-      #{createby,jdbcType=VARCHAR}, #{createdept,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{updateby,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP})
+    insert into sys_user (USERID, STAFFID, DEPTID, 
+      USERNAME, PASSWORD, NAME, 
+      STATE, CREATEBY, CREATEDEPT, 
+      CREATETIME, UPDATEBY, UPDATETIME
+      )
+    values (#{userid,jdbcType=INTEGER}, #{staffid,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, 
+      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{createby,jdbcType=VARCHAR}, #{createdept,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updateby,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.businese.model.SysUser" >
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userid != null" >
         USERID,
+      </if>
+      <if test="staffid != null" >
+        STAFFID,
       </if>
       <if test="deptid != null" >
         DEPTID,
@@ -159,6 +162,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userid != null" >
         #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="staffid != null" >
+        #{staffid,jdbcType=INTEGER},
       </if>
       <if test="deptid != null" >
         #{deptid,jdbcType=INTEGER},
@@ -204,6 +210,9 @@
       <if test="record.userid != null" >
         USERID = #{record.userid,jdbcType=INTEGER},
       </if>
+      <if test="record.staffid != null" >
+        STAFFID = #{record.staffid,jdbcType=INTEGER},
+      </if>
       <if test="record.deptid != null" >
         DEPTID = #{record.deptid,jdbcType=INTEGER},
       </if>
@@ -242,6 +251,7 @@
   <update id="updateByExample" parameterType="map" >
     update sys_user
     set USERID = #{record.userid,jdbcType=INTEGER},
+      STAFFID = #{record.staffid,jdbcType=INTEGER},
       DEPTID = #{record.deptid,jdbcType=INTEGER},
       USERNAME = #{record.username,jdbcType=VARCHAR},
       PASSWORD = #{record.password,jdbcType=VARCHAR},
@@ -259,6 +269,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.businese.model.SysUser" >
     update sys_user
     <set >
+      <if test="staffid != null" >
+        STAFFID = #{staffid,jdbcType=INTEGER},
+      </if>
       <if test="deptid != null" >
         DEPTID = #{deptid,jdbcType=INTEGER},
       </if>
@@ -294,7 +307,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.businese.model.SysUser" >
     update sys_user
-    set DEPTID = #{deptid,jdbcType=INTEGER},
+    set STAFFID = #{staffid,jdbcType=INTEGER},
+      DEPTID = #{deptid,jdbcType=INTEGER},
       USERNAME = #{username,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},
@@ -307,9 +321,10 @@
     where USERID = #{userid,jdbcType=INTEGER}
   </update>
 
-  <!--======================================================================================================-->
+  <!--============================================================================================-->
   <select id="selectLastUserId" resultType="java.lang.Integer" >
     select max(USERID) from sys_user
     where state=1
   </select>
+
 </mapper>

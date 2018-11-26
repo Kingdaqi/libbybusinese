@@ -28,5 +28,5 @@ public interface SysUserMapper {
 
     int updateByPrimaryKey(SysUser record);
 
-    Integer selectLastUserId();
+    int selectLastUserId();
 }

@@ -5,16 +5,16 @@ import com.businese.model.SysUser;
 import java.util.List;
 
 /**
- * create by Administrator on 2018/7/5
+ * create by Administrator on 2018/11/26
  */
 public interface SysUserService {
 
     /**
      * 新增用户
-     * @param sysUser
+     * @param SysUser
      * @return
      */
-    SysUser addSysUser(SysUser sysUser);
+    SysUser addSysUser(SysUser SysUser);
 
     /**
      * 根据用户名查询用户
@@ -71,4 +71,5 @@ public interface SysUserService {
      * @param user
      */
     void update(SysUser user);
+
 }

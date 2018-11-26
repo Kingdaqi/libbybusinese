@@ -42,9 +42,9 @@ public class PersonalInfoController {
      */
     @RequestMapping(value = "/getPersonalInfo",method = RequestMethod.GET)
     public ResponseEntity getPersonalInfo(HttpServletRequest request) {
-        String username = request.getSession().getAttribute("username").toString();
+        String staffId = request.getSession().getAttribute("staffId").toString();
 
-        SysStaff sysStaff = staffService.getStaffByName(username);
+        SysStaff sysStaff = staffService.getStaffById(Integer.parseInt(staffId));
 
         List<SysStaff> list = new ArrayList<SysStaff>();
         list.add(sysStaff);
@@ -65,8 +65,9 @@ public class PersonalInfoController {
      */
     @RequestMapping(value = "/getPersonalDetailInfo",method = RequestMethod.GET)
     public ResponseEntity getPersonalDetailInfo(HttpServletRequest request) {
-        String name = request.getSession().getAttribute("username").toString();
-        SysStaff sysStaff = staffService.getStaffByName(name);
+        String staffId = request.getSession().getAttribute("staffId").toString();
+
+        SysStaff sysStaff = staffService.getStaffById(Integer.parseInt(staffId));
 
         JSONObject result = new JSONObject();
         result.put("data",sysStaff);
@@ -87,7 +88,7 @@ public class PersonalInfoController {
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public ResponseEntity update(HttpServletRequest request, @RequestBody SysStaff sysStaff){
         JSONObject result = new JSONObject();
-        String updateBy = request.getSession().getAttribute("username").toString();
+        String updateBy = request.getSession().getAttribute("name").toString();
         int count =  staffService.updateSysStaff(sysStaff,updateBy);
 
         if (count>0){

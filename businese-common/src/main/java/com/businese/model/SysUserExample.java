@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 @Component("sysUserExample")
 public class SysUserExample {
     protected String orderByClause;
@@ -188,6 +187,66 @@ public class SysUserExample {
             return (Criteria) this;
         }
 
+        public Criteria andStaffidIsNull() {
+            addCriterion("STAFFID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffidIsNotNull() {
+            addCriterion("STAFFID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffidEqualTo(Integer value) {
+            addCriterion("STAFFID =", value, "staffid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffidNotEqualTo(Integer value) {
+            addCriterion("STAFFID <>", value, "staffid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffidGreaterThan(Integer value) {
+            addCriterion("STAFFID >", value, "staffid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("STAFFID >=", value, "staffid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffidLessThan(Integer value) {
+            addCriterion("STAFFID <", value, "staffid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffidLessThanOrEqualTo(Integer value) {
+            addCriterion("STAFFID <=", value, "staffid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffidIn(List<Integer> values) {
+            addCriterion("STAFFID in", values, "staffid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffidNotIn(List<Integer> values) {
+            addCriterion("STAFFID not in", values, "staffid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffidBetween(Integer value1, Integer value2) {
+            addCriterion("STAFFID between", value1, value2, "staffid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffidNotBetween(Integer value1, Integer value2) {
+            addCriterion("STAFFID not between", value1, value2, "staffid");
+            return (Criteria) this;
+        }
+
         public Criteria andDeptidIsNull() {
             addCriterion("DEPTID is null");
             return (Criteria) this;
@@ -225,16 +284,6 @@ public class SysUserExample {
 
         public Criteria andDeptidLessThanOrEqualTo(Integer value) {
             addCriterion("DEPTID <=", value, "deptid");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeptidLike(Integer value) {
-            addCriterion("DEPTID like", value, "deptid");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeptidNotLike(Integer value) {
-            addCriterion("DEPTID not like", value, "deptid");
             return (Criteria) this;
         }
 
