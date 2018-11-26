@@ -65,4 +65,5 @@ public interface StaffService {
      * @param sysUser
      */
     void initSysUser(SysStaff staff, SysUser sysUser);
+
 }

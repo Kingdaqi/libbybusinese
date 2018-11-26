@@ -3,6 +3,8 @@ package com.businese.dao;
 import com.businese.model.SysUser;
 import com.businese.model.SysUserExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface SysUserMapper {
@@ -29,4 +31,8 @@ public interface SysUserMapper {
     int updateByPrimaryKey(SysUser record);
 
     int selectLastUserId();
+
+    void modifyPassword(Map<Object,Object> param);
+
+    String getPassword(int userId);
 }

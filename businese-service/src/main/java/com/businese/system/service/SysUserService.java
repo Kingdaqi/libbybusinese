@@ -72,4 +72,17 @@ public interface SysUserService {
      */
     void update(SysUser user);
 
+    /**
+     * 修改登录密码
+     * @param userId
+     * @param newPassword
+     */
+    void modifyPassword(int userId, String newPassword);
+
+    /**
+     * 根据用户id获取用户密码
+     * @param userId
+     * @return
+     */
+    String getPassword(int userId);
 }

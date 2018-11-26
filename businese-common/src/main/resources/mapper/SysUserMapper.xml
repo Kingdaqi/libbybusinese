@@ -327,4 +327,15 @@
     where state=1
   </select>
 
+  <select id="getPassword" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select PASSWORD from sys_user
+    where USERID = #{userId,jdbcType=INTEGER} and state=1
+  </select>
+
+  <update id="modifyPassword" parameterType="map">
+    update sys_user
+    set PASSWORD = #{record.newPassword,jdbcType=VARCHAR}
+    WHERE USERID = #{record.userId,jdbcType=INTEGER}
+  </update>
+
 </mapper>

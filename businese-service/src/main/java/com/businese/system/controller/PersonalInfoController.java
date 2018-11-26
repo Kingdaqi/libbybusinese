@@ -7,6 +7,7 @@ import com.businese.model.SysStaff;
 import com.businese.staff.service.StaffService;
 import com.businese.system.service.DeptService;
 import com.businese.system.service.RoleService;
+import com.businese.system.service.SysUserService;
 import com.businese.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,8 @@ public class PersonalInfoController {
     private RoleService roleService;
     @Autowired
     private DeptService deptService;
+    @Autowired
+    private SysUserService sysUserService;
 
     /**
      * 查询当前登录用户信息员工
@@ -151,5 +154,43 @@ public class PersonalInfoController {
             return new ResponseEntity(result, HttpStatus.OK);
         else
             return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * 修改密码
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/modifyPassword",method = RequestMethod.POST)
+    public ResponseEntity modifyPassword(HttpServletRequest request, @RequestParam(value="newpassword") String newPassword){
+        JSONObject result = new JSONObject();
+        String userId = request.getSession().getAttribute("userId").toString();
+
+        try {
+            sysUserService.modifyPassword(Integer.parseInt(userId),newPassword);
+            result.put("result","success");
+        }catch (Exception e){
+            e.printStackTrace();
+            result.put("result","error");
+        }
+
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
+
+    /**
+     * 获取旧密码
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getOldPassword",method = RequestMethod.GET)
+    public ResponseEntity getOldPassword(HttpServletRequest request){
+        JSONObject result = new JSONObject();
+        String userId = request.getSession().getAttribute("userId").toString();
+
+        String password = sysUserService.getPassword(Integer.parseInt(userId));
+
+        result.put("oldpassword",password);
+
+        return new ResponseEntity(result, HttpStatus.OK);
     }
 }

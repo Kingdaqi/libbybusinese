@@ -11,9 +11,8 @@ import com.businese.system.service.SysUserService;
 import com.businese.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
+import java.util.*;
 
 /**
  * create by Administrator on 2018/7/5
@@ -145,6 +144,22 @@ public class SysUserServiceImpl implements SysUserService {
 
     public void update(SysUser user) {
         sysUserMapper.updateByPrimaryKeySelective(user);
+    }
+
+    public void modifyPassword(int userId, String newPassword) {
+//        Map<Object,Object> param = new HashMap<Object, Object>();
+//        param.put("userId",userId);
+//        param.put("newPassword",newPassword);
+
+        SysUser sysUser = new SysUser();
+        sysUser.setUserid(userId);
+        sysUser.setPassword(newPassword);
+
+        sysUserMapper.updateByPrimaryKeySelective(sysUser);
+    }
+
+    public String getPassword(int userId) {
+        return sysUserMapper.getPassword(userId);
     }
 
     public void delete(Integer userId) {

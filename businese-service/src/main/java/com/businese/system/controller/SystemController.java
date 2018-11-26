@@ -5,6 +5,12 @@ import com.businese.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * create by Administrator on 2018/10/16
@@ -97,6 +103,25 @@ public class SystemController {
     @RequestMapping("/editPersonalInfoWindow")
     public String editPersonalInfoWindow(){
         return "system/editPersonalInfoWindow";
+    }
+
+    /**
+     * 修改登陆密码窗口
+     * @return
+     */
+    @RequestMapping("/modifyPassword")
+    public String modifyPassword(){
+        return "system/modifyPasswordWindow";
+    }
+
+    @ResponseBody
+    @RequestMapping("login/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //清空session
+        HttpSession session = request.getSession();
+        session.invalidate();//销毁session
+
+        response.sendRedirect(request.getContextPath()+"/index.jsp");
     }
 
 }
