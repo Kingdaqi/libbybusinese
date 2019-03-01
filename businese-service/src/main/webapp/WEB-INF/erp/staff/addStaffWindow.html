@@ -15,7 +15,7 @@
         $(document).ready(function() {
             $.ajax({
                 type: "GET",
-                url: 'getRoles',
+                url: 'role/getRoles',
                 dataType:'json',
                 cache: false,
                 async:false,
@@ -27,38 +27,37 @@
             });
         });
         function handleRoleBox(data) {
-            var options = "";
+            var inputs = "";
             $.each(data,function (index,item) {
-                // options += "<input onclick='addRole()' type=\"checkbox\" name=\""++"\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
-                options += "<option value=\""+item.id+"\">"+item.name+"</option>";
+                inputs += "<input onclick='addRole()' type=\"checkbox\" name=\""+item.name+"\" value=\""+item.id+"\"><span style=\"margin-right: 10px\">"+item.name+"</span>"
             })
-            $("#posid").append(options);
+            $("#roleBox").append(inputs);
         }
         function addStaff() {
             if(checkParam()){
                 var data = {name:$("#name").val()
-                            ,gender:$(".layui-radio[checked='checked']").val()
-                            ,birthday:$("#birthday").val()
-                            ,politic:$("#politic").val()
-                            ,nation:$("#nation").val()
-                            ,nativeplace:$("#nativeplace").val()
-                            ,email:$("#email").val()
-                            ,address:$("#address").val()
-                            ,posid:$("#posid").val()
-                            ,departmentid:$("#departmentid").val()
-                            ,phone:$("#phone").val()
-                            ,tiptopdegree:$("#tiptopdegree").val()
-                            ,school:$("#school").val()
-                            ,specialty:$("#specialty").val()
-                            ,idcard:$("#idcard").val()
-                            ,wedlock:$("#wedlock").val()
-                            ,begindate:$("#begindate").val()
-                            ,conversiontime:$("#conversiontime").val()
-                            ,begincontract:$("#begincontract").val()
-                            ,endcontract:$("#endcontract").val()};
+                    ,gender:$(".layui-radio[checked='checked']").val()
+                    ,name:$("#birthday").val()
+                    ,name:$("#politicid").val()
+                    ,name:$("#nationid").val()
+                    ,name:$("#nativeplace").val()
+                    ,name:$("#email").val()
+                    ,name:$("#address").val()
+                    ,name:$("#posid").val()
+                    ,name:$("#departmentid").val()
+                    ,name:$("#phone").val()
+                    ,name:$("#tiptopdegree").val()
+                    ,name:$("#school").val()
+                    ,name:$("#idcard").val()
+                    ,name:$("#wedlock").val()
+                    ,name:$("#engageform").val()
+                    ,name:$("#begindate").val()
+                    ,name:$("#conversiontime").val()
+                    ,name:$("#begincontract").val()
+                    ,name:$("#endcontract").val()};
                 $.ajax({
                     type: "POST",
-                    url: 'save',
+                    url: 'add',
                     data: JSON.stringify(data),
                     dataType:'json',
                     contentType:'application/json;;charset=utf-8',
@@ -81,7 +80,6 @@
                 $('#nametip2').css("display",'none');
                 return false;
             }else{
-                var flag = true;
                 $('#nametip').css("display",'none');
                 var name = $("#name").val();
                 $.ajax({
@@ -90,18 +88,16 @@
                     data: {name:name},
                     dataType:'json',
                     cache: false,
-                    async:false,
                     success: function(data){
                         if(data.result=='success'){
                             $('#nametip2').css("display",'none');
                         }else{
                             $("#name").val(name);
                             $('#nametip2').css("display",'block');
-                            flag = false;
+                            return false;
                         }
                     }
                 });
-                return flag;
             }
 
             if($('#birthday').val()==''){
@@ -111,18 +107,18 @@
                 $('#birthdaytip').css("display",'none');
             }
 
-            if($('#politic').val()==''){
-                $('#politictip').css("display",'block');
+            if($('#politicid').val()==''){
+                $('#politicidtip').css("display",'block');
                 return false;;
             }else{
-                $('#politictip').css("display",'none');
+                $('#politicidtip').css("display",'none');
             }
 
-            if($('#nation').val()==''){
-                $('#nationtip').css("display",'block');
+            if($('#nationid').val()!=$('#password').val()){
+                $('#nationidtip').css("display",'block');
                 return false;;
             }else{
-                $('#nationtip').css("display",'none');
+                $('#nationidtip').css("display",'none');
             }
 
             if($('#nativeplace').val()==''){
@@ -153,11 +149,11 @@
                 $('#posidtip').css("display",'none');
             }
 
-            if($('#deptName').val()==''){
-                $('#deptNametip').css("display",'block');
+            if($('#departmentid').val()==''){
+                $('#departmentidtip').css("display",'block');
                 return false;;
             }else{
-                $('#deptNametip').css("display",'none');
+                $('#departmentidtip').css("display",'none');
             }
 
             if($('#phone').val()==''){
@@ -202,6 +198,13 @@
                 $('#wedlocktip').css("display",'none');
             }
 
+            if($('#engageform').val()==''){
+                $('#engageformtip').css("display",'block');
+                return false;;
+            }else{
+                $('#engageformtip').css("display",'none');
+            }
+
             if($('#begindate').val()==''){
                 $('#begindatetip').css("display",'block');
                 return false;;
@@ -210,6 +213,18 @@
             }
 
             return true;
+        }
+        function addRole() {
+            var roles = "";
+            $(":checkbox[checked]").each(function(i){
+                var name = $(this).attr("name");
+                if (i==0) {
+                    roles += name;
+                }else{
+                    roles += "，"+name
+                }
+            });
+            $("#roles").val(roles);
         }
         function changeGender(flag) {
             if (flag==0){
@@ -222,325 +237,316 @@
                 $(".layui-radio[value='男']").removeAttr("checked");
             }
         }
-        function showDept() {
-            $("#dept").css("display","inline-grid");
-        }
-        function hideDept() {
-            $("#dept").css("display","none");
+        function changeEngageform(flag) {
+            if (flag==0){
+                //劳动合同选中
+                $(".layui-radio[value='劳动合同']").attr("checked","checked");
+                $(".layui-radio[value='劳务合同']").removeAttr("checked");
+            }else{
+                //劳务合同选中
+                $(".layui-radio[value='劳务合同']").attr("checked","checked");
+                $(".layui-radio[value='劳动合同']").removeAttr("checked");
+            }
         }
     </script>
 </head>
-<body style="height: 550px">
+<body style="height: 660px">
 
-    <div id="userInfo" style="height: 90%;margin-left: 30px;">
-        <form id="userInfoForm" style="width: 100%;height: 100%;" action="staff/save" method="POST">
+<div id="userInfo" style="height: 90%;">
+    <form id="userInfoForm" style="width: 100%;height: 100%;" action="sysUser/add" method="POST">
 
-            <div class="layui-col-md18">
-                <label for="name"><font style="color: red">*</font>姓名</label>
-                <input type="text" id="name" placeholder="员工姓名" class="layui-input">
-                <font id="nametip" class="layui-tip-font">*姓名不能为空</font>
-                <font id="nametip2" class="layui-tip-font">*姓名已存在，请尝试加入数字输入，例如"张三2"</font>
+        <div class="layui-col-md18">
+            <label for="name"><font style="color: red">*</font>姓名</label>
+            <input type="text" id="name" placeholder="员工姓名" class="layui-input">
+            <font id="nametip" class="layui-tip-font">*姓名不能为空</font>
+            <font id="nametip2" class="layui-tip-font">*姓名已存在，请尝试加入数字输入，例如"张三2"</font>
+        </div>
+
+        <div class="layui-col-md18" style="padding-top: 11px;">
+            <label><font style="color: red">*</font>性别</label>
+            <input class="layui-radio" type="radio" name="gender" value="男" checked="checked" onclick="changeGender(0)">男
+            <input class="layui-radio" type="radio" name="gender" value="女" onclick="changeGender(1)">女
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="birthday"><font style="color: red">*</font>出生日期</label>
+            <input type="text" id="birthday" contenteditable="false" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+            <font id="birthdaytip" class="layui-tip-font">*出生日期不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="politicid"><font style="color: red">*</font>政治面貌</label>
+            <input type="text" id="politicid" placeholder="政治面貌" class="layui-input">
+            <font id="politicidtip" class="layui-tip-font">*政治面貌不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="nationid"><font style="color: red">*</font>民族</label>
+            <input type="text" id="nationid" placeholder="民族" class="layui-input">
+            <font id="nationidtip" class="layui-tip-font">*民族不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="nativeplace"><font style="color: red">*</font>籍贯</label>
+            <input type="text" id="nativeplace" placeholder="籍贯" class="layui-input">
+            <font id="nativeplacetip" class="layui-tip-font">*籍贯不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="email"><font style="color: red">*</font>电子邮箱</label>
+            <input type="text" id="email" placeholder="电子邮箱" class="layui-input">
+            <font id="emailtip" class="layui-tip-font">*电子邮箱不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="address"><font style="color: red">*</font>联系地址</label>
+            <input type="text" id="address" placeholder="联系地址" class="layui-input">
+            <font id="addresstip" class="layui-tip-font">*联系地址不能为空</font>
+        </div>
+
+        <!--<div class="layui-col-md18">
+            <label for="workid">工号</label>
+            <input type="text" id="workid" placeholder="工号" class="layui-input">
+        </div>-->
+
+        <div class="layui-col-md18">
+            <label for="posid"><font style="color: red">*</font>职位</label>
+            <input type="text" id="posid" placeholder="职位" class="layui-input">
+            <font id="posidtip" class="layui-tip-font">*职位不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="departmentid"><font style="color: red">*</font>所属部门</label>
+            <input type="text" id="departmentid" placeholder="所属部门" class="layui-input">
+            <font id="departmentidtip" class="layui-tip-font">*所属部门</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="phone"><font style="color: red">*</font>联系方式</label>
+            <input type="text" id="phone" placeholder="联系方式" class="layui-input">
+            <font id="phonetip" class="layui-tip-font">*联系方式不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="tiptopdegree"><font style="color: red">*</font>最高学历</label>
+            <input type="text" id="tiptopdegree" placeholder="最高学历" class="layui-input">
+            <font id="tiptopdegreetip" class="layui-tip-font">*最高学历不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="school"><font style="color: red">*</font>毕业院校</label>
+            <input type="text" id="school" placeholder="毕业院校" class="layui-input">
+            <font id="schooltip" class="layui-tip-font">*毕业院校不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="specialty"><font style="color: red">*</font>专业名称</label>
+            <input type="text" id="specialty" placeholder="专业名称" class="layui-input">
+            <font id="specialtytip" class="layui-tip-font">*专业名称不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="idcard"><font style="color: red">*</font>身份证号</label>
+            <input type="text" id="idcard" placeholder="身份证号" class="layui-input">
+            <font id="idcardtip" class="layui-tip-font">*身份证号不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="wedlock"><font style="color: red">*</font>婚姻状况</label>
+            <input type="text" id="wedlock" placeholder="婚姻状况" class="layui-input">
+            <font id="wedlocktip" class="layui-tip-font">*婚姻状况不能为空</font>
+        </div>
+
+        <div class="layui-col-md18" style="padding-top: 11px;">
+            <label><font style="color: red">*</font>聘用形式</label>
+            <input class="layui-radio" type="radio" name="engageform" value="劳动合同" checked="checked" onclick="changeEngageform(0)">劳动合同
+            <input style="margin-left: 10px;" class="layui-radio" type="radio" name="engageform" value="劳务合同" onclick="changeEngageform(1)">劳务合同
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="begindate"><font style="color: red">*</font>入职日期</label>
+            <input type="text" id="begindate" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+            <font id="begindatetip" class="layui-tip-font">*入职日期不能为空</font>
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="conversiontime">转正日期</label>
+            <input type="text" id="conversiontime" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="begincontract">合同起始日期</label>
+            <input type="text" id="begincontract" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+        </div>
+
+        <div class="layui-col-md18">
+            <label for="endcontract">合同终止日期</label>
+            <input type="text" id="endcontract" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
+        </div>
+
+        <!--<div class="layui-col-md18">
+            <label for="roles"><font style="color: red">*</font>角色</label>
+            <input type="text" id="roles" placeholder="请选择角色" readonly="readonly" class="layui-input">
+            <font id="rolestip" class="layui-tip-font">*角色不能为空</font>
+            <br />
+            <div id="roleBox" style="margin-left: 185px;margin-top: 5px;width: 50%">
+                &lt;!&ndash;<input type="checkbox" name="lang" value="01"><span style="margin-right: 10px">系统管理员</span>&ndash;&gt;
             </div>
+        </div>-->
 
-            <div class="layui-col-md18" style="padding-top: 11px;">
-                <label><font style="color: red">*</font>性别</label>
-                <input class="layui-radio" type="radio" name="gender" value="男" checked="checked" onclick="changeGender(0)">男
-                <input class="layui-radio" type="radio" name="gender" value="女" onclick="changeGender(1)">女
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="birthday"><font style="color: red">*</font>出生日期</label>
-                <input type="text" id="birthday" contenteditable="false" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
-                <font id="birthdaytip" class="layui-tip-font">*出生日期不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="politic"><font style="color: red">*</font>政治面貌</label>
-                <input type="text" id="politic" placeholder="政治面貌" class="layui-input">
-                <font id="politictip" class="layui-tip-font">*政治面貌不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="nation"><font style="color: red">*</font>民族</label>
-                <input type="text" id="nation" placeholder="民族" class="layui-input">
-                <font id="nationtip" class="layui-tip-font">*民族不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="nativeplace"><font style="color: red">*</font>籍贯</label>
-                <input type="text" id="nativeplace" placeholder="籍贯" class="layui-input">
-                <font id="nativeplacetip" class="layui-tip-font">*籍贯不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="email"><font style="color: red">*</font>电子邮箱</label>
-                <input type="text" id="email" placeholder="电子邮箱" class="layui-input">
-                <font id="emailtip" class="layui-tip-font">*电子邮箱不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="address"><font style="color: red">*</font>联系地址</label>
-                <input type="text" id="address" placeholder="联系地址" class="layui-input">
-                <font id="addresstip" class="layui-tip-font">*联系地址不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="posid"><font style="color: red">*</font>职位</label>
-                <select class="layui-select-pos" name="type" id="posid" lay-verify="required" lay-filter="posid">
-                    <option value="">请选择职位</option>
-                </select>
-                <font id="posidtip" class="layui-tip-font">*职位不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="deptName"><font style="color: red">*</font>所属部门</label>
-                <input type="hidden" id="departmentid">
-                <input type="text" id="deptName" placeholder="所属部门" readonly="readonly" onclick="showDept()"  class="layui-input">
-                <ul id="dept" class="layui-ul" onmouseleave="hideDept()">
-                    <i style="font-size: 15px;" class="layui-icon layui-icon-left">请选择部门</i>
-                </ul>
-                <font id="deptNametip" class="layui-tip-font">*所属部门</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="phone"><font style="color: red">*</font>联系方式</label>
-                <input type="text" id="phone" placeholder="联系方式" class="layui-input">
-                <font id="phonetip" class="layui-tip-font">*联系方式不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="tiptopdegree"><font style="color: red">*</font>最高学历</label>
-                <input type="text" id="tiptopdegree" placeholder="最高学历" class="layui-input">
-                <font id="tiptopdegreetip" class="layui-tip-font">*最高学历不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="school"><font style="color: red">*</font>毕业院校</label>
-                <input type="text" id="school" placeholder="毕业院校" class="layui-input">
-                <font id="schooltip" class="layui-tip-font">*毕业院校不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="specialty"><font style="color: red">*</font>专业名称</label>
-                <input type="text" id="specialty" placeholder="专业名称" class="layui-input">
-                <font id="specialtytip" class="layui-tip-font">*专业名称不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="idcard"><font style="color: red">*</font>身份证号</label>
-                <input type="text" id="idcard" placeholder="身份证号" class="layui-input">
-                <font id="idcardtip" class="layui-tip-font">*身份证号不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="wedlock"><font style="color: red">*</font>婚姻状况</label>
-                <input type="text" id="wedlock" placeholder="婚姻状况" class="layui-input">
-                <font id="wedlocktip" class="layui-tip-font">*婚姻状况不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="begindate"><font style="color: red">*</font>入职日期</label>
-                <input type="text" id="begindate" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
-                <font id="begindatetip" class="layui-tip-font">*入职日期不能为空</font>
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="conversiontime">转正日期</label>
-                <input type="text" id="conversiontime" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="begincontract">合同起始日期</label>
-                <input type="text" id="begincontract" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
-            </div>
-
-            <div class="layui-col-md18">
-                <label for="endcontract">合同终止日期</label>
-                <input type="text" id="endcontract" placeholder="yyyy-MM-dd" class="layui-input laydate-item">
-            </div>
-
-        </form>
-    </div>
-    <div align="right" style="height: 10%">
-        <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="addStaff()">确认</button>
-        <button class="layui-btn layui-btn-primary layui-btn-radius" style="margin-right: 90px;" data-type="close">取消</button>
-    </div>
+    </form>
+</div>
+<div align="right" style="height: 10%">
+    <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="addStaff()">确认</button>
+    <button class="layui-btn layui-btn-primary layui-btn-radius" style="margin-right: 20px;" data-type="close">取消</button>
+</div>
 
 <script src="../../layui-v2.4.3/layui/layui.js"></script>
-<!--<script src="../../layui-v2.4.3/layui/layui.all.js"></script>-->
 <script>
     layui.use('layer', function(){
-    var $ = layui.$
-    ,layer = layui.layer
-    ,index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        var $ = layui.$
+            ,layer = layui.layer
+            ,index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 
-    var active = {
-    //在内部关闭iframe
-        close: function(set){
-            parent.layer.close(index);
+        var active = {
+            //在内部关闭iframe
+            close: function(set){
+                parent.layer.close(index);
+            }
         }
-    }
 
-    $('.layui-btn').on('click', function(){
-        var othis = $(this)
-        ,type = othis.data('type');
-        active[type] && active[type].call(this);
+        $('.layui-btn').on('click', function(){
+            var othis = $(this)
+                ,type = othis.data('type');
+            active[type] && active[type].call(this);
         });
     });
 </script>
-<script>
-    window.onload = function () {
-        var tree_data;
-        $.ajax({
-            type: "GET",
-            url: 'getDeptTree',
-            dataType:'json',
-            contentType:'application/json;;charset=utf-8',
-            cache: false,
-            async:false,
-            success: function(data){
-                if(data.data!=null){
-                    tree_data = data.data;
-                }
-            }
-        });
 
-        layui.tree({
-            elem: '#dept' //传入元素选择器
-            ,class:"layui-show"
-            ,click: function(item){ //点击节点回调
-                // layer.msg('当前节id：'+ item.id + '当前节名称：'+ item.name);
-                $("#deptName").attr("value",item.name);
-                $("#departmentid").attr("value",item.id);
-            }
-            ,nodes:tree_data
-        });
-    }
-</script>
 <script>/*日期选择模块*/
-    layui.config({
-        base: '../../layui-v2.4.3/' //静态资源所在路径
-    }).extend({
-        index: 'lib/index' //主入口模块
-    }).use(['index', 'laydate'], function(){
-        var laydate = layui.laydate;
+layui.config({
+    base: '../../layui-v2.4.3/' //静态资源所在路径
+}).extend({
+    index: 'lib/index' //主入口模块
+}).use(['index', 'laydate'], function(){
+    var laydate = layui.laydate;
 
-        //示例代码
+    //示例代码
 
-        //常规用法
-        laydate.render({
-            elem: '#birthday'
-        });
-
-        //国际版
-        laydate.render({
-            elem: '#test-laydate-normal-en'
-            ,lang: 'en'
-        });
-
-        //年选择器
-        laydate.render({
-            elem: '#test-laydate-type-year'
-            ,type: 'year'
-        });
-
-        //年月选择器
-        laydate.render({
-            elem: '#test-laydate-type-month'
-            ,type: 'month'
-        });
-
-        //日期选择器
-        laydate.render({
-            elem: '#test-laydate-type-date'
-            //,type: 'date' //type 默认为 date，所以可不填
-        });
-
-        //时间选择器
-        laydate.render({
-            elem: '#test-laydate-type-time'
-            ,type: 'time'
-        });
-
-        //日期时间选择器
-        laydate.render({
-            elem: '#test-laydate-type-datetime'
-            ,type: 'datetime'
-        });
-
-        //日期范围
-        laydate.render({
-            elem: '#test-laydate-range-date'
-            ,range: true
-        });
-
-        //年范围
-        laydate.render({
-            elem: '#test-laydate-range-year'
-            ,type: 'year'
-            ,range: true
-        });
-
-        //年月范围
-        laydate.render({
-            elem: '#test-laydate-range-month'
-            ,type: 'month'
-            ,range: true
-        });
-
-        //时间范围
-        laydate.render({
-            elem: '#test-laydate-range-time'
-            ,type: 'time'
-            ,range: true
-        });
-
-        //日期时间范围
-        laydate.render({
-            elem: '#test-laydate-range-datetime'
-            ,type: 'datetime'
-            ,range: true
-        });
-
-        //自定义格式
-        laydate.render({
-            elem: '#test-laydate-format-date1'
-            ,format: 'yyyy年MM月dd日'
-        });
-        laydate.render({
-            elem: '#test-laydate-format-date2'
-            ,format: 'dd/MM/yyyy'
-        });
-        laydate.render({
-            elem: '#test-laydate-format-month'
-            ,type: 'month'
-            ,format: 'yyyyMM'
-        });
-        laydate.render({
-            elem: '#test-laydate-format-time'
-            ,type: 'time'
-            ,format: 'H点m分'
-        });
-        laydate.render({
-            elem: '#test-laydate-format-range1'
-            ,range: '~'
-        });
-        laydate.render({
-            elem: '#test-laydate-format-range2'
-            ,type: 'datetime'
-            ,range: '到'
-            ,format: 'yyyy年M月d日H时m分s秒'
-        });
-
-        //同时绑定多个
-        lay('.laydate-item').each(function(){
-            laydate.render({
-                elem: this
-                ,trigger: 'click'
-            });
-        });
-
+    //常规用法
+    laydate.render({
+        elem: '#birthday'
     });
+
+    //国际版
+    laydate.render({
+        elem: '#test-laydate-normal-en'
+        ,lang: 'en'
+    });
+
+    //年选择器
+    laydate.render({
+        elem: '#test-laydate-type-year'
+        ,type: 'year'
+    });
+
+    //年月选择器
+    laydate.render({
+        elem: '#test-laydate-type-month'
+        ,type: 'month'
+    });
+
+    //日期选择器
+    laydate.render({
+        elem: '#test-laydate-type-date'
+        //,type: 'date' //type 默认为 date，所以可不填
+    });
+
+    //时间选择器
+    laydate.render({
+        elem: '#test-laydate-type-time'
+        ,type: 'time'
+    });
+
+    //日期时间选择器
+    laydate.render({
+        elem: '#test-laydate-type-datetime'
+        ,type: 'datetime'
+    });
+
+    //日期范围
+    laydate.render({
+        elem: '#test-laydate-range-date'
+        ,range: true
+    });
+
+    //年范围
+    laydate.render({
+        elem: '#test-laydate-range-year'
+        ,type: 'year'
+        ,range: true
+    });
+
+    //年月范围
+    laydate.render({
+        elem: '#test-laydate-range-month'
+        ,type: 'month'
+        ,range: true
+    });
+
+    //时间范围
+    laydate.render({
+        elem: '#test-laydate-range-time'
+        ,type: 'time'
+        ,range: true
+    });
+
+    //日期时间范围
+    laydate.render({
+        elem: '#test-laydate-range-datetime'
+        ,type: 'datetime'
+        ,range: true
+    });
+
+    //自定义格式
+    laydate.render({
+        elem: '#test-laydate-format-date1'
+        ,format: 'yyyy年MM月dd日'
+    });
+    laydate.render({
+        elem: '#test-laydate-format-date2'
+        ,format: 'dd/MM/yyyy'
+    });
+    laydate.render({
+        elem: '#test-laydate-format-month'
+        ,type: 'month'
+        ,format: 'yyyyMM'
+    });
+    laydate.render({
+        elem: '#test-laydate-format-time'
+        ,type: 'time'
+        ,format: 'H点m分'
+    });
+    laydate.render({
+        elem: '#test-laydate-format-range1'
+        ,range: '~'
+    });
+    laydate.render({
+        elem: '#test-laydate-format-range2'
+        ,type: 'datetime'
+        ,range: '到'
+        ,format: 'yyyy年M月d日H时m分s秒'
+    });
+
+    //同时绑定多个
+    lay('.laydate-item').each(function(){
+        laydate.render({
+            elem: this
+            ,trigger: 'click'
+        });
+    });
+
+});
 </script>
 </body>
 </html>
