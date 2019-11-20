@@ -1,6 +1,6 @@
-package com.businese.customer.service.service.impl;
+package com.businese.customer.service.impl;
 
-import com.businese.customer.service.service.CustomerService;
+import com.businese.customer.service.CustomerService;
 import org.springframework.stereotype.Service;
 
 /**
