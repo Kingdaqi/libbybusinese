@@ -393,7 +393,7 @@ body {
   background: #fff;
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
   font-weight: normal;
-  line-height: 1.6;
+  /*line-height: 1.6;*/
   color: #333333;
   font-size: 1.6rem;
 }
@@ -524,6 +524,7 @@ h2 {
 ul,
 ol {
   padding-left: 2em;
+  padding-right: 2em;
 }
 /* Reset margin for nested lists */
 ul > li > ul,

@@ -10,65 +10,380 @@
   <link rel="stylesheet" href="../assets/css/amazeui.css" />
   <link rel="stylesheet" href="../assets/css/common.min.css" />
   <link rel="stylesheet" href="../assets/css/product.min.css" />
+
+  <style type="text/css">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      background: #ddd;
+    }
+    ul{
+      list-style: none;
+    }
+    a{
+      text-decoration: none;
+    }
+    .nav{
+      background: #fff;
+      width: 100%;
+      height: 100px;
+      font-size: 20px;
+      line-height: 100px;
+      text-align: center;
+      border-bottom: 1px solid #f60;
+    }
+    .box{
+      margin: 0 auto;
+      width: 1200px;
+    }
+    .fl_l{
+      width: 200px;
+      float: left;
+      border: 1px solid #f4f4f4;
+      background: #fff;
+      padding-right: 0
+    }
+    .fl_l li a{
+      border-bottom: 1px solid #eee;
+      text-align: center;
+      display: block;
+      color: #333;
+      font-size: 14px;
+      line-height: 60px;
+    }
+    .fl_l li.active a{
+      background: #f60;
+      color: #fff;
+    }
+    .fl_r{
+      float: right;
+      width: 960px;
+    }
+    .fl_r li{
+      margin-bottom: 30px;
+      background: #fff;
+      font-size: 50px;
+      /*line-height: 300px;*/
+      display: block;
+      text-align: center;
+    }
+    .banner{
+      background: #fff;
+      width: 100%;
+      height: 600px;
+      font-size: 40px;
+      line-height: 600px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+  </style>
+  <style>
+    .test66{
+      float: left;
+      width: 33.33333%;
+      box-sizing: border-box;
+      padding: 10px 20px 0px;
+      min-width: 150px;
+      height: 350px;
+      margin-top: 15px;
+    }
+
+    .container66{
+      width: 100%;
+    }
+
+    @media (max-width:615px ) {
+      .test66{
+        float: left;
+        width: 33%;
+        box-sizing: border-box;
+        padding: 10px;
+        min-width: 150px;
+      }
+    }
+
+    @media (max-width:465px ) {
+      .test66{
+        float: left;
+        width: 50%;
+        box-sizing: border-box;
+        padding: 10px;
+        min-width: 150px;
+      }
+    }
+
+    @media (max-width:315px ) {
+      .test66{
+        float: left;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="layout">
-    <!--===========layout-header================-->
-    <div id="head"></div>
+<div class="layout">
+  <!--===========layout-header================-->
+  <div id="head"></div>
 
 
-
-
-    <!--===========layout-container================-->
-    <div class="layout-container">
-      <div class="page-header">
-        <div class="am-container">
-          <h1 class="page-header-title">Product Center</h1>
-        </div>
-      </div>
-
-      <div class="breadcrumb-box">
-        <div class="am-container">
-          <ol class="am-breadcrumb">
-            <li><a href="../index-en.html">Home</a></li>
-            <li class="am-active">Product Center</li>
-          </ol>
-        </div>
+  <!--===========layout-container================-->
+  <div class="layout-container">
+    <div class="page-header">
+      <div class="am-container">
+        <h1 class="page-header-title">Product Center</h1>
       </div>
     </div>
 
-
-    <div class="section">
-
-      <div class="product1-show-container">
-        <ul class="am-avg-md-5 am-avg-sm-2">
-          <li><div class="product-img-box"></div><a href="#"><img src="../assets/images/product/product_1.jpg" alt=""></a></li>
-          <li><div class="product-img-box"></div><a href="#"><img src="../assets/images/product/product_2.jpg" alt=""></a></li>
-          <li><div class="product-img-box"></div><a href="#"><img src="../assets/images/product/product_3.jpg" alt=""></a></li>
-          <li><div class="product-img-box"></div><a href="#"><img src="../assets/images/product/product_4.jpg" alt=""></a></li>
-          <li><div class="product-img-box"></div><a href="#"><img src="../assets/images/product/product_5.jpg" alt=""></a></li>
-          <li><div class="product-img-box"></div><a href="#"><img src="../assets/images/product/product_6.jpg" alt=""></a></li>
-          <li><div class="product-img-box"></div><a href="#"><img src="../assets/images/product/product_7.jpg" alt=""></a></li>
-          <li><div class="product-img-box"></div><a href="#"><img src="../assets/images/product/product_8.jpg" alt=""></a></li>
-          <li><div class="product-img-box"></div><a href="#"><img src="../assets/images/product/product_9.jpg" alt=""></a></li>
-          <li><div class="product-img-box"></div><a href="#"><img src="../assets/images/product/product_10.jpg" alt=""></a></li>
-        </ul>
+    <div class="breadcrumb-box">
+      <div class="am-container">
+        <ol class="am-breadcrumb">
+          <li><a href="../index-en.html">Home</a></li>
+          <li class="am-active">Product Center</li>
+        </ol>
       </div>
     </div>
-
-
-    <!--===========layout-footer================-->
-    <div id="foot"></div>
-
   </div>
-  <script src="../assets/js/jquery-2.1.0.js" charset="utf-8"></script>
-  <script src="../assets/js/amazeui.js" charset="utf-8"></script>
-  <script>
-    $(function(){
-      $("#head").load("../public/head-en.html");
-      $("#foot").load("../public/foot-en.html");
-    })
-  </script>
+
+  <div class="box" style="margin-top: 20px">
+    <ul class="fl_l" style="padding-left: 0">
+      <li class="active"><a href="#">quartz glass plate</a></li>
+      <li><a href="#">quartz glass tube</a></li>
+      <li><a href="#">quartz glass rod</a></li>
+      <li><a href="#">others</a></li>
+    </ul>
+    <ul class="fl_r" style="margin-top: 0">
+
+      <!--============================石英玻璃片====================================-->
+
+      <li>
+        <div style="width: 100%;height: 700px">
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_palte_1.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass plate</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_palte_2.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass plate</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_palte_3.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass plate</font></span>
+            </a>
+          </div>
+
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_palte_5.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass plate</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_palte_6.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass plate</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_palte_7.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass plate</font></span>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <!--============================石英玻璃管====================================-->
+
+      <li>
+        <div style="width: 100%;height: 700px">
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_tube_1.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass tube</font></span>
+            </a>
+            <h3></h3>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_tube_2.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass tube</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_tube_3.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass tube</font></span>
+            </a>
+          </div>
+
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_tube_4.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass tube</font></span>
+            </a>
+            <h3></h3>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_tube_6.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass tube</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_tube_7.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass tube</font></span>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <!--============================石英玻璃棒====================================-->
+
+      <li>
+        <div style="width: 100%;height: 700px">
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_rod_1.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass rod</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_rod_2.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass rod</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_rod_3.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass rod</font></span>
+            </a>
+          </div>
+
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_rod_4.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass rod</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_rod_5.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass rod</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_rod_6.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">quartz glass rod</font></span>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <!--============================其他石英制品====================================-->
+      <li>
+        <div style="width: 100%;height: 700px">
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_1.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">Quartz shaped tube</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_2.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">Quartz ark</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_3.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">Quartz shaped tube</font></span>
+            </a>
+          </div>
+
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_4.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">Quartz shaped rod</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/product_glass_6.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">Quartz test tube</font></span>
+            </a>
+          </div>
+          <div class="test66" >
+            <a href="#">
+              <img src="../assets/images/product/quartzGlass/needmore.jpg" style="max-width: 100%;"/>
+              <span align="center"><font size="3">Tell us your demand</font></span>
+            </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div style="clear: both;"></div>
+  </div>
+
+
+  <!--===========layout-footer================-->
+  <div id="foot"></div>
+
+</div>
+<script src="../assets/js/jquery-2.1.0.js" charset="utf-8"></script>
+<script src="../assets/js/amazeui.js" charset="utf-8"></script>
+<script>
+  $(function(){
+    $("#head").load("../public/head-en.html");
+    $("#foot").load("../public/foot-en.html");
+  });
+
+  $(function(){
+    //设置标杆
+    var _line=parseInt($(window).height()/7);
+    $(window).scroll(function(){
+      //滚动730px，左侧导航固定定位
+      if ($(window).scrollTop()>730) {
+        $('.fl_l').css({'position':'fixed','top':100})
+      }else{
+        $('.fl_l').css({'position':'','top':''})
+      };
+      $('.fl_l li').eq(0).addClass('active');
+      //滚动到标杆位置,左侧导航加active
+      $('.fl_r li').each(function(){
+        var _target=parseInt($(this).offset().top-$(window).scrollTop()-_line);
+        var _i=$(this).index();
+        if (_target<=0) {
+          $('.fl_l li').removeClass('active');
+          $('.fl_l li').eq(_i).addClass('active');
+        }
+        //如果到达页面底部，给左侧导航最后一个加active
+        else if($(document).height()==$(window).scrollTop()+$(window).height()){
+          $('.fl_l li').removeClass('active');
+          $('.fl_l li').eq($('.fl_r li').length-1).addClass('active');
+        }
+      });
+    });
+    $('.fl_l li').click(function(){
+      $(this).addClass('active').siblings().removeClass('active');
+      var _i=$(this).index();
+      $('body, html').animate({scrollTop:$('.fl_r li').eq(_i).offset().top-_line},500);
+    });
+  });
+</script>
 </body>
 
 </html>
